@@ -1,7 +1,7 @@
 """The tests for the Demo Media player platform."""
 import unittest
 from unittest.mock import patch
-import homeassistant.components.media_player as mp
+import blumate.components.media_player as mp
 
 from tests.common import get_test_home_assistant
 
@@ -166,7 +166,7 @@ class TestDemoMediaPlayer(unittest.TestCase):
         assert 0 == (mp.SUPPORT_PREVIOUS_TRACK &
                      state.attributes.get('supported_media_commands'))
 
-    @patch('homeassistant.components.media_player.demo.DemoYoutubePlayer.'
+    @patch('blumate.components.media_player.demo.DemoYoutubePlayer.'
            'media_seek')
     def test_play_media(self, mock_seek):
         """Test play_media ."""

@@ -7,12 +7,12 @@ import threading
 
 import voluptuous as vol
 
-from homeassistant import bootstrap, loader
-from homeassistant.const import (__version__, CONF_LATITUDE, CONF_LONGITUDE,
-                                 CONF_NAME, CONF_CUSTOMIZE)
-import homeassistant.util.dt as dt_util
-from homeassistant.helpers.entity import Entity
-from homeassistant.helpers.config_validation import PLATFORM_SCHEMA
+from blumate import bootstrap, loader
+from blumate.const import (__version__, CONF_LATITUDE, CONF_LONGITUDE,
+                           CONF_NAME, CONF_CUSTOMIZE)
+import blumate.util.dt as dt_util
+from blumate.helpers.entity import Entity
+from blumate.helpers.config_validation import PLATFORM_SCHEMA
 
 from tests.common import get_test_home_assistant, MockModule, MockPlatform
 
@@ -239,7 +239,7 @@ class TestBootstrap:
         assert bootstrap.setup_component(self.hass, 'comp')
         assert not mock_setup.called
 
-    @mock.patch('homeassistant.util.package.install_package',
+    @mock.patch('blumate.util.package.install_package',
                 return_value=False)
     def test_component_not_installed_if_requirement_fails(self, mock_install):
         """Component setup should fail if requirement can't install."""
@@ -302,12 +302,12 @@ class TestBootstrap:
         assert not bootstrap._setup_component(self.hass, 'comp', None)
         assert 'comp' not in self.hass.config.components
 
-    @mock.patch('homeassistant.bootstrap.process_ha_core_config')
+    @mock.patch('blumate.bootstrap.process_ha_core_config')
     def test_home_assistant_core_config_validation(self, mock_process):
         """Test if we pass in wrong information for HA conf."""
         # Extensive HA conf validation testing is done in test_config.py
         assert None is bootstrap.from_config_dict({
-            'homeassistant': {
+            'blumate': {
                 'latitude': 'some string'
             }
         })

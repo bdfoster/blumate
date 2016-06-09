@@ -2,7 +2,7 @@
 
 cd "$(dirname "$0")/.."
 
-head -n 3 homeassistant/const.py | tail -n 1 | grep dev
+head -n 3 blumate/const.py | tail -n 1 | grep dev
 
 if [ $? -eq 0 ]
 then

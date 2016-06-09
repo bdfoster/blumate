@@ -58,9 +58,9 @@ light:
 """
 import unittest
 
-from homeassistant.bootstrap import _setup_component
-from homeassistant.const import STATE_ON, STATE_OFF, ATTR_ASSUMED_STATE
-import homeassistant.components.light as light
+from blumate.bootstrap import _setup_component
+from blumate.const import STATE_ON, STATE_OFF, ATTR_ASSUMED_STATE
+import blumate.components.light as light
 from tests.common import (
   get_test_home_assistant, mock_mqtt_component, fire_mqtt_message)
 

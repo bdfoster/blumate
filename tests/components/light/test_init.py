@@ -3,11 +3,11 @@
 import unittest
 import os
 
-import homeassistant.loader as loader
-from homeassistant.const import (
+import blumate.loader as loader
+from blumate.const import (
     ATTR_ENTITY_ID, STATE_ON, STATE_OFF, CONF_PLATFORM,
     SERVICE_TURN_ON, SERVICE_TURN_OFF, SERVICE_TOGGLE)
-import homeassistant.components.light as light
+import blumate.components.light as light
 
 from tests.common import mock_service, get_test_home_assistant
 

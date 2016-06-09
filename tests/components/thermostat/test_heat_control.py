@@ -1,8 +1,8 @@
 """The tests for the heat control thermostat."""
 import unittest
 
-from homeassistant.bootstrap import _setup_component
-from homeassistant.const import (
+from blumate.bootstrap import _setup_component
+from blumate.const import (
     ATTR_UNIT_OF_MEASUREMENT,
     SERVICE_TURN_OFF,
     SERVICE_TURN_ON,
@@ -10,7 +10,7 @@ from homeassistant.const import (
     STATE_OFF,
     TEMP_CELSIUS,
 )
-from homeassistant.components import thermostat
+from blumate.components import thermostat
 
 from tests.common import get_test_home_assistant
 

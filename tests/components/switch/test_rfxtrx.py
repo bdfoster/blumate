@@ -1,8 +1,8 @@
 """The tests for the Rfxtrx switch platform."""
 import unittest
 
-from homeassistant.bootstrap import _setup_component
-from homeassistant.components import rfxtrx as rfxtrx_core
+from blumate.bootstrap import _setup_component
+from blumate.components import rfxtrx as rfxtrx_core
 
 from tests.common import get_test_home_assistant
 

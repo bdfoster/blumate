@@ -2,9 +2,9 @@
 # pylint: disable=too-many-public-methods
 import unittest
 
-from homeassistant.const import ATTR_LATITUDE, ATTR_LONGITUDE
-from homeassistant.core import State
-from homeassistant.helpers import location
+from blumate.const import ATTR_LATITUDE, ATTR_LONGITUDE
+from blumate.core import State
+from blumate.helpers import location
 
 
 class TestHelpersLocation(unittest.TestCase):

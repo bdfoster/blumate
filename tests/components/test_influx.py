@@ -5,8 +5,8 @@ from unittest import mock
 
 import influxdb as influx_client
 
-import homeassistant.components.influxdb as influxdb
-from homeassistant.const import EVENT_STATE_CHANGED, STATE_OFF, STATE_ON
+import blumate.components.influxdb as influxdb
+from blumate.const import EVENT_STATE_CHANGED, STATE_OFF, STATE_ON
 
 
 @mock.patch('influxdb.InfluxDBClient')

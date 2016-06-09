@@ -3,10 +3,10 @@ from datetime import datetime
 import unittest
 from unittest.mock import patch
 
-from homeassistant.bootstrap import _setup_component
-from homeassistant.components import sun
-import homeassistant.components.automation as automation
-import homeassistant.util.dt as dt_util
+from blumate.bootstrap import _setup_component
+from blumate.components import sun
+import blumate.components.automation as automation
+import blumate.util.dt as dt_util
 
 from tests.common import fire_time_changed, get_test_home_assistant
 
@@ -40,7 +40,7 @@ class TestAutomationSun(unittest.TestCase):
         now = datetime(2015, 9, 15, 23, tzinfo=dt_util.UTC)
         trigger_time = datetime(2015, 9, 16, 2, tzinfo=dt_util.UTC)
 
-        with patch('homeassistant.util.dt.utcnow',
+        with patch('blumate.util.dt.utcnow',
                    return_value=now):
             _setup_component(self.hass, automation.DOMAIN, {
                 automation.DOMAIN: {
@@ -67,7 +67,7 @@ class TestAutomationSun(unittest.TestCase):
         now = datetime(2015, 9, 13, 23, tzinfo=dt_util.UTC)
         trigger_time = datetime(2015, 9, 16, 14, tzinfo=dt_util.UTC)
 
-        with patch('homeassistant.util.dt.utcnow',
+        with patch('blumate.util.dt.utcnow',
                    return_value=now):
             _setup_component(self.hass, automation.DOMAIN, {
                 automation.DOMAIN: {
@@ -94,7 +94,7 @@ class TestAutomationSun(unittest.TestCase):
         now = datetime(2015, 9, 15, 23, tzinfo=dt_util.UTC)
         trigger_time = datetime(2015, 9, 16, 2, 30, tzinfo=dt_util.UTC)
 
-        with patch('homeassistant.util.dt.utcnow',
+        with patch('blumate.util.dt.utcnow',
                    return_value=now):
             _setup_component(self.hass, automation.DOMAIN, {
                 automation.DOMAIN: {
@@ -128,7 +128,7 @@ class TestAutomationSun(unittest.TestCase):
         now = datetime(2015, 9, 13, 23, tzinfo=dt_util.UTC)
         trigger_time = datetime(2015, 9, 16, 13, 30, tzinfo=dt_util.UTC)
 
-        with patch('homeassistant.util.dt.utcnow',
+        with patch('blumate.util.dt.utcnow',
                    return_value=now):
             _setup_component(self.hass, automation.DOMAIN, {
                 automation.DOMAIN: {
@@ -170,14 +170,14 @@ class TestAutomationSun(unittest.TestCase):
         })
 
         now = datetime(2015, 9, 16, 15, tzinfo=dt_util.UTC)
-        with patch('homeassistant.util.dt.now',
+        with patch('blumate.util.dt.now',
                    return_value=now):
             self.hass.bus.fire('test_event')
             self.hass.pool.block_till_done()
             self.assertEqual(0, len(self.calls))
 
         now = datetime(2015, 9, 16, 10, tzinfo=dt_util.UTC)
-        with patch('homeassistant.util.dt.now',
+        with patch('blumate.util.dt.now',
                    return_value=now):
             self.hass.bus.fire('test_event')
             self.hass.pool.block_till_done()
@@ -206,14 +206,14 @@ class TestAutomationSun(unittest.TestCase):
         })
 
         now = datetime(2015, 9, 16, 13, tzinfo=dt_util.UTC)
-        with patch('homeassistant.util.dt.now',
+        with patch('blumate.util.dt.now',
                    return_value=now):
             self.hass.bus.fire('test_event')
             self.hass.pool.block_till_done()
             self.assertEqual(0, len(self.calls))
 
         now = datetime(2015, 9, 16, 15, tzinfo=dt_util.UTC)
-        with patch('homeassistant.util.dt.now',
+        with patch('blumate.util.dt.now',
                    return_value=now):
             self.hass.bus.fire('test_event')
             self.hass.pool.block_till_done()
@@ -243,14 +243,14 @@ class TestAutomationSun(unittest.TestCase):
         })
 
         now = datetime(2015, 9, 16, 15, 1, tzinfo=dt_util.UTC)
-        with patch('homeassistant.util.dt.now',
+        with patch('blumate.util.dt.now',
                    return_value=now):
             self.hass.bus.fire('test_event')
             self.hass.pool.block_till_done()
             self.assertEqual(0, len(self.calls))
 
         now = datetime(2015, 9, 16, 15, tzinfo=dt_util.UTC)
-        with patch('homeassistant.util.dt.now',
+        with patch('blumate.util.dt.now',
                    return_value=now):
             self.hass.bus.fire('test_event')
             self.hass.pool.block_till_done()
@@ -280,14 +280,14 @@ class TestAutomationSun(unittest.TestCase):
         })
 
         now = datetime(2015, 9, 16, 14, 59, tzinfo=dt_util.UTC)
-        with patch('homeassistant.util.dt.now',
+        with patch('blumate.util.dt.now',
                    return_value=now):
             self.hass.bus.fire('test_event')
             self.hass.pool.block_till_done()
             self.assertEqual(0, len(self.calls))
 
         now = datetime(2015, 9, 16, 15, tzinfo=dt_util.UTC)
-        with patch('homeassistant.util.dt.now',
+        with patch('blumate.util.dt.now',
                    return_value=now):
             self.hass.bus.fire('test_event')
             self.hass.pool.block_till_done()
@@ -318,21 +318,21 @@ class TestAutomationSun(unittest.TestCase):
         })
 
         now = datetime(2015, 9, 16, 9, 59, tzinfo=dt_util.UTC)
-        with patch('homeassistant.util.dt.now',
+        with patch('blumate.util.dt.now',
                    return_value=now):
             self.hass.bus.fire('test_event')
             self.hass.pool.block_till_done()
             self.assertEqual(0, len(self.calls))
 
         now = datetime(2015, 9, 16, 15, 1, tzinfo=dt_util.UTC)
-        with patch('homeassistant.util.dt.now',
+        with patch('blumate.util.dt.now',
                    return_value=now):
             self.hass.bus.fire('test_event')
             self.hass.pool.block_till_done()
             self.assertEqual(0, len(self.calls))
 
         now = datetime(2015, 9, 16, 12, tzinfo=dt_util.UTC)
-        with patch('homeassistant.util.dt.now',
+        with patch('blumate.util.dt.now',
                    return_value=now):
             self.hass.bus.fire('test_event')
             self.hass.pool.block_till_done()
@@ -364,7 +364,7 @@ class TestAutomationSun(unittest.TestCase):
 
         # Before
         now = datetime(2015, 9, 16, 17, tzinfo=pytz.timezone('US/Mountain'))
-        with patch('homeassistant.util.dt.now',
+        with patch('blumate.util.dt.now',
                    return_value=now):
             self.hass.bus.fire('test_event')
             self.hass.pool.block_till_done()
@@ -372,7 +372,7 @@ class TestAutomationSun(unittest.TestCase):
 
         # After
         now = datetime(2015, 9, 16, 18, tzinfo=pytz.timezone('US/Mountain'))
-        with patch('homeassistant.util.dt.now',
+        with patch('blumate.util.dt.now',
                    return_value=now):
             self.hass.bus.fire('test_event')
             self.hass.pool.block_till_done()

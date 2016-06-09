@@ -2,7 +2,7 @@
 # pylint: disable=too-many-public-methods,protected-access
 import unittest
 
-from homeassistant.components import input_slider
+from blumate.components import input_slider
 
 from tests.common import get_test_home_assistant
 

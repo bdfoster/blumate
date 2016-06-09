@@ -4,9 +4,9 @@ import unittest
 from unittest.mock import patch
 from datetime import timedelta, datetime
 
-import homeassistant.core as ha
-import homeassistant.util.dt as dt_util
-import homeassistant.components.sun as sun
+import blumate.core as ha
+import blumate.util.dt as dt_util
+import blumate.components.sun as sun
 
 from tests.common import get_test_home_assistant
 
@@ -96,7 +96,7 @@ class TestSun(unittest.TestCase):
 
         june = datetime(2016, 6, 1, tzinfo=dt_util.UTC)
 
-        with patch('homeassistant.helpers.condition.dt_util.now',
+        with patch('blumate.helpers.condition.dt_util.now',
                    return_value=june):
             assert sun.setup(self.hass, {sun.DOMAIN: {sun.CONF_ELEVATION: 0}})
 

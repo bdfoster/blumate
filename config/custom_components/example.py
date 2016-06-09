@@ -27,14 +27,14 @@ ie a light or a switch. Example value could be light.Ceiling or switch.AC
 import time
 import logging
 
-from homeassistant.const import STATE_HOME, STATE_NOT_HOME, STATE_ON, STATE_OFF
-from homeassistant.helpers import validate_config
-from homeassistant.helpers.event_decorators import \
+from blumate.const import STATE_HOME, STATE_NOT_HOME, STATE_ON, STATE_OFF
+from blumate.helpers import validate_config
+from blumate.helpers.event_decorators import \
     track_state_change, track_time_change
-from homeassistant.helpers.service import service
-import homeassistant.components as core
-from homeassistant.components import device_tracker
-from homeassistant.components import light
+from blumate.helpers.service import service
+import blumate.components as core
+from blumate.components import device_tracker
+from blumate.components import light
 
 # The domain of your component. Should be equal to the name of your component.
 DOMAIN = "example"

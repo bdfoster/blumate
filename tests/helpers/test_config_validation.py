@@ -3,7 +3,7 @@ from datetime import timedelta
 import pytest
 import voluptuous as vol
 
-import homeassistant.helpers.config_validation as cv
+import blumate.helpers.config_validation as cv
 
 from tests.common import get_test_home_assistant
 
@@ -172,7 +172,7 @@ def test_service():
     with pytest.raises(vol.MultipleInvalid):
         schema('invalid_turn_on')
 
-    schema('homeassistant.turn_on')
+    schema('blumate.turn_on')
 
 
 def test_service_schema():
@@ -180,18 +180,18 @@ def test_service_schema():
     for value in (
         {}, None,
         {
-            'service': 'homeassistant.turn_on',
-            'service_template': 'homeassistant.turn_on'
+            'service': 'blumate.turn_on',
+            'service_template': 'blumate.turn_on'
         },
         {
             'data': {'entity_id': 'light.kitchen'},
         },
         {
-            'service': 'homeassistant.turn_on',
+            'service': 'blumate.turn_on',
             'data': None
         },
         {
-            'service': 'homeassistant.turn_on',
+            'service': 'blumate.turn_on',
             'data_template': {
                 'brightness': '{{ no_end'
             }
@@ -201,13 +201,13 @@ def test_service_schema():
             cv.SERVICE_SCHEMA(value)
 
     for value in (
-        {'service': 'homeassistant.turn_on'},
+        {'service': 'blumate.turn_on'},
         {
-            'service': 'homeassistant.turn_on',
+            'service': 'blumate.turn_on',
             'entity_id': 'light.kitchen',
         },
         {
-            'service': 'homeassistant.turn_on',
+            'service': 'blumate.turn_on',
             'entity_id': ['light.kitchen', 'light.ceiling'],
         },
     ):

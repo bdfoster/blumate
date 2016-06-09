@@ -1,8 +1,8 @@
 """Test the initialization."""
 import betamax
 
-from homeassistant import util
-from homeassistant.util import location
+from blumate import util
+from blumate.util import location
 
 with betamax.Betamax.configure() as config:
     config.cassette_library_dir = 'tests/cassettes'

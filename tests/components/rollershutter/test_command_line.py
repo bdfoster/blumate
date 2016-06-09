@@ -5,9 +5,9 @@ import tempfile
 import unittest
 from unittest import mock
 
-import homeassistant.core as ha
-import homeassistant.components.rollershutter as rollershutter
-from homeassistant.components.rollershutter import (
+import blumate.core as ha
+import blumate.components.rollershutter as rollershutter
+from blumate.components.rollershutter import (
     command_line as cmd_rs)
 
 

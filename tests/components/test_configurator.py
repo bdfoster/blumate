@@ -2,8 +2,8 @@
 # pylint: disable=too-many-public-methods,protected-access
 import unittest
 
-import homeassistant.components.configurator as configurator
-from homeassistant.const import EVENT_TIME_CHANGED
+import blumate.components.configurator as configurator
+from blumate.const import EVENT_TIME_CHANGED
 
 from tests.common import get_test_home_assistant
 

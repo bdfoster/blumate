@@ -4,9 +4,9 @@ from datetime import timedelta
 import unittest
 
 # Otherwise can't test just this file (import order issue)
-import homeassistant.components  # noqa
-import homeassistant.util.dt as dt_util
-from homeassistant.helpers import script
+import blumate.components  # noqa
+import blumate.util.dt as dt_util
+from blumate.helpers import script
 
 from tests.common import fire_time_changed, get_test_home_assistant
 

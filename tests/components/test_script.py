@@ -2,8 +2,8 @@
 # pylint: disable=too-many-public-methods,protected-access
 import unittest
 
-from homeassistant.bootstrap import _setup_component
-from homeassistant.components import script
+from blumate.bootstrap import _setup_component
+from blumate.components import script
 
 from tests.common import get_test_home_assistant
 
@@ -36,7 +36,7 @@ class TestScriptComponent(unittest.TestCase):
                 'test': {
                     'sequence': {
                         'event': 'test_event',
-                        'service': 'homeassistant.turn_on',
+                        'service': 'blumate.turn_on',
                     }
                 }
             },

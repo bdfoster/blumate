@@ -2,9 +2,9 @@
 import unittest
 import os
 
-from homeassistant.bootstrap import _setup_component
-from homeassistant.components import device_tracker
-from homeassistant.const import CONF_PLATFORM
+from blumate.bootstrap import _setup_component
+from blumate.components import device_tracker
+from blumate.const import CONF_PLATFORM
 
 from tests.common import (
     get_test_home_assistant, mock_mqtt_component, fire_mqtt_message)

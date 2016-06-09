@@ -1,8 +1,8 @@
 """The tests for the location automation."""
 import unittest
 
-from homeassistant.bootstrap import _setup_component
-from homeassistant.components import automation, zone
+from blumate.bootstrap import _setup_component
+from blumate.components import automation, zone
 
 from tests.common import get_test_home_assistant
 

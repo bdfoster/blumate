@@ -6,9 +6,9 @@ import unittest
 import eventlet
 import requests
 
-import homeassistant.bootstrap as bootstrap
-import homeassistant.components.http as http
-from homeassistant.const import HTTP_HEADER_HA_AUTH
+import blumate.bootstrap as bootstrap
+import blumate.components.http as http
+from blumate.const import HTTP_HEADER_HA_AUTH
 
 from tests.common import get_test_instance_port, get_test_home_assistant
 

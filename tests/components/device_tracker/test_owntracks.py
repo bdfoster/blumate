@@ -5,9 +5,9 @@ import unittest
 
 from collections import defaultdict
 
-from homeassistant.components import device_tracker
-from homeassistant.const import (STATE_NOT_HOME, CONF_PLATFORM)
-import homeassistant.components.device_tracker.owntracks as owntracks
+from blumate.components import device_tracker
+from blumate.const import (STATE_NOT_HOME, CONF_PLATFORM)
+import blumate.components.device_tracker.owntracks as owntracks
 
 from tests.common import (
     get_test_home_assistant, mock_mqtt_component, fire_mqtt_message)

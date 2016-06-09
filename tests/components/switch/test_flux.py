@@ -3,11 +3,11 @@ import unittest
 from datetime import timedelta
 from unittest.mock import patch
 
-from homeassistant.bootstrap import _setup_component, setup_component
-from homeassistant.components import switch, light
-from homeassistant.const import CONF_PLATFORM, STATE_ON, SERVICE_TURN_ON
-import homeassistant.loader as loader
-import homeassistant.util.dt as dt_util
+from blumate.bootstrap import _setup_component, setup_component
+from blumate.components import switch, light
+from blumate.const import CONF_PLATFORM, STATE_ON, SERVICE_TURN_ON
+import blumate.loader as loader
+import blumate.util.dt as dt_util
 from tests.common import get_test_home_assistant
 from tests.common import fire_time_changed, mock_service
 
@@ -88,10 +88,10 @@ class TestSwitchFlux(unittest.TestCase):
                                         second=0)
         sunrise_time = test_time.replace(hour=5, minute=0,
                                          second=0) + timedelta(days=1)
-        with patch('homeassistant.util.dt.now', return_value=test_time):
-            with patch('homeassistant.components.sun.next_rising',
+        with patch('blumate.util.dt.now', return_value=test_time):
+            with patch('blumate.components.sun.next_rising',
                        return_value=sunrise_time):
-                with patch('homeassistant.components.sun.next_setting',
+                with patch('blumate.components.sun.next_setting',
                            return_value=sunset_time):
                     assert setup_component(self.hass, switch.DOMAIN, {
                         switch.DOMAIN: {
@@ -127,10 +127,10 @@ class TestSwitchFlux(unittest.TestCase):
                                         second=0)
         sunrise_time = test_time.replace(hour=5, minute=0,
                                          second=0) + timedelta(days=1)
-        with patch('homeassistant.util.dt.now', return_value=test_time):
-            with patch('homeassistant.components.sun.next_rising',
+        with patch('blumate.util.dt.now', return_value=test_time):
+            with patch('blumate.components.sun.next_rising',
                        return_value=sunrise_time):
-                with patch('homeassistant.components.sun.next_setting',
+                with patch('blumate.components.sun.next_setting',
                            return_value=sunset_time):
                     assert setup_component(self.hass, switch.DOMAIN, {
                         switch.DOMAIN: {
@@ -171,10 +171,10 @@ class TestSwitchFlux(unittest.TestCase):
                                          minute=0,
                                          second=0) + timedelta(days=1)
 
-        with patch('homeassistant.util.dt.now', return_value=test_time):
-            with patch('homeassistant.components.sun.next_rising',
+        with patch('blumate.util.dt.now', return_value=test_time):
+            with patch('blumate.components.sun.next_rising',
                        return_value=sunrise_time):
-                with patch('homeassistant.components.sun.next_setting',
+                with patch('blumate.components.sun.next_setting',
                            return_value=sunset_time):
                     assert setup_component(self.hass, switch.DOMAIN, {
                         switch.DOMAIN: {
@@ -215,10 +215,10 @@ class TestSwitchFlux(unittest.TestCase):
                                          minute=0,
                                          second=0) + timedelta(days=1)
 
-        with patch('homeassistant.util.dt.now', return_value=test_time):
-            with patch('homeassistant.components.sun.next_rising',
+        with patch('blumate.util.dt.now', return_value=test_time):
+            with patch('blumate.components.sun.next_rising',
                        return_value=sunrise_time):
-                with patch('homeassistant.components.sun.next_setting',
+                with patch('blumate.components.sun.next_setting',
                            return_value=sunset_time):
                     assert setup_component(self.hass, switch.DOMAIN, {
                         switch.DOMAIN: {
@@ -259,10 +259,10 @@ class TestSwitchFlux(unittest.TestCase):
                                          minute=0,
                                          second=0) + timedelta(days=1)
 
-        with patch('homeassistant.util.dt.now', return_value=test_time):
-            with patch('homeassistant.components.sun.next_rising',
+        with patch('blumate.util.dt.now', return_value=test_time):
+            with patch('blumate.components.sun.next_rising',
                        return_value=sunrise_time):
-                with patch('homeassistant.components.sun.next_setting',
+                with patch('blumate.components.sun.next_setting',
                            return_value=sunset_time):
                     assert setup_component(self.hass, switch.DOMAIN, {
                         switch.DOMAIN: {
@@ -303,10 +303,10 @@ class TestSwitchFlux(unittest.TestCase):
                                          minute=0,
                                          second=0) + timedelta(days=1)
 
-        with patch('homeassistant.util.dt.now', return_value=test_time):
-            with patch('homeassistant.components.sun.next_rising',
+        with patch('blumate.util.dt.now', return_value=test_time):
+            with patch('blumate.components.sun.next_rising',
                        return_value=sunrise_time):
-                with patch('homeassistant.components.sun.next_setting',
+                with patch('blumate.components.sun.next_setting',
                            return_value=sunset_time):
                     assert setup_component(self.hass, switch.DOMAIN, {
                         switch.DOMAIN: {
@@ -349,10 +349,10 @@ class TestSwitchFlux(unittest.TestCase):
                                          minute=0,
                                          second=0) + timedelta(days=1)
 
-        with patch('homeassistant.util.dt.now', return_value=test_time):
-            with patch('homeassistant.components.sun.next_rising',
+        with patch('blumate.util.dt.now', return_value=test_time):
+            with patch('blumate.components.sun.next_rising',
                        return_value=sunrise_time):
-                with patch('homeassistant.components.sun.next_setting',
+                with patch('blumate.components.sun.next_setting',
                            return_value=sunset_time):
                     assert setup_component(self.hass, switch.DOMAIN, {
                         switch.DOMAIN: {
@@ -395,10 +395,10 @@ class TestSwitchFlux(unittest.TestCase):
                                          minute=0,
                                          second=0) + timedelta(days=1)
 
-        with patch('homeassistant.util.dt.now', return_value=test_time):
-            with patch('homeassistant.components.sun.next_rising',
+        with patch('blumate.util.dt.now', return_value=test_time):
+            with patch('blumate.components.sun.next_rising',
                        return_value=sunrise_time):
-                with patch('homeassistant.components.sun.next_setting',
+                with patch('blumate.components.sun.next_setting',
                            return_value=sunset_time):
                     assert setup_component(self.hass, switch.DOMAIN, {
                         switch.DOMAIN: {
@@ -452,10 +452,10 @@ class TestSwitchFlux(unittest.TestCase):
                                          minute=0,
                                          second=0) + timedelta(days=1)
 
-        with patch('homeassistant.util.dt.now', return_value=test_time):
-            with patch('homeassistant.components.sun.next_rising',
+        with patch('blumate.util.dt.now', return_value=test_time):
+            with patch('blumate.components.sun.next_rising',
                        return_value=sunrise_time):
-                with patch('homeassistant.components.sun.next_setting',
+                with patch('blumate.components.sun.next_setting',
                            return_value=sunset_time):
                     assert setup_component(self.hass, switch.DOMAIN, {
                         switch.DOMAIN: {

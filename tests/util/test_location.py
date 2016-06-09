@@ -2,7 +2,7 @@
 # pylint: disable=too-many-public-methods
 import unittest
 
-import homeassistant.util.location as location_util
+import blumate.util.location as location_util
 
 # Paris
 COORDINATES_PARIS = (48.864716, 2.349014)

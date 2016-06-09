@@ -3,7 +3,7 @@
 import unittest
 from datetime import datetime, timedelta
 
-import homeassistant.util.dt as dt_util
+import blumate.util.dt as dt_util
 
 TEST_TIME_ZONE = 'America/Los_Angeles'
 

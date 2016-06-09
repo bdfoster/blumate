@@ -5,8 +5,8 @@ import unittest
 from unittest.mock import patch
 from subprocess import SubprocessError
 
-from homeassistant.bootstrap import _setup_component
-from homeassistant.components import shell_command
+from blumate.bootstrap import _setup_component
+from blumate.components import shell_command
 
 from tests.common import get_test_home_assistant
 
@@ -51,9 +51,9 @@ class TestShellCommand(unittest.TestCase):
             }
         })
 
-    @patch('homeassistant.components.shell_command.subprocess.call',
+    @patch('blumate.components.shell_command.subprocess.call',
            side_effect=SubprocessError)
-    @patch('homeassistant.components.shell_command._LOGGER.error')
+    @patch('blumate.components.shell_command._LOGGER.error')
     def test_subprocess_raising_error(self, mock_call, mock_error):
         """Test subprocess."""
         with tempfile.TemporaryDirectory() as tempdirname:

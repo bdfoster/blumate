@@ -5,12 +5,12 @@ from unittest.mock import patch
 from datetime import datetime, timedelta
 import os
 
-from homeassistant.loader import get_component
-import homeassistant.util.dt as dt_util
-from homeassistant.const import (
+from blumate.loader import get_component
+import blumate.util.dt as dt_util
+from blumate.const import (
     ATTR_ENTITY_ID, ATTR_ENTITY_PICTURE, ATTR_FRIENDLY_NAME, ATTR_HIDDEN,
     STATE_HOME, STATE_NOT_HOME, CONF_PLATFORM)
-import homeassistant.components.device_tracker as device_tracker
+import blumate.components.device_tracker as device_tracker
 
 from tests.common import (
     get_test_home_assistant, fire_time_changed, fire_service_discovered)
@@ -100,7 +100,7 @@ class TestComponentsDeviceTracker(unittest.TestCase):
         register_time = datetime(2015, 9, 15, 23, tzinfo=dt_util.UTC)
         scan_time = datetime(2015, 9, 15, 23, 1, tzinfo=dt_util.UTC)
 
-        with patch('homeassistant.components.device_tracker.dt_util.utcnow',
+        with patch('blumate.components.device_tracker.dt_util.utcnow',
                    return_value=register_time):
             self.assertTrue(device_tracker.setup(self.hass, {
                 'device_tracker': {
@@ -113,7 +113,7 @@ class TestComponentsDeviceTracker(unittest.TestCase):
 
         scanner.leave_home('DEV1')
 
-        with patch('homeassistant.components.device_tracker.dt_util.utcnow',
+        with patch('blumate.components.device_tracker.dt_util.utcnow',
                    return_value=scan_time):
             fire_time_changed(self.hass, scan_time)
             self.hass.pool.block_till_done()
@@ -179,7 +179,7 @@ class TestComponentsDeviceTracker(unittest.TestCase):
         self.assertSequenceEqual((entity_id,),
                                  state.attributes.get(ATTR_ENTITY_ID))
 
-    @patch('homeassistant.components.device_tracker.DeviceTracker.see')
+    @patch('blumate.components.device_tracker.DeviceTracker.see')
     def test_see_service(self, mock_see):
         """Test the see service."""
         self.assertTrue(device_tracker.setup(self.hass, {}))

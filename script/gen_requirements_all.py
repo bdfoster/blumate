@@ -55,7 +55,7 @@ def gather_modules():
     errors = []
     output = []
 
-    for package in sorted(explore_module('homeassistant.components', True)):
+    for package in sorted(explore_module('blumate.components', True)):
         try:
             module = importlib.import_module(package)
         except ImportError:
@@ -78,7 +78,7 @@ def gather_modules():
         print("Make sure you import 3rd party libraries inside methods.")
         return None
 
-    output.append('# Home Assistant core')
+    output.append('# BluMate core')
     output.append('\n')
     output.append('\n'.join(core_requirements()))
     output.append('\n')

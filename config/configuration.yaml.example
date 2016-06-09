@@ -1,4 +1,4 @@
-homeassistant:
+blumate:
   # Omitted values in this section will be auto detected using freegeoip.io
 
   # Location required to calculate the time the sun rises and sets.  

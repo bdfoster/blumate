@@ -1,6 +1,6 @@
 """Test Home Assistant color util methods."""
 import unittest
-import homeassistant.util.color as color_util
+import blumate.util.color as color_util
 
 
 class TestColorUtil(unittest.TestCase):
@@ -58,6 +58,22 @@ class TestColorUtil(unittest.TestCase):
 
         self.assertEqual([51, 153, 255, 0],
                          color_util.rgb_hex_to_rgb_list('3399ff00'))
+
+    def test_color_name_to_rgb_valid_name(self):
+        """Test color_name_to_rgb."""
+        self.assertEqual((255, 0, 0),
+                         color_util.color_name_to_rgb('red'))
+
+        self.assertEqual((0, 0, 255),
+                         color_util.color_name_to_rgb('blue'))
+
+        self.assertEqual((0, 255, 0),
+                         color_util.color_name_to_rgb('green'))
+
+    def test_color_name_to_rgb_unknown_name_default_white(self):
+        """Test color_name_to_rgb."""
+        self.assertEqual((255, 255, 255),
+                         color_util.color_name_to_rgb('not a color'))
 
 
 class ColorTemperatureMiredToKelvinTests(unittest.TestCase):

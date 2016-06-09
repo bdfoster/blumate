@@ -3,9 +3,9 @@ import socket
 import unittest
 from unittest import mock
 
-import homeassistant.core as ha
-import homeassistant.components.graphite as graphite
-from homeassistant.const import (
+import blumate.core as ha
+import blumate.components.graphite as graphite
+from blumate.const import (
     EVENT_STATE_CHANGED,
     EVENT_HOMEASSISTANT_START, EVENT_HOMEASSISTANT_STOP,
     STATE_ON, STATE_OFF)
@@ -27,13 +27,13 @@ class TestGraphite(unittest.TestCase):
         """Stop everything that was started."""
         self.hass.stop()
 
-    @mock.patch('homeassistant.components.graphite.GraphiteFeeder')
+    @mock.patch('blumate.components.graphite.GraphiteFeeder')
     def test_minimal_config(self, mock_gf):
         """Test setup with minimal configuration."""
         self.assertTrue(graphite.setup(self.hass, {}))
         mock_gf.assert_called_once_with(self.hass, 'localhost', 2003, 'ha')
 
-    @mock.patch('homeassistant.components.graphite.GraphiteFeeder')
+    @mock.patch('blumate.components.graphite.GraphiteFeeder')
     def test_full_config(self, mock_gf):
         """Test setup with full configuration."""
         config = {
@@ -46,7 +46,7 @@ class TestGraphite(unittest.TestCase):
         self.assertTrue(graphite.setup(self.hass, config))
         mock_gf.assert_called_once_with(self.hass, 'foo', 123, 'me')
 
-    @mock.patch('homeassistant.components.graphite.GraphiteFeeder')
+    @mock.patch('blumate.components.graphite.GraphiteFeeder')
     def test_config_bad_port(self, mock_gf):
         """Test setup with invalid port."""
         config = {

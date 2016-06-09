@@ -1,10 +1,10 @@
 """The tests for the MQTT Garge door platform."""
 import unittest
 
-from homeassistant.bootstrap import _setup_component
-from homeassistant.const import STATE_OPEN, STATE_CLOSED, ATTR_ASSUMED_STATE
+from blumate.bootstrap import _setup_component
+from blumate.const import STATE_OPEN, STATE_CLOSED, ATTR_ASSUMED_STATE
 
-import homeassistant.components.garage_door as garage_door
+import blumate.components.garage_door as garage_door
 from tests.common import (
     mock_mqtt_component, fire_mqtt_message, get_test_home_assistant)
 

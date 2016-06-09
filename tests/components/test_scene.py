@@ -1,8 +1,8 @@
 """The tests for the Scene component."""
 import unittest
 
-from homeassistant import loader
-from homeassistant.components import light, scene
+from blumate import loader
+from blumate.components import light, scene
 
 from tests.common import get_test_home_assistant
 

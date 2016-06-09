@@ -4,9 +4,9 @@ import unittest.mock as mock
 
 import requests
 
-import homeassistant.components.sensor as sensor
-import homeassistant.components.sensor.mfi as mfi
-from homeassistant.const import TEMP_CELSIUS
+import blumate.components.sensor as sensor
+import blumate.components.sensor.mfi as mfi
+from blumate.const import TEMP_CELSIUS
 
 from tests.common import get_test_home_assistant
 
@@ -101,7 +101,7 @@ class TestMfiSensorSetup(unittest.TestCase):
                                             verify=False)
 
     @mock.patch('mficlient.client.MFiClient')
-    @mock.patch('homeassistant.components.sensor.mfi.MfiSensor')
+    @mock.patch('blumate.components.sensor.mfi.MfiSensor')
     def test_setup_adds_proper_devices(self, mock_sensor, mock_client):
         """Test if setup adds devices."""
         ports = {i: mock.MagicMock(model=model)

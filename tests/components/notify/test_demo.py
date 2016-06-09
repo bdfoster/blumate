@@ -1,8 +1,8 @@
 """The tests for the notify demo platform."""
 import unittest
 
-import homeassistant.components.notify as notify
-from homeassistant.components.notify import demo
+import blumate.components.notify as notify
+from blumate.components.notify import demo
 
 from tests.common import get_test_home_assistant
 

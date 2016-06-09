@@ -7,9 +7,9 @@ import os
 import pytest
 from voluptuous import MultipleInvalid
 
-from homeassistant.core import DOMAIN, HomeAssistantError
-import homeassistant.config as config_util
-from homeassistant.const import (
+from blumate.core import DOMAIN, HomeAssistantError
+import blumate.config as config_util
+from blumate.const import (
     CONF_LATITUDE, CONF_LONGITUDE, CONF_TEMPERATURE_UNIT, CONF_NAME,
     CONF_TIME_ZONE)
 

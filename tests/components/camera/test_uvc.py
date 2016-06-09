@@ -7,7 +7,7 @@ import requests
 from uvcclient import camera
 from uvcclient import nvr
 
-from homeassistant.components.camera import uvc
+from blumate.components.camera import uvc
 
 
 class TestUVCSetup(unittest.TestCase):

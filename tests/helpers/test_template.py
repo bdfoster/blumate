@@ -3,10 +3,10 @@
 import unittest
 from unittest.mock import patch
 
-from homeassistant.components import group
-from homeassistant.exceptions import TemplateError
-from homeassistant.helpers import template
-import homeassistant.util.dt as dt_util
+from blumate.components import group
+from blumate.exceptions import TemplateError
+from blumate.helpers import template
+import blumate.util.dt as dt_util
 
 from tests.common import get_test_home_assistant
 
@@ -203,8 +203,8 @@ class TestUtilTemplate(unittest.TestCase):
             'unknown',
             template.render(self.hass, '{{ states("test.object2") }}'))
 
-    @patch('homeassistant.core.dt_util.utcnow', return_value=dt_util.utcnow())
-    @patch('homeassistant.helpers.template.TemplateEnvironment.'
+    @patch('blumate.core.dt_util.utcnow', return_value=dt_util.utcnow())
+    @patch('blumate.helpers.template.TemplateEnvironment.'
            'is_safe_callable', return_value=True)
     def test_now(self, mock_is_safe, mock_utcnow):
         """."""
@@ -212,8 +212,8 @@ class TestUtilTemplate(unittest.TestCase):
             dt_util.utcnow().isoformat(),
             template.render(self.hass, '{{ now.isoformat() }}'))
 
-    @patch('homeassistant.core.dt_util.utcnow', return_value=dt_util.utcnow())
-    @patch('homeassistant.helpers.template.TemplateEnvironment.'
+    @patch('blumate.core.dt_util.utcnow', return_value=dt_util.utcnow())
+    @patch('blumate.helpers.template.TemplateEnvironment.'
            'is_safe_callable', return_value=True)
     def test_utcnow(self, mock_is_safe, mock_utcnow):
         """."""

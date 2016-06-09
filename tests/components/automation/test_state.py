@@ -3,9 +3,9 @@ import unittest
 from datetime import timedelta
 from unittest.mock import patch
 
-from homeassistant.bootstrap import _setup_component
-import homeassistant.util.dt as dt_util
-import homeassistant.components.automation as automation
+from blumate.bootstrap import _setup_component
+import blumate.util.dt as dt_util
+import blumate.components.automation as automation
 
 from tests.common import fire_time_changed, get_test_home_assistant
 
@@ -239,7 +239,7 @@ class TestAutomationState(unittest.TestCase):
                     'to': True,
                 },
                 'action': {
-                    'service': 'homeassistant.turn_on',
+                    'service': 'blumate.turn_on',
                 }
             }})
 
@@ -253,7 +253,7 @@ class TestAutomationState(unittest.TestCase):
                     'from': True,
                 },
                 'action': {
-                    'service': 'homeassistant.turn_on',
+                    'service': 'blumate.turn_on',
                 }
             }})
 
@@ -270,7 +270,7 @@ class TestAutomationState(unittest.TestCase):
                     },
                 },
                 'action': {
-                    'service': 'homeassistant.turn_on',
+                    'service': 'blumate.turn_on',
                 }
             }})
 
@@ -286,7 +286,7 @@ class TestAutomationState(unittest.TestCase):
                     },
                 },
                 'action': {
-                    'service': 'homeassistant.turn_on',
+                    'service': 'blumate.turn_on',
                 }
             }})
 
@@ -344,7 +344,7 @@ class TestAutomationState(unittest.TestCase):
         """Test for firing if contition is on."""
         point1 = dt_util.utcnow()
         point2 = point1 + timedelta(seconds=10)
-        with patch('homeassistant.core.dt_util.utcnow') as mock_utcnow:
+        with patch('blumate.core.dt_util.utcnow') as mock_utcnow:
             mock_utcnow.return_value = point1
             self.hass.states.set('test.entity', 'on')
             assert _setup_component(self.hass, automation.DOMAIN, {

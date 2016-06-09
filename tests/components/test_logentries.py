@@ -3,8 +3,8 @@
 import unittest
 from unittest import mock
 
-import homeassistant.components.logentries as logentries
-from homeassistant.const import STATE_ON, STATE_OFF, EVENT_STATE_CHANGED
+import blumate.components.logentries as logentries
+from blumate.const import STATE_ON, STATE_OFF, EVENT_STATE_CHANGED
 
 
 class TestLogentries(unittest.TestCase):

@@ -1,7 +1,7 @@
 """The tests for the Demo lock platform."""
 import unittest
 
-from homeassistant.components import lock
+from blumate.components import lock
 
 from tests.common import get_test_home_assistant
 

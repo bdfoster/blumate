@@ -3,7 +3,7 @@ from collections import namedtuple
 import logging
 import unittest
 
-from homeassistant.components import logger
+from blumate.components import logger
 
 RECORD = namedtuple('record', ('name', 'levelno'))
 

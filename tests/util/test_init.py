@@ -4,8 +4,8 @@ import unittest
 from unittest.mock import patch
 from datetime import datetime, timedelta
 
-from homeassistant import util
-import homeassistant.util.dt as dt_util
+from blumate import util
+import blumate.util.dt as dt_util
 
 
 class TestUtil(unittest.TestCase):
@@ -198,14 +198,14 @@ class TestUtil(unittest.TestCase):
         self.assertEqual(2, len(calls1))
         self.assertEqual(1, len(calls2))
 
-        with patch('homeassistant.util.utcnow', return_value=plus3):
+        with patch('blumate.util.utcnow', return_value=plus3):
             test_throttle1()
             test_throttle2()
 
         self.assertEqual(2, len(calls1))
         self.assertEqual(1, len(calls2))
 
-        with patch('homeassistant.util.utcnow', return_value=plus5):
+        with patch('blumate.util.utcnow', return_value=plus5):
             test_throttle1()
             test_throttle2()
 

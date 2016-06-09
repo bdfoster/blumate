@@ -4,8 +4,8 @@ from copy import copy
 from uuid import uuid4
 from unittest.mock import patch, Mock
 
-from homeassistant.components.sensor import tcp
-from homeassistant.helpers.entity import Entity
+from blumate.components.sensor import tcp
+from blumate.helpers.entity import Entity
 from tests.common import get_test_home_assistant
 
 
@@ -30,7 +30,7 @@ KEYS_AND_DEFAULTS = {
 }
 
 
-@patch('homeassistant.components.sensor.tcp.Sensor.update')
+@patch('blumate.components.sensor.tcp.Sensor.update')
 def test_setup_platform_valid_config(mock_update):
     """Should check the supplied config and call add_entities with Sensor."""
     add_entities = Mock()
@@ -58,13 +58,13 @@ class TestTCPSensor():
         """Stop everything that was started."""
         cls.hass.stop()
 
-    @patch('homeassistant.components.sensor.tcp.Sensor.update')
+    @patch('blumate.components.sensor.tcp.Sensor.update')
     def test_name(self, mock_update):
         """Should return the name if set in the config."""
         sensor = tcp.Sensor(self.hass, TEST_CONFIG)
         assert sensor.name == TEST_CONFIG[tcp.CONF_NAME]
 
-    @patch('homeassistant.components.sensor.tcp.Sensor.update')
+    @patch('blumate.components.sensor.tcp.Sensor.update')
     def test_name_not_set(self, mock_update):
         """Should return the superclass name property if not set in config."""
         config = copy(TEST_CONFIG)
@@ -73,7 +73,7 @@ class TestTCPSensor():
         sensor = tcp.Sensor(self.hass, config)
         assert sensor.name == entity.name
 
-    @patch('homeassistant.components.sensor.tcp.Sensor.update')
+    @patch('blumate.components.sensor.tcp.Sensor.update')
     def test_state(self, mock_update):
         """Should return the contents of _state."""
         sensor = tcp.Sensor(self.hass, TEST_CONFIG)
@@ -81,13 +81,13 @@ class TestTCPSensor():
         sensor._state = uuid
         assert sensor.state == uuid
 
-    @patch('homeassistant.components.sensor.tcp.Sensor.update')
+    @patch('blumate.components.sensor.tcp.Sensor.update')
     def test_unit_of_measurement(self, mock_update):
         """Should return the configured unit of measurement."""
         sensor = tcp.Sensor(self.hass, TEST_CONFIG)
         assert sensor.unit_of_measurement == TEST_CONFIG[tcp.CONF_UNIT]
 
-    @patch("homeassistant.components.sensor.tcp.Sensor.update")
+    @patch("blumate.components.sensor.tcp.Sensor.update")
     def test_config_valid_keys(self, *args):
         """Should store valid keys in _config."""
         sensor = tcp.Sensor(self.hass, TEST_CONFIG)
@@ -98,7 +98,7 @@ class TestTCPSensor():
         """Should return True when provided with the correct keys."""
         assert tcp.Sensor.validate_config(TEST_CONFIG)
 
-    @patch("homeassistant.components.sensor.tcp.Sensor.update")
+    @patch("blumate.components.sensor.tcp.Sensor.update")
     def test_config_invalid_keys(self, mock_update):
         """Shouldn't store invalid keys in _config."""
         config = copy(TEST_CONFIG)
@@ -121,7 +121,7 @@ class TestTCPSensor():
         })
         assert tcp.Sensor.validate_config(config)
 
-    @patch("homeassistant.components.sensor.tcp.Sensor.update")
+    @patch("blumate.components.sensor.tcp.Sensor.update")
     def test_config_uses_defaults(self, mock_update):
         """Should use defaults where appropriate."""
         config = copy(TEST_CONFIG)
@@ -149,7 +149,7 @@ class TestTCPSensor():
                 "validate_config() should have returned False since %r was not"
                 "provided." % key)
 
-    @patch("homeassistant.components.sensor.tcp.Sensor.update")
+    @patch("blumate.components.sensor.tcp.Sensor.update")
     def test_init_calls_update(self, mock_update):
         """Should call update() method during __init__()."""
         tcp.Sensor(self.hass, TEST_CONFIG)
@@ -168,7 +168,7 @@ class TestTCPSensor():
     @patch("socket.socket.connect", side_effect=socket.error())
     def test_update_returns_if_connecting_fails(self, *args):
         """Should return if connecting to host fails."""
-        with patch("homeassistant.components.sensor.tcp.Sensor.update"):
+        with patch("blumate.components.sensor.tcp.Sensor.update"):
             sensor = tcp.Sensor(self.hass, TEST_CONFIG)
         assert sensor.update() is None
 
@@ -176,7 +176,7 @@ class TestTCPSensor():
     @patch("socket.socket.send", side_effect=socket.error())
     def test_update_returns_if_sending_fails(self, *args):
         """Should return if sending fails."""
-        with patch("homeassistant.components.sensor.tcp.Sensor.update"):
+        with patch("blumate.components.sensor.tcp.Sensor.update"):
             sensor = tcp.Sensor(self.hass, TEST_CONFIG)
         assert sensor.update() is None
 
@@ -185,7 +185,7 @@ class TestTCPSensor():
     @patch("select.select", return_value=(False, False, False))
     def test_update_returns_if_select_fails(self, *args):
         """Should return if select fails to return a socket."""
-        with patch("homeassistant.components.sensor.tcp.Sensor.update"):
+        with patch("blumate.components.sensor.tcp.Sensor.update"):
             sensor = tcp.Sensor(self.hass, TEST_CONFIG)
         assert sensor.update() is None
 

@@ -3,11 +3,11 @@
 import os
 import unittest
 
-import homeassistant.loader as loader
-from homeassistant.const import CONF_PLATFORM, STATE_HOME, STATE_NOT_HOME
-from homeassistant.components import (
+import blumate.loader as loader
+from blumate.const import CONF_PLATFORM, STATE_HOME, STATE_NOT_HOME
+from blumate.components import (
     device_tracker, light, sun, device_sun_light_trigger)
-from homeassistant.helpers import event_decorators
+from blumate.helpers import event_decorators
 
 from tests.common import (
     get_test_config_dir, get_test_home_assistant, ensure_sun_risen,

@@ -4,9 +4,9 @@ import os
 import tempfile
 import unittest
 
-from homeassistant.const import STATE_ON, STATE_OFF
-import homeassistant.components.switch as switch
-import homeassistant.components.switch.command_line as command_line
+from blumate.const import STATE_ON, STATE_OFF
+import blumate.components.switch as switch
+import blumate.components.switch.command_line as command_line
 
 from tests.common import get_test_home_assistant
 

@@ -1,7 +1,7 @@
 """The tests for the Demo Garage door platform."""
 import unittest
 
-import homeassistant.components.garage_door as gd
+import blumate.components.garage_door as gd
 
 from tests.common import get_test_home_assistant
 

@@ -11,11 +11,11 @@ from datetime import datetime, timedelta
 
 import pytz
 
-import homeassistant.core as ha
-from homeassistant.exceptions import (
+import blumate.core as ha
+from blumate.exceptions import (
     HomeAssistantError, InvalidEntityFormatError)
-import homeassistant.util.dt as dt_util
-from homeassistant.const import (
+import blumate.util.dt as dt_util
+from blumate.const import (
     __version__, EVENT_HOMEASSISTANT_START, EVENT_HOMEASSISTANT_STOP,
     EVENT_STATE_CHANGED, ATTR_FRIENDLY_NAME, TEMP_CELSIUS,
     TEMP_FAHRENHEIT)
@@ -51,7 +51,7 @@ class TestHomeAssistant(unittest.TestCase):
         self.hass.pool.block_till_done()
         self.assertEqual(1, len(calls))
 
-    # @patch('homeassistant.core.time.sleep')
+    # @patch('blumate.core.time.sleep')
     def test_block_till_stoped(self):
         """Test if we can block till stop service is called."""
         with patch('time.sleep'):
@@ -85,7 +85,7 @@ class TestHomeAssistant(unittest.TestCase):
             """Send sigterm."""
             os.kill(os.getpid(), signal.SIGTERM)
 
-        with patch('homeassistant.core.time.sleep', send_sigterm):
+        with patch('blumate.core.time.sleep', send_sigterm):
             self.hass.block_till_stopped()
 
         self.assertEqual(1, len(calls))
@@ -328,7 +328,7 @@ class TestStateMachine(unittest.TestCase):
 
         future = dt_util.utcnow() + timedelta(hours=10)
 
-        with patch('homeassistant.util.dt.utcnow', return_value=future):
+        with patch('blumate.util.dt.utcnow', return_value=future):
             self.states.set("light.Bowl", "on", {'attr': 'triggers_change'})
 
         self.assertEqual(state.last_changed,
@@ -341,12 +341,12 @@ class TestServiceCall(unittest.TestCase):
     def test_repr(self):
         """Test repr method."""
         self.assertEqual(
-            "<ServiceCall homeassistant.start>",
-            str(ha.ServiceCall('homeassistant', 'start')))
+            "<ServiceCall blumate.start>",
+            str(ha.ServiceCall('blumate', 'start')))
 
         self.assertEqual(
-            "<ServiceCall homeassistant.start: fast=yes>",
-            str(ha.ServiceCall('homeassistant', 'start', {"fast": "yes"})))
+            "<ServiceCall blumate.start: fast=yes>",
+            str(ha.ServiceCall('blumate', 'start', {"fast": "yes"})))
 
 
 class TestServiceRegistry(unittest.TestCase):
@@ -427,14 +427,14 @@ class TestConfig(unittest.TestCase):
         """Test config dir set correct."""
         data_dir = os.getenv('APPDATA') if os.name == "nt" \
             else os.path.expanduser('~')
-        self.assertEqual(os.path.join(data_dir, ".homeassistant"),
+        self.assertEqual(os.path.join(data_dir, ".blumate"),
                          self.config.config_dir)
 
     def test_path_with_file(self):
         """Test get_config_path method."""
         data_dir = os.getenv('APPDATA') if os.name == "nt" \
             else os.path.expanduser('~')
-        self.assertEqual(os.path.join(data_dir, ".homeassistant", "test.conf"),
+        self.assertEqual(os.path.join(data_dir, ".blumate", "test.conf"),
                          self.config.path("test.conf"))
 
     def test_path_with_dir_and_file(self):
@@ -442,7 +442,7 @@ class TestConfig(unittest.TestCase):
         data_dir = os.getenv('APPDATA') if os.name == "nt" \
             else os.path.expanduser('~')
         self.assertEqual(
-            os.path.join(data_dir, ".homeassistant", "dir", "test.conf"),
+            os.path.join(data_dir, ".blumate", "dir", "test.conf"),
             self.config.path("dir", "test.conf"))
 
     def test_temperature_not_convert_if_no_preference(self):

@@ -3,9 +3,9 @@ from datetime import timedelta
 import unittest
 from unittest.mock import patch
 
-from homeassistant.bootstrap import _setup_component
-import homeassistant.util.dt as dt_util
-import homeassistant.components.automation as automation
+from blumate.bootstrap import _setup_component
+import blumate.util.dt as dt_util
+import blumate.components.automation as automation
 
 from tests.common import fire_time_changed, get_test_home_assistant
 
@@ -256,14 +256,14 @@ class TestAutomationTime(unittest.TestCase):
         before_10 = dt_util.now().replace(hour=8)
         after_10 = dt_util.now().replace(hour=14)
 
-        with patch('homeassistant.helpers.condition.dt_util.now',
+        with patch('blumate.helpers.condition.dt_util.now',
                    return_value=before_10):
             self.hass.bus.fire('test_event')
             self.hass.pool.block_till_done()
 
         self.assertEqual(1, len(self.calls))
 
-        with patch('homeassistant.helpers.condition.dt_util.now',
+        with patch('blumate.helpers.condition.dt_util.now',
                    return_value=after_10):
             self.hass.bus.fire('test_event')
             self.hass.pool.block_till_done()
@@ -291,14 +291,14 @@ class TestAutomationTime(unittest.TestCase):
         before_10 = dt_util.now().replace(hour=8)
         after_10 = dt_util.now().replace(hour=14)
 
-        with patch('homeassistant.helpers.condition.dt_util.now',
+        with patch('blumate.helpers.condition.dt_util.now',
                    return_value=before_10):
             self.hass.bus.fire('test_event')
             self.hass.pool.block_till_done()
 
         self.assertEqual(0, len(self.calls))
 
-        with patch('homeassistant.helpers.condition.dt_util.now',
+        with patch('blumate.helpers.condition.dt_util.now',
                    return_value=after_10):
             self.hass.bus.fire('test_event')
             self.hass.pool.block_till_done()
@@ -327,14 +327,14 @@ class TestAutomationTime(unittest.TestCase):
         monday = dt_util.now() - timedelta(days=days_past_monday)
         tuesday = monday + timedelta(days=1)
 
-        with patch('homeassistant.helpers.condition.dt_util.now',
+        with patch('blumate.helpers.condition.dt_util.now',
                    return_value=monday):
             self.hass.bus.fire('test_event')
             self.hass.pool.block_till_done()
 
         self.assertEqual(1, len(self.calls))
 
-        with patch('homeassistant.helpers.condition.dt_util.now',
+        with patch('blumate.helpers.condition.dt_util.now',
                    return_value=tuesday):
             self.hass.bus.fire('test_event')
             self.hass.pool.block_till_done()
@@ -364,21 +364,21 @@ class TestAutomationTime(unittest.TestCase):
         tuesday = monday + timedelta(days=1)
         wednesday = tuesday + timedelta(days=1)
 
-        with patch('homeassistant.helpers.condition.dt_util.now',
+        with patch('blumate.helpers.condition.dt_util.now',
                    return_value=monday):
             self.hass.bus.fire('test_event')
             self.hass.pool.block_till_done()
 
         self.assertEqual(1, len(self.calls))
 
-        with patch('homeassistant.helpers.condition.dt_util.now',
+        with patch('blumate.helpers.condition.dt_util.now',
                    return_value=tuesday):
             self.hass.bus.fire('test_event')
             self.hass.pool.block_till_done()
 
         self.assertEqual(2, len(self.calls))
 
-        with patch('homeassistant.helpers.condition.dt_util.now',
+        with patch('blumate.helpers.condition.dt_util.now',
                    return_value=wednesday):
             self.hass.bus.fire('test_event')
             self.hass.pool.block_till_done()

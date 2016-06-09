@@ -1,5 +1,5 @@
 """The tests for the Proximity component."""
-from homeassistant.components import proximity
+from blumate.components import proximity
 
 from tests.common import get_test_home_assistant
 

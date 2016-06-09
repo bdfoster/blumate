@@ -2,8 +2,8 @@
 import unittest
 from unittest import mock
 
-import homeassistant.components.splunk as splunk
-from homeassistant.const import STATE_ON, STATE_OFF, EVENT_STATE_CHANGED
+import blumate.components.splunk as splunk
+from blumate.const import STATE_ON, STATE_OFF, EVENT_STATE_CHANGED
 
 
 class TestSplunk(unittest.TestCase):

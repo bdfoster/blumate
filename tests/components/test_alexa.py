@@ -6,8 +6,8 @@ import json
 import eventlet
 import requests
 
-from homeassistant import bootstrap, const
-from homeassistant.components import alexa, http
+from blumate import bootstrap, const
+from blumate.components import alexa, http
 
 from tests.common import get_test_instance_port, get_test_home_assistant
 

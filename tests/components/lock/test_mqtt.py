@@ -1,10 +1,10 @@
 """The tests for the MQTT lock platform."""
 import unittest
 
-from homeassistant.bootstrap import _setup_component
-from homeassistant.const import (STATE_LOCKED, STATE_UNLOCKED,
-                                 ATTR_ASSUMED_STATE)
-import homeassistant.components.lock as lock
+from blumate.bootstrap import _setup_component
+from blumate.const import (STATE_LOCKED, STATE_UNLOCKED,
+                           ATTR_ASSUMED_STATE)
+import blumate.components.lock as lock
 from tests.common import (
     mock_mqtt_component, fire_mqtt_message, get_test_home_assistant)
 

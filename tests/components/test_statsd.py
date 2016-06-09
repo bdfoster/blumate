@@ -2,9 +2,9 @@
 import unittest
 from unittest import mock
 
-import homeassistant.core as ha
-import homeassistant.components.statsd as statsd
-from homeassistant.const import STATE_ON, STATE_OFF, EVENT_STATE_CHANGED
+import blumate.core as ha
+import blumate.components.statsd as statsd
+from blumate.const import STATE_ON, STATE_OFF, EVENT_STATE_CHANGED
 
 
 class TestStatsd(unittest.TestCase):

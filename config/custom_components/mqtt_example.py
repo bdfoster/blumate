@@ -16,7 +16,7 @@ configuration.yaml file.
 mqtt_example:
   topic: "home-assistant/mqtt_example"
 """
-import homeassistant.loader as loader
+import blumate.loader as loader
 
 # The domain of your component. Should be equal to the name of your component.
 DOMAIN = "mqtt_example"

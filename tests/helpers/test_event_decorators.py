@@ -6,13 +6,13 @@ from datetime import datetime, timedelta
 
 from astral import Astral
 
-import homeassistant.core as ha
-import homeassistant.util.dt as dt_util
-from homeassistant.helpers import event_decorators
-from homeassistant.helpers.event_decorators import (
+import blumate.core as ha
+import blumate.util.dt as dt_util
+from blumate.helpers import event_decorators
+from blumate.helpers.event_decorators import (
     track_time_change, track_utc_time_change, track_state_change,
     track_sunrise, track_sunset)
-from homeassistant.components import sun
+from blumate.components import sun
 
 from tests.common import get_test_home_assistant
 
