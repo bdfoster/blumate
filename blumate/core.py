@@ -89,7 +89,7 @@ class BluMate(object):
             DOMAIN, SERVICE_BLUMATE_RESTART, restart_blumate)
 
         try:
-            signal.signal(signal.SIGTERM, stop_SERVICE_BLUMATE_RESTARTistant)
+            signal.signal(signal.SIGTERM, stop_blumate)
         except ValueError:
             _LOGGER.warning(
                 'Could not bind to SIGTERM. Are you running in a thread?')
@@ -214,7 +214,7 @@ class EventBus(object):
     def fire(self, event_type, event_data=None, origin=EventOrigin.local):
         """Fire an event."""
         if not self._pool.running:
-            raise SERVICE_BLUMATE_RESTARTistantError('BluMate has shut down.')
+            raise BluMateError('BluMate has shut down.')
 
         with self._lock:
             # Copy the list of the current listeners because some listeners
@@ -735,7 +735,7 @@ class Config(object):
 
 
 def create_timer(hass, interval=TIMER_INTERVAL):
-    """Create a timer that will start on SERVICE_BLUMATE_RESTARTISTANT_START."""
+    """Create a timer that will start on SERVICE_BLUMATE_START."""
     # We want to be able to fire every time a minute starts (seconds=0).
     # We want this so other modules can use that to make sure they fire
     # every minute.
