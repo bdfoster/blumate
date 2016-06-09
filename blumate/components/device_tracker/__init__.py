@@ -14,7 +14,7 @@ import threading
 from blumate.bootstrap import prepare_setup_platform
 from blumate.components import discovery, group, zone
 from blumate.config import load_yaml_config_file
-from blumate.exceptions import HomeAssistantError
+from blumate.exceptions import BluMateError
 from blumate.helpers import config_per_platform
 from blumate.helpers.entity import Entity
 import blumate.helpers.config_validation as cv
@@ -187,7 +187,7 @@ class DeviceTracker(object):
         """Notify the device tracker that you see a device."""
         with self.lock:
             if mac is None and dev_id is None:
-                raise HomeAssistantError('Neither mac or device id passed in')
+                raise BluMateError('Neither mac or device id passed in')
             elif mac is not None:
                 mac = mac.upper()
                 device = self.mac_to_dev.get(mac)

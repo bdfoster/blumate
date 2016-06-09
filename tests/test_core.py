@@ -13,7 +13,7 @@ import pytz
 
 import blumate.core as ha
 from blumate.exceptions import (
-    HomeAssistantError, InvalidEntityFormatError)
+    BluMateError, InvalidEntityFormatError)
 import blumate.util.dt as dt_util
 from blumate.const import (
     __version__, EVENT_BLUMATE_START, EVENT_BLUMATE_STOP,
@@ -38,7 +38,7 @@ class TestHomeAssistant(unittest.TestCase):
         """Stop everything that was started."""
         try:
             self.hass.stop()
-        except HomeAssistantError:
+        except BluMateError:
             # Already stopped after the block till stopped test
             pass
 

@@ -1,25 +1,25 @@
 """Exceptions used by Home Assistant."""
 
 
-class HomeAssistantError(Exception):
+class BluMateError(Exception):
     """General Home Assistant exception occurred."""
 
     pass
 
 
-class InvalidEntityFormatError(HomeAssistantError):
+class InvalidEntityFormatError(BluMateError):
     """When an invalid formatted entity is encountered."""
 
     pass
 
 
-class NoEntitySpecifiedError(HomeAssistantError):
+class NoEntitySpecifiedError(BluMateError):
     """When no entity is specified."""
 
     pass
 
 
-class TemplateError(HomeAssistantError):
+class TemplateError(BluMateError):
     """Error during template rendering."""
 
     def __init__(self, exception):

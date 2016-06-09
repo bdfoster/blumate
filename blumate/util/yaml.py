@@ -6,7 +6,7 @@ from collections import OrderedDict
 import glob
 import yaml
 
-from blumate.exceptions import HomeAssistantError
+from blumate.exceptions import BluMateError
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -32,7 +32,7 @@ def load_yaml(fname):
             return yaml.load(conf_file, Loader=SafeLineLoader) or {}
     except yaml.YAMLError as exc:
         _LOGGER.error(exc)
-        raise HomeAssistantError(exc)
+        raise BluMateError(exc)
 
 
 def _include_yaml(loader, node):
@@ -116,7 +116,7 @@ def _env_var_yaml(loader, node):
         return os.environ[node.value]
     else:
         _LOGGER.error("Environment variable %s not defined.", node.value)
-        raise HomeAssistantError(node.value)
+        raise BluMateError(node.value)
 
 
 yaml.SafeLoader.add_constructor('!include', _include_yaml)

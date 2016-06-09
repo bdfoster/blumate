@@ -11,7 +11,7 @@ from blumate.const import (
     WEEKDAYS, CONF_STATE, CONF_ZONE, CONF_BEFORE,
     CONF_AFTER, CONF_WEEKDAY, SUN_EVENT_SUNRISE, SUN_EVENT_SUNSET,
     CONF_BELOW, CONF_ABOVE)
-from blumate.exceptions import TemplateError, HomeAssistantError
+from blumate.exceptions import TemplateError, BluMateError
 import blumate.helpers.config_validation as cv
 from blumate.helpers.template import render
 import blumate.util.dt as dt_util
@@ -28,7 +28,7 @@ def from_config(config, config_validation=True):
         FROM_CONFIG_FORMAT.format(config.get(CONF_CONDITION)), None)
 
     if factory is None:
-        raise HomeAssistantError('Invalid condition "{}" specified {}'.format(
+        raise BluMateError('Invalid condition "{}" specified {}'.format(
             config.get(CONF_CONDITION), config))
 
     return factory(config, config_validation)

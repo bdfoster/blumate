@@ -23,7 +23,7 @@ from blumate.const import (
     CONF_CUSTOMIZE, CONF_LATITUDE, CONF_LONGITUDE, CONF_NAME,
     CONF_TEMPERATURE_UNIT, CONF_TIME_ZONE, EVENT_COMPONENT_LOADED,
     TEMP_CELSIUS, TEMP_FAHRENHEIT, PLATFORM_FORMAT, __version__)
-from blumate.exceptions import HomeAssistantError
+from blumate.exceptions import BluMateError
 from blumate.helpers import (
     event_decorators, service, config_per_platform, extract_domain_configs)
 from blumate.helpers.entity import Entity
@@ -297,7 +297,7 @@ def from_config_file(config_path, hass=None, verbose=False, skip_pip=True,
 
     try:
         config_dict = config_util.load_yaml_config_file(config_path)
-    except HomeAssistantError:
+    except BluMateError:
         return None
 
     return from_config_dict(config_dict, hass, enable_log=False,

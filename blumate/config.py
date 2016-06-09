@@ -9,7 +9,7 @@ import blumate.util.location as loc_util
 from blumate.const import (
     CONF_LATITUDE, CONF_LONGITUDE, CONF_NAME, CONF_TEMPERATURE_UNIT,
     CONF_TIME_ZONE, CONF_CUSTOMIZE)
-from blumate.exceptions import HomeAssistantError
+from blumate.exceptions import BluMateError
 from blumate.util.yaml import load_yaml
 import blumate.helpers.config_validation as cv
 from blumate.helpers.entity import valid_entity_id
@@ -152,6 +152,6 @@ def load_yaml_config_file(config_path):
         _LOGGER.error(
             'The configuration file %s does not contain a dictionary',
             os.path.basename(config_path))
-        raise HomeAssistantError()
+        raise BluMateError()
 
     return conf_dict

@@ -13,7 +13,7 @@ import voluptuous as vol
 
 from blumate.bootstrap import prepare_setup_platform
 from blumate.config import load_yaml_config_file
-from blumate.exceptions import HomeAssistantError
+from blumate.exceptions import BluMateError
 from blumate.helpers import template
 import blumate.helpers.config_validation as cv
 from blumate.const import (
@@ -441,7 +441,7 @@ class MQTT(object):
 def _raise_on_error(result):
     """Raise error if error result."""
     if result != 0:
-        raise HomeAssistantError('Error talking to MQTT: {}'.format(result))
+        raise BluMateError('Error talking to MQTT: {}'.format(result))
 
 
 def _match_topic(subscription, topic):

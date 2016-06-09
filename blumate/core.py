@@ -27,10 +27,10 @@ from blumate.const import (
     EVENT_BLUMATE_START, EVENT_BLUMATE_STOP,
     EVENT_SERVICE_EXECUTED, EVENT_SERVICE_REGISTERED, EVENT_STATE_CHANGED,
     EVENT_TIME_CHANGED, MATCH_ALL, RESTART_EXIT_CODE,
-    SERVICE_HOMEASSISTANT_RESTART, SERVICE_BLUMATE_STOP, TEMP_CELSIUS,
+    SERVICE_BLUMATE_RESTART, SERVICE_BLUMATE_STOP, TEMP_CELSIUS,
     TEMP_FAHRENHEIT, __version__)
 from blumate.exceptions import (
-    HomeAssistantError, InvalidEntityFormatError)
+    BluMateError, InvalidEntityFormatError)
 from blumate.helpers.entity import split_entity_id, valid_entity_id
 
 DOMAIN = "blumate"
@@ -73,28 +73,28 @@ class BluMate(object):
         request_shutdown = threading.Event()
         request_restart = threading.Event()
 
-        def stop_homeassistant(*args):
+        def stop_blumate(*args):
             """Stop BluMate."""
             request_shutdown.set()
 
-        def restart_homeassistant(*args):
+        def restart_blumate(*args):
             """Reset BluMate."""
             _LOGGER.warning('BluMate requested a restart.')
             request_restart.set()
             request_shutdown.set()
 
         self.services.register(
-            DOMAIN, SERVICE_BLUMATE_STOP, stop_homeassistant)
+            DOMAIN, SERVICE_BLUMATE_STOP, stop_blumate)
         self.services.register(
-            DOMAIN, SERVICE_HOMEASSISTANT_RESTART, restart_homeassistant)
+            DOMAIN, SERVICE_BLUMATE_RESTART, restart_blumate)
 
         try:
-            signal.signal(signal.SIGTERM, stop_homeassistant)
+            signal.signal(signal.SIGTERM, stop_SERVICE_BLUMATE_RESTARTistant)
         except ValueError:
             _LOGGER.warning(
                 'Could not bind to SIGTERM. Are you running in a thread?')
         try:
-            signal.signal(signal.SIGHUP, restart_homeassistant)
+            signal.signal(signal.SIGHUP, restart_blumate)
         except ValueError:
             _LOGGER.warning(
                 'Could not bind to SIGHUP. Are you running in a thread?')
@@ -214,7 +214,7 @@ class EventBus(object):
     def fire(self, event_type, event_data=None, origin=EventOrigin.local):
         """Fire an event."""
         if not self._pool.running:
-            raise HomeAssistantError('BluMate has shut down.')
+            raise SERVICE_BLUMATE_RESTARTistantError('BluMate has shut down.')
 
         with self._lock:
             # Copy the list of the current listeners because some listeners
@@ -735,7 +735,7 @@ class Config(object):
 
 
 def create_timer(hass, interval=TIMER_INTERVAL):
-    """Create a timer that will start on HOMEASSISTANT_START."""
+    """Create a timer that will start on SERVICE_BLUMATE_RESTARTISTANT_START."""
     # We want to be able to fire every time a minute starts (seconds=0).
     # We want this so other modules can use that to make sure they fire
     # every minute.
@@ -784,7 +784,7 @@ def create_timer(hass, interval=TIMER_INTERVAL):
             if not stop_event.isSet():
                 try:
                     hass.bus.fire(EVENT_TIME_CHANGED, {ATTR_NOW: now})
-                except HomeAssistantError:
+                except BluMateError:
                     # HA raises error if firing event after it has shut down
                     break
 

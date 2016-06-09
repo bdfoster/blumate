@@ -11,7 +11,7 @@ import voluptuous as vol
 from blumate.bootstrap import prepare_setup_platform
 from blumate.const import ATTR_ENTITY_ID, CONF_PLATFORM
 from blumate.components import logbook
-from blumate.exceptions import HomeAssistantError
+from blumate.exceptions import BluMateError
 from blumate.helpers import extract_domain_configs, script, condition
 from blumate.loader import get_platform
 import blumate.helpers.config_validation as cv
@@ -171,7 +171,7 @@ def _process_if(hass, config, p_config, action):
 
         try:
             checks.append(condition.from_config(if_config))
-        except HomeAssistantError as ex:
+        except BluMateError as ex:
             # Invalid conditions are allowed if we base it on trigger
             if use_trigger:
                 _LOGGER.warning('Ignoring invalid condition: %s', ex)

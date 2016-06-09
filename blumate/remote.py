@@ -23,7 +23,7 @@ from blumate.const import (
     URL_API_EVENTS, URL_API_EVENTS_EVENT, URL_API_SERVICES,
     URL_API_SERVICES_SERVICE, URL_API_STATES, URL_API_STATES_ENTITY,
     HTTP_HEADER_CONTENT_TYPE, CONTENT_TYPE_JSON)
-from blumate.exceptions import HomeAssistantError
+from blumate.exceptions import BluMateError
 
 METHOD_GET = "get"
 METHOD_POST = "post"
@@ -91,12 +91,12 @@ class API(object):
 
         except requests.exceptions.ConnectionError:
             _LOGGER.exception("Error connecting to server")
-            raise HomeAssistantError("Error connecting to server")
+            raise BluMateError("Error connecting to server")
 
         except requests.exceptions.Timeout:
             error = "Timeout when talking to {}".format(self.host)
             _LOGGER.exception(error)
-            raise HomeAssistantError(error)
+            raise BluMateError(error)
 
     def __repr__(self):
         """Return the representation of the API."""
@@ -111,7 +111,7 @@ class BluMate(ha.BluMate):
     def __init__(self, remote_api, local_api=None):
         """Initalize the forward instance."""
         if not remote_api.validate_api():
-            raise HomeAssistantError(
+            raise BluMateError(
                 "Remote API at {}:{} not valid: {}".format(
                     remote_api.host, remote_api.port, remote_api.status))
 
@@ -131,7 +131,7 @@ class BluMate(ha.BluMate):
         # Ensure a local API exists to connect with remote
         if 'api' not in self.config.components:
             if not bootstrap.setup_component(self, 'api'):
-                raise HomeAssistantError(
+                raise BluMateError(
                     'Unable to setup local API to receive events')
 
         ha.create_timer(self)
@@ -146,7 +146,7 @@ class BluMate(ha.BluMate):
         # Setup that events from remote_api get forwarded to local_api
         # Do this after we fire START, otherwise HTTP is not started
         if not connect_remote_events(self.remote_api, self.config.api):
-            raise HomeAssistantError((
+            raise BluMateError((
                 'Could not setup event forwarding from api {} to '
                 'local api {}').format(self.remote_api, self.config.api))
 
@@ -317,7 +317,7 @@ def validate_api(api):
         else:
             return APIStatus.UNKNOWN
 
-    except HomeAssistantError:
+    except BluMateError:
         return APIStatus.CANNOT_CONNECT
 
 
@@ -341,7 +341,7 @@ def connect_remote_events(from_api, to_api):
 
             return False
 
-    except HomeAssistantError:
+    except BluMateError:
         _LOGGER.exception("Error setting up event forwarding")
         return False
 
@@ -365,7 +365,7 @@ def disconnect_remote_events(from_api, to_api):
 
             return False
 
-    except HomeAssistantError:
+    except BluMateError:
         _LOGGER.exception("Error removing an event forwarder")
         return False
 
@@ -377,7 +377,7 @@ def get_event_listeners(api):
 
         return req.json() if req.status_code == 200 else {}
 
-    except (HomeAssistantError, ValueError):
+    except (BluMateError, ValueError):
         # ValueError if req.json() can't parse the json
         _LOGGER.exception("Unexpected result retrieving event listeners")
 
@@ -393,7 +393,7 @@ def fire_event(api, event_type, data=None):
             _LOGGER.error("Error firing event: %d - %s",
                           req.status_code, req.text)
 
-    except HomeAssistantError:
+    except BluMateError:
         _LOGGER.exception("Error firing event")
 
 
@@ -407,7 +407,7 @@ def get_state(api, entity_id):
         return ha.State.from_dict(req.json()) \
             if req.status_code == 200 else None
 
-    except (HomeAssistantError, ValueError):
+    except (BluMateError, ValueError):
         # ValueError if req.json() can't parse the json
         _LOGGER.exception("Error fetching state")
 
@@ -423,7 +423,7 @@ def get_states(api):
         return [ha.State.from_dict(item) for
                 item in req.json()]
 
-    except (HomeAssistantError, ValueError, AttributeError):
+    except (BluMateError, ValueError, AttributeError):
         # ValueError if req.json() can't parse the json
         _LOGGER.exception("Error fetching states")
 
@@ -444,7 +444,7 @@ def remove_state(api, entity_id):
         _LOGGER.error("Error removing state: %d - %s",
                       req.status_code, req.text)
         return False
-    except HomeAssistantError:
+    except BluMateError:
         _LOGGER.exception("Error removing state")
 
         return False
@@ -472,7 +472,7 @@ def set_state(api, entity_id, new_state, attributes=None):
         else:
             return True
 
-    except HomeAssistantError:
+    except BluMateError:
         _LOGGER.exception("Error setting state")
 
         return False
@@ -495,7 +495,7 @@ def get_services(api):
 
         return req.json() if req.status_code == 200 else {}
 
-    except (HomeAssistantError, ValueError):
+    except (BluMateError, ValueError):
         # ValueError if req.json() can't parse the json
         _LOGGER.exception("Got unexpected services result")
 
@@ -513,5 +513,5 @@ def call_service(api, domain, service, service_data=None):
             _LOGGER.error("Error calling service: %d - %s",
                           req.status_code, req.text)
 
-    except HomeAssistantError:
+    except BluMateError:
         _LOGGER.exception("Error calling service")

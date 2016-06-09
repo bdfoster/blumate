@@ -221,12 +221,12 @@ class TestRemoteClasses(unittest.TestCase):
         """Test BluMate init."""
         # Wrong password
         self.assertRaises(
-            ha.HomeAssistantError, remote.BluMate,
+            ha.BluMateError, remote.BluMate,
             remote.API('127.0.0.1', API_PASSWORD + 'A', 8124))
 
         # Wrong port
         self.assertRaises(
-            ha.HomeAssistantError, remote.BluMate,
+            ha.BluMateError, remote.BluMate,
             remote.API('127.0.0.1', API_PASSWORD, BROKEN_PORT))
 
     def test_statemachine_init(self):

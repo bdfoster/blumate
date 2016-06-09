@@ -7,7 +7,7 @@ import os
 import pytest
 from voluptuous import MultipleInvalid
 
-from blumate.core import DOMAIN, HomeAssistantError
+from blumate.core import DOMAIN, BluMateError
 import blumate.config as config_util
 from blumate.const import (
     CONF_LATITUDE, CONF_LONGITUDE, CONF_TEMPERATURE_UNIT, CONF_NAME,
@@ -79,7 +79,7 @@ class TestConfig(unittest.TestCase):
         with open(YAML_PATH, 'w') as f:
             f.write('5')
 
-        with self.assertRaises(HomeAssistantError):
+        with self.assertRaises(BluMateError):
             config_util.load_yaml_config_file(YAML_PATH)
 
     def test_load_yaml_config_raises_error_if_malformed_yaml(self):
@@ -87,7 +87,7 @@ class TestConfig(unittest.TestCase):
         with open(YAML_PATH, 'w') as f:
             f.write(':')
 
-        with self.assertRaises(HomeAssistantError):
+        with self.assertRaises(BluMateError):
             config_util.load_yaml_config_file(YAML_PATH)
 
     def test_load_yaml_config_raises_error_if_unsafe_yaml(self):
@@ -95,7 +95,7 @@ class TestConfig(unittest.TestCase):
         with open(YAML_PATH, 'w') as f:
             f.write('hello: !!python/object/apply:os.system')
 
-        with self.assertRaises(HomeAssistantError):
+        with self.assertRaises(BluMateError):
             config_util.load_yaml_config_file(YAML_PATH)
 
     def test_load_yaml_config_preserves_key_order(self):

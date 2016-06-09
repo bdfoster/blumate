@@ -181,7 +181,7 @@ def load_order_components(components):
 def load_order_component(comp_name):
     """Return an OrderedSet of components in the correct order of loading.
 
-    Raises HomeAssistantError if a circular dependency is detected.
+    Raises BluMateError if a circular dependency is detected.
     Returns an empty list if component could not be loaded.
     """
     return _load_order_component(comp_name, OrderedSet(), set())
