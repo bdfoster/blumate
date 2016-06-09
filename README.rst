@@ -88,8 +88,8 @@ If you run into issues while using Home Assistant or during development
 of a component, check the `Home Assistant help
 section <https://home-assistant.io/help/>`__ how to reach us.
 
-.. |Build Status| image:: https://travis-ci.org/home-assistant/home-assistant.svg?branch=master
-   :target: https://travis-ci.org/home-assistant/home-assistant
+.. |Build Status| .. image:: https://travis-ci.org/bdfoster/home-assistant.svg?branch=master
+    :target: https://travis-ci.org/bdfoster/home-assistant
 .. |Coverage Status| image:: https://coveralls.io/repos/github/bdfoster/home-assistant/badge.svg?branch=dev :target: https://coveralls.io/github/bdfoster/home-assistant?branch=master
 .. |Join the chat at https://gitter.im/home-assistant/home-assistant| image:: https://img.shields.io/badge/gitter-general-blue.svg
    :target: https://gitter.im/home-assistant/home-assistant?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
