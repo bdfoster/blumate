@@ -1,4 +1,4 @@
-"""Provides methods to bootstrap a home assistant instance."""
+"""Provides methods to bootstrap a BluMate instance."""
 
 import logging
 import logging.handlers
@@ -75,7 +75,7 @@ def _handle_requirements(hass, component, name):
 
 
 def _setup_component(hass, domain, config):
-    """Setup a component for Home Assistant."""
+    """Setup a component for BluMate."""
     # pylint: disable=too-many-return-statements,too-many-branches
     if domain in hass.config.components:
         return True
@@ -217,12 +217,12 @@ def mount_local_lib_path(config_dir):
 def from_config_dict(config, hass=None, config_dir=None, enable_log=True,
                      verbose=False, skip_pip=False,
                      log_rotate_days=None):
-    """Try to configure Home Assistant from a config dict.
+    """Try to configure BluMate from a config dict.
 
     Dynamically loads required components and its dependencies.
     """
     if hass is None:
-        hass = core.HomeAssistant()
+        hass = core.BluMate()
         if config_dir is not None:
             config_dir = os.path.abspath(config_dir)
             hass.config.config_dir = config_dir
@@ -283,10 +283,10 @@ def from_config_file(config_path, hass=None, verbose=False, skip_pip=True,
     """Read the configuration file and try to start all the functionality.
 
     Will add functionality to 'hass' parameter if given,
-    instantiates a new Home Assistant object if 'hass' is not given.
+    instantiates a new BluMate object if 'hass' is not given.
     """
     if hass is None:
-        hass = core.HomeAssistant()
+        hass = core.BluMate()
 
     # Set config dir to directory holding config file
     config_dir = os.path.abspath(os.path.dirname(config_path))

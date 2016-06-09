@@ -13,8 +13,8 @@ import threading
 import time
 import logging
 
-from blumate.const import (EVENT_HOMEASSISTANT_STOP,
-                           EVENT_HOMEASSISTANT_START)
+from blumate.const import (EVENT_BLUMATE_STOP,
+                           EVENT_BLUMATE_START)
 
 DOMAIN = "lirc"
 REQUIREMENTS = ['python-lirc==1.2.1']
@@ -40,8 +40,8 @@ def setup(hass, config):
     def _stop_lirc(_event):
         lirc_interface.stopped.set()
 
-    hass.bus.listen_once(EVENT_HOMEASSISTANT_START, _start_lirc)
-    hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP, _stop_lirc)
+    hass.bus.listen_once(EVENT_BLUMATE_START, _start_lirc)
+    hass.bus.listen_once(EVENT_BLUMATE_STOP, _stop_lirc)
 
     return True
 

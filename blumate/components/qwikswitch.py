@@ -5,7 +5,7 @@ For more details about this component, please refer to the documentation at
 https://home-assistant.io/components/qwikswitch/
 """
 import logging
-from blumate.const import EVENT_HOMEASSISTANT_STOP
+from blumate.const import EVENT_BLUMATE_STOP
 from blumate.components.light import ATTR_BRIGHTNESS
 from blumate.components.discovery import load_platform
 
@@ -104,7 +104,7 @@ def setup(hass, config):
         qsusb = QSUsb(url, _LOGGER, dimmer_adjust)
 
         # Ensure qsusb terminates threads correctly
-        hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP,
+        hass.bus.listen_once(EVENT_BLUMATE_STOP,
                              lambda event: qsusb.stop())
     except ValueError as val_err:
         _LOGGER.error(str(val_err))

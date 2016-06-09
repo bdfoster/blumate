@@ -11,7 +11,7 @@ import time
 
 from blumate.const import (
     __version__,
-    EVENT_HOMEASSISTANT_START,
+    EVENT_BLUMATE_START,
     REQUIRED_PYTHON_VER,
     RESTART_EXIT_CODE,
 )
@@ -182,7 +182,7 @@ def check_pid(pid_file):
     except OSError:
         # PID does not exist
         return
-    print('Fatal Error: HomeAssistant is already running.')
+    print('Fatal Error: BluMate is already running.')
     sys.exit(1)
 
 
@@ -302,7 +302,7 @@ def setup_and_run_blumate(config_dir, args):
                 import webbrowser
                 webbrowser.open(blumate.config.api.base_url)
 
-        blumate.bus.listen_once(EVENT_HOMEASSISTANT_START, open_browser)
+        blumate.bus.listen_once(EVENT_BLUMATE_START, open_browser)
 
     blumate.start()
     exit_code = int(blumate.block_till_stopped())

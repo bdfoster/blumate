@@ -12,7 +12,7 @@ from requests.exceptions import RequestException
 from blumate import bootstrap
 from blumate.const import (
     ATTR_SERVICE, ATTR_DISCOVERED,
-    EVENT_HOMEASSISTANT_STOP, EVENT_PLATFORM_DISCOVERED)
+    EVENT_BLUMATE_STOP, EVENT_PLATFORM_DISCOVERED)
 from blumate.helpers.entity import Entity
 from blumate.loader import get_component
 
@@ -74,7 +74,7 @@ def setup(hass, base_config):
         _LOGGER.info("Shutting down subscriptions.")
         VERA_CONTROLLER.stop()
 
-    hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP, stop_subscription)
+    hass.bus.listen_once(EVENT_BLUMATE_STOP, stop_subscription)
 
     try:
         all_devices = VERA_CONTROLLER.get_devices(

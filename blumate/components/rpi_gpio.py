@@ -8,7 +8,7 @@ https://home-assistant.io/components/rpi_gpio/
 import logging
 
 from blumate.const import (
-    EVENT_HOMEASSISTANT_START, EVENT_HOMEASSISTANT_STOP)
+    EVENT_BLUMATE_START, EVENT_BLUMATE_STOP)
 
 REQUIREMENTS = ['RPi.GPIO==0.6.1']
 DOMAIN = "rpi_gpio"
@@ -26,9 +26,9 @@ def setup(hass, config):
 
     def prepare_gpio(event):
         """Stuff to do when home assistant starts."""
-        hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP, cleanup_gpio)
+        hass.bus.listen_once(EVENT_BLUMATE_STOP, cleanup_gpio)
 
-    hass.bus.listen_once(EVENT_HOMEASSISTANT_START, prepare_gpio)
+    hass.bus.listen_once(EVENT_BLUMATE_START, prepare_gpio)
     GPIO.setmode(GPIO.BCM)
     return True
 

@@ -16,7 +16,7 @@ class TestCommandRollerShutter(unittest.TestCase):
 
     def setup_method(self, method):
         """Setup things to be run when tests are started."""
-        self.hass = ha.HomeAssistant()
+        self.hass = ha.BluMate()
         self.hass.config.latitude = 32.87336
         self.hass.config.longitude = 117.22743
         self.rs = cmd_rs.CommandRollershutter(self.hass, 'foo',

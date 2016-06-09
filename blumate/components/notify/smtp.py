@@ -108,7 +108,7 @@ class MailNotificationService(BaseNotificationService):
         msg['Subject'] = subject
         msg['To'] = self.recipient
         msg['From'] = self._sender
-        msg['X-Mailer'] = 'HomeAssistant'
+        msg['X-Mailer'] = 'BluMate'
 
         for _ in range(self.tries):
             try:

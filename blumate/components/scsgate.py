@@ -7,7 +7,7 @@ https://home-assistant.io/components/scsgate/
 import logging
 from threading import Lock
 
-from blumate.core import EVENT_HOMEASSISTANT_STOP
+from blumate.core import EVENT_BLUMATE_STOP
 
 REQUIREMENTS = ['scsgate==0.1.0']
 DOMAIN = "scsgate"
@@ -147,6 +147,6 @@ def setup(hass, config):
         _LOGGER.info("Stopping SCSGate monitor thread")
         SCSGATE.stop()
 
-    hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP, stop_monitor)
+    hass.bus.listen_once(EVENT_BLUMATE_STOP, stop_monitor)
 
     return True

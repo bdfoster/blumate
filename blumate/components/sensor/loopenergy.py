@@ -7,7 +7,7 @@ https://home-assistant.io/components/sensor.loop_energy/
 import logging
 
 from blumate.helpers.entity import Entity
-from blumate.const import EVENT_HOMEASSISTANT_STOP
+from blumate.const import EVENT_BLUMATE_STOP
 from blumate.util import convert
 
 _LOGGER = logging.getLogger(__name__)
@@ -63,7 +63,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
         _LOGGER.info("Shutting down loopenergy.")
         controller.terminate()
 
-    hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP, stop_loopenergy)
+    hass.bus.listen_once(EVENT_BLUMATE_STOP, stop_loopenergy)
 
     sensors = [LoopEnergyElec(controller)]
 

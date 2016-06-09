@@ -9,7 +9,7 @@ import pickle
 from binascii import hexlify, unhexlify
 from base64 import b64encode, b64decode
 
-from blumate.const import EVENT_HOMEASSISTANT_STOP
+from blumate.const import EVENT_BLUMATE_STOP
 from blumate.core import JobPriority
 from blumate.helpers.entity import Entity
 
@@ -77,7 +77,7 @@ def setup(hass, config):
         _LOGGER.exception("Unable to open serial port for ZigBee: %s", exc)
         return False
     DEVICE = ZigBee(ser)
-    hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP, close_serial_port)
+    hass.bus.listen_once(EVENT_BLUMATE_STOP, close_serial_port)
 
     def _frame_received(frame):
         """Called when a ZigBee frame is received.

@@ -6,7 +6,7 @@ https://home-assistant.io/components/upnp/
 """
 import logging
 
-from blumate.const import (EVENT_HOMEASSISTANT_STOP)
+from blumate.const import (EVENT_BLUMATE_STOP)
 
 DEPENDENCIES = ["api"]
 
@@ -40,6 +40,6 @@ def setup(hass, config):
         """De-register the UPnP port mapping."""
         upnp.deleteportmapping(hass.config.api.port, "TCP")
 
-    hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP, deregister_port)
+    hass.bus.listen_once(EVENT_BLUMATE_STOP, deregister_port)
 
     return True

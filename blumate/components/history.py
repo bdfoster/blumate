@@ -11,7 +11,7 @@ from itertools import groupby
 
 from blumate.components import recorder, script
 import blumate.util.dt as dt_util
-from blumate.components.http import HomeAssistantView
+from blumate.components.http import BluMateView
 
 DOMAIN = 'history'
 DEPENDENCIES = ['recorder', 'http']
@@ -161,7 +161,7 @@ def setup(hass, config):
     return True
 
 
-class Last5StatesView(HomeAssistantView):
+class Last5StatesView(BluMateView):
     """Handle last 5 state view requests."""
 
     url = '/api/history/entity/<entity:entity_id>/recent_states'
@@ -172,7 +172,7 @@ class Last5StatesView(HomeAssistantView):
         return self.json(last_5_states(entity_id))
 
 
-class HistoryPeriodView(HomeAssistantView):
+class HistoryPeriodView(BluMateView):
     """Handle history period requests."""
 
     url = '/api/history/period'

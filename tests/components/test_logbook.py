@@ -5,7 +5,7 @@ from datetime import timedelta
 
 import blumate.core as ha
 from blumate.const import (
-    EVENT_STATE_CHANGED, EVENT_HOMEASSISTANT_START, EVENT_HOMEASSISTANT_STOP)
+    EVENT_STATE_CHANGED, EVENT_BLUMATE_START, EVENT_BLUMATE_STOP)
 import blumate.util.dt as dt_util
 from blumate.components import logbook
 
@@ -102,8 +102,8 @@ class TestComponentLogbook(unittest.TestCase):
         Events that are occuring in the same minute.
         """
         entries = list(logbook.humanify((
-            ha.Event(EVENT_HOMEASSISTANT_STOP),
-            ha.Event(EVENT_HOMEASSISTANT_START),
+            ha.Event(EVENT_BLUMATE_STOP),
+            ha.Event(EVENT_BLUMATE_START),
             )))
 
         self.assertEqual(1, len(entries))

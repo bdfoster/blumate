@@ -12,8 +12,8 @@ from pprint import pprint
 from blumate import bootstrap
 from blumate.const import (
     ATTR_BATTERY_LEVEL, ATTR_DISCOVERED, ATTR_ENTITY_ID, ATTR_LOCATION,
-    ATTR_SERVICE, CONF_CUSTOMIZE, EVENT_HOMEASSISTANT_START,
-    EVENT_HOMEASSISTANT_STOP, EVENT_PLATFORM_DISCOVERED)
+    ATTR_SERVICE, CONF_CUSTOMIZE, EVENT_BLUMATE_START,
+    EVENT_BLUMATE_STOP, EVENT_PLATFORM_DISCOVERED)
 from blumate.helpers.event import track_time_change
 from blumate.util import convert, slugify
 
@@ -345,7 +345,7 @@ def setup(hass, config):
         poll_interval = NETWORK.get_poll_interval()
         _LOGGER.info("zwave polling interval set to %d ms", poll_interval)
 
-        hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP, stop_zwave)
+        hass.bus.listen_once(EVENT_BLUMATE_STOP, stop_zwave)
 
         # Register add / remove node services for Z-Wave sticks without
         # hardware inclusion button
@@ -355,7 +355,7 @@ def setup(hass, config):
         hass.services.register(DOMAIN, SERVICE_SOFT_RESET, soft_reset)
         hass.services.register(DOMAIN, SERVICE_TEST_NETWORK, test_network)
 
-    hass.bus.listen_once(EVENT_HOMEASSISTANT_START, start_zwave)
+    hass.bus.listen_once(EVENT_BLUMATE_START, start_zwave)
 
     return True
 

@@ -12,7 +12,7 @@ import blumate.core as ha
 import blumate.remote as rem
 from blumate.bootstrap import ERROR_LOG_FILENAME
 from blumate.const import (
-    EVENT_HOMEASSISTANT_STOP, EVENT_TIME_CHANGED,
+    EVENT_BLUMATE_STOP, EVENT_TIME_CHANGED,
     HTTP_BAD_REQUEST, HTTP_CREATED, HTTP_NOT_FOUND,
     HTTP_UNPROCESSABLE_ENTITY, MATCH_ALL, URL_API, URL_API_COMPONENTS,
     URL_API_CONFIG, URL_API_DISCOVERY_INFO, URL_API_ERROR_LOG,
@@ -22,7 +22,7 @@ from blumate.const import (
 from blumate.exceptions import TemplateError
 from blumate.helpers.state import TrackStates
 from blumate.helpers import template
-from blumate.components.http import HomeAssistantView
+from blumate.components.http import BluMateView
 
 DOMAIN = 'api'
 DEPENDENCIES = ['http']
@@ -53,7 +53,7 @@ def setup(hass, config):
     return True
 
 
-class APIStatusView(HomeAssistantView):
+class APIStatusView(BluMateView):
     """View to handle Status requests."""
 
     url = URL_API
@@ -64,7 +64,7 @@ class APIStatusView(HomeAssistantView):
         return self.json_message('API running.')
 
 
-class APIEventStream(HomeAssistantView):
+class APIEventStream(BluMateView):
     """View to handle EventStream requests."""
 
     url = URL_API_STREAM
@@ -94,7 +94,7 @@ class APIEventStream(HomeAssistantView):
 
             _LOGGER.debug('STREAM %s FORWARDING %s', id(stop_obj), event)
 
-            if event.event_type == EVENT_HOMEASSISTANT_STOP:
+            if event.event_type == EVENT_BLUMATE_STOP:
                 data = stop_obj
             else:
                 data = json.dumps(event, cls=rem.JSONEncoder)
@@ -142,7 +142,7 @@ class APIEventStream(HomeAssistantView):
         return self.Response(stream(), mimetype='text/event-stream')
 
 
-class APIConfigView(HomeAssistantView):
+class APIConfigView(BluMateView):
     """View to handle Config requests."""
 
     url = URL_API_CONFIG
@@ -153,7 +153,7 @@ class APIConfigView(HomeAssistantView):
         return self.json(self.hass.config.as_dict())
 
 
-class APIDiscoveryView(HomeAssistantView):
+class APIDiscoveryView(BluMateView):
     """View to provide discovery info."""
 
     requires_auth = False
@@ -171,7 +171,7 @@ class APIDiscoveryView(HomeAssistantView):
         })
 
 
-class APIStatesView(HomeAssistantView):
+class APIStatesView(BluMateView):
     """View to handle States requests."""
 
     url = URL_API_STATES
@@ -182,7 +182,7 @@ class APIStatesView(HomeAssistantView):
         return self.json(self.hass.states.all())
 
 
-class APIEntityStateView(HomeAssistantView):
+class APIEntityStateView(BluMateView):
     """View to handle EntityState requests."""
 
     url = "/api/states/<entity(exist=False):entity_id>"
@@ -228,7 +228,7 @@ class APIEntityStateView(HomeAssistantView):
             return self.json_message('Entity not found', HTTP_NOT_FOUND)
 
 
-class APIEventListenersView(HomeAssistantView):
+class APIEventListenersView(BluMateView):
     """View to handle EventListeners requests."""
 
     url = URL_API_EVENTS
@@ -239,7 +239,7 @@ class APIEventListenersView(HomeAssistantView):
         return self.json(events_json(self.hass))
 
 
-class APIEventView(HomeAssistantView):
+class APIEventView(BluMateView):
     """View to handle Event requests."""
 
     url = '/api/events/<event_type>'
@@ -267,7 +267,7 @@ class APIEventView(HomeAssistantView):
         return self.json_message("Event {} fired.".format(event_type))
 
 
-class APIServicesView(HomeAssistantView):
+class APIServicesView(BluMateView):
     """View to handle Services requests."""
 
     url = URL_API_SERVICES
@@ -278,7 +278,7 @@ class APIServicesView(HomeAssistantView):
         return self.json(services_json(self.hass))
 
 
-class APIDomainServicesView(HomeAssistantView):
+class APIDomainServicesView(BluMateView):
     """View to handle DomainServices requests."""
 
     url = "/api/services/<domain>/<service>"
@@ -295,7 +295,7 @@ class APIDomainServicesView(HomeAssistantView):
         return self.json(changed_states)
 
 
-class APIEventForwardingView(HomeAssistantView):
+class APIEventForwardingView(BluMateView):
     """View to handle EventForwarding requests."""
 
     url = URL_API_EVENT_FORWARD
@@ -358,7 +358,7 @@ class APIEventForwardingView(HomeAssistantView):
         return self.json_message("Event forwarding cancelled.")
 
 
-class APIComponentsView(HomeAssistantView):
+class APIComponentsView(BluMateView):
     """View to handle Components requests."""
 
     url = URL_API_COMPONENTS
@@ -369,7 +369,7 @@ class APIComponentsView(HomeAssistantView):
         return self.json(self.hass.config.components)
 
 
-class APIErrorLogView(HomeAssistantView):
+class APIErrorLogView(BluMateView):
     """View to handle ErrorLog requests."""
 
     url = URL_API_ERROR_LOG
@@ -380,7 +380,7 @@ class APIErrorLogView(HomeAssistantView):
         return self.file(request, self.hass.config.path(ERROR_LOG_FILENAME))
 
 
-class APITemplateView(HomeAssistantView):
+class APITemplateView(BluMateView):
     """View to handle requests."""
 
     url = URL_API_TEMPLATE

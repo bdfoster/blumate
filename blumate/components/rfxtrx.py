@@ -10,7 +10,7 @@ import voluptuous as vol
 
 import blumate.helpers.config_validation as cv
 from blumate.util import slugify
-from blumate.const import EVENT_HOMEASSISTANT_STOP
+from blumate.const import EVENT_BLUMATE_STOP
 from blumate.helpers.entity import Entity
 from blumate.const import (ATTR_ENTITY_ID, TEMP_CELSIUS)
 
@@ -150,7 +150,7 @@ def setup(hass, config):
 
     def _shutdown_rfxtrx(event):
         RFXOBJECT.close_connection()
-    hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP, _shutdown_rfxtrx)
+    hass.bus.listen_once(EVENT_BLUMATE_STOP, _shutdown_rfxtrx)
 
     return True
 

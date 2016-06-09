@@ -9,7 +9,7 @@ import logging
 
 from blumate.const import HTTP_BAD_REQUEST
 from blumate.helpers import template, script
-from blumate.components.http import HomeAssistantView
+from blumate.components.http import BluMateView
 
 DOMAIN = 'alexa'
 DEPENDENCIES = ['http']
@@ -32,7 +32,7 @@ def setup(hass, config):
     return True
 
 
-class AlexaView(HomeAssistantView):
+class AlexaView(BluMateView):
     """Handle Alexa requests."""
 
     url = API_ENDPOINT

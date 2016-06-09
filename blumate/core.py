@@ -1,7 +1,7 @@
 """
-Core components of Home Assistant.
+Core components of BluMate.
 
-Home Assistant is a Home Automation framework for observing the state
+BluMate is a Home Automation framework for observing the state
 of entities and react to changes.
 """
 
@@ -24,10 +24,10 @@ from blumate.config import get_default_config_dir
 from blumate.const import (
     ATTR_DOMAIN, ATTR_FRIENDLY_NAME, ATTR_NOW, ATTR_SERVICE,
     ATTR_SERVICE_CALL_ID, ATTR_SERVICE_DATA, EVENT_CALL_SERVICE,
-    EVENT_HOMEASSISTANT_START, EVENT_HOMEASSISTANT_STOP,
+    EVENT_BLUMATE_START, EVENT_BLUMATE_STOP,
     EVENT_SERVICE_EXECUTED, EVENT_SERVICE_REGISTERED, EVENT_STATE_CHANGED,
     EVENT_TIME_CHANGED, MATCH_ALL, RESTART_EXIT_CODE,
-    SERVICE_HOMEASSISTANT_RESTART, SERVICE_HOMEASSISTANT_STOP, TEMP_CELSIUS,
+    SERVICE_HOMEASSISTANT_RESTART, SERVICE_BLUMATE_STOP, TEMP_CELSIUS,
     TEMP_FAHRENHEIT, __version__)
 from blumate.exceptions import (
     HomeAssistantError, InvalidEntityFormatError)
@@ -49,11 +49,11 @@ MIN_WORKER_THREAD = 2
 _LOGGER = logging.getLogger(__name__)
 
 
-class HomeAssistant(object):
-    """Root object of the Home Assistant home automation."""
+class BluMate(object):
+    """Root object of the BluMate home automation."""
 
     def __init__(self):
-        """Initialize new Home Assistant object."""
+        """Initialize new BluMate object."""
         self.pool = pool = create_worker_pool()
         self.bus = EventBus(pool)
         self.services = ServiceRegistry(self.bus, pool)
@@ -61,12 +61,12 @@ class HomeAssistant(object):
         self.config = Config()
 
     def start(self):
-        """Start home assistant."""
+        """Start BluMate."""
         _LOGGER.info(
-            "Starting Home Assistant (%d threads)", self.pool.worker_count)
+            "Starting BluMate (%d threads)", self.pool.worker_count)
 
         create_timer(self)
-        self.bus.fire(EVENT_HOMEASSISTANT_START)
+        self.bus.fire(EVENT_BLUMATE_START)
 
     def block_till_stopped(self):
         """Register service blumate/stop and will block until called."""
@@ -74,17 +74,17 @@ class HomeAssistant(object):
         request_restart = threading.Event()
 
         def stop_homeassistant(*args):
-            """Stop Home Assistant."""
+            """Stop BluMate."""
             request_shutdown.set()
 
         def restart_homeassistant(*args):
-            """Reset Home Assistant."""
-            _LOGGER.warning('Home Assistant requested a restart.')
+            """Reset BluMate."""
+            _LOGGER.warning('BluMate requested a restart.')
             request_restart.set()
             request_shutdown.set()
 
         self.services.register(
-            DOMAIN, SERVICE_HOMEASSISTANT_STOP, stop_homeassistant)
+            DOMAIN, SERVICE_BLUMATE_STOP, stop_homeassistant)
         self.services.register(
             DOMAIN, SERVICE_HOMEASSISTANT_RESTART, restart_homeassistant)
 
@@ -111,9 +111,9 @@ class HomeAssistant(object):
         return RESTART_EXIT_CODE if request_restart.isSet() else 0
 
     def stop(self):
-        """Stop Home Assistant and shuts down all threads."""
+        """Stop BluMate and shuts down all threads."""
         _LOGGER.info("Stopping")
-        self.bus.fire(EVENT_HOMEASSISTANT_STOP)
+        self.bus.fire(EVENT_BLUMATE_STOP)
         self.pool.stop()
 
 
@@ -214,7 +214,7 @@ class EventBus(object):
     def fire(self, event_type, event_data=None, origin=EventOrigin.local):
         """Fire an event."""
         if not self._pool.running:
-            raise HomeAssistantError('Home Assistant has shut down.')
+            raise HomeAssistantError('BluMate has shut down.')
 
         with self._lock:
             # Copy the list of the current listeners because some listeners
@@ -673,7 +673,7 @@ class ServiceRegistry(object):
 
 
 class Config(object):
-    """Configuration settings for Home Assistant."""
+    """Configuration settings for BluMate."""
 
     # pylint: disable=too-many-instance-attributes
     def __init__(self):
@@ -697,7 +697,7 @@ class Config(object):
         self.config_dir = get_default_config_dir()
 
     def distance(self, lat, lon):
-        """Calculate distance from Home Assistant in meters."""
+        """Calculate distance from BluMate in meters."""
         return location.distance(self.latitude, self.longitude, lat, lon)
 
     def path(self, *path):
@@ -749,7 +749,7 @@ def create_timer(hass, interval=TIMER_INTERVAL):
             """Stop the timer."""
             stop_event.set()
 
-        hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP, stop_timer)
+        hass.bus.listen_once(EVENT_BLUMATE_STOP, stop_timer)
 
         _LOGGER.info("Timer:starting")
 
@@ -794,7 +794,7 @@ def create_timer(hass, interval=TIMER_INTERVAL):
         thread.daemon = True
         thread.start()
 
-    hass.bus.listen_once(EVENT_HOMEASSISTANT_START, start_timer)
+    hass.bus.listen_once(EVENT_BLUMATE_START, start_timer)
 
 
 def create_worker_pool(worker_count=None):

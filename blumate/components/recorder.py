@@ -18,7 +18,7 @@ import voluptuous as vol
 
 import blumate.util.dt as dt_util
 from blumate.const import (
-    EVENT_HOMEASSISTANT_START, EVENT_HOMEASSISTANT_STOP, EVENT_STATE_CHANGED,
+    EVENT_BLUMATE_START, EVENT_BLUMATE_STOP, EVENT_STATE_CHANGED,
     EVENT_TIME_CHANGED, MATCH_ALL)
 from blumate.core import Event, EventOrigin, State
 from blumate.remote import JSONEncoder
@@ -198,8 +198,8 @@ class Recorder(threading.Thread):
             """Start recording."""
             self.start()
 
-        hass.bus.listen_once(EVENT_HOMEASSISTANT_START, start_recording)
-        hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP, self.shutdown)
+        hass.bus.listen_once(EVENT_BLUMATE_START, start_recording)
+        hass.bus.listen_once(EVENT_BLUMATE_STOP, self.shutdown)
         hass.bus.listen(MATCH_ALL, self.event_listener)
 
     def run(self):

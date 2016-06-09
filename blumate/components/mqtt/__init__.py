@@ -17,7 +17,7 @@ from blumate.exceptions import HomeAssistantError
 from blumate.helpers import template
 import blumate.helpers.config_validation as cv
 from blumate.const import (
-    EVENT_HOMEASSISTANT_START, EVENT_HOMEASSISTANT_STOP,
+    EVENT_BLUMATE_START, EVENT_BLUMATE_STOP,
     CONF_PLATFORM, CONF_SCAN_INTERVAL, CONF_VALUE_TEMPLATE)
 
 _LOGGER = logging.getLogger(__name__)
@@ -249,7 +249,7 @@ def setup(hass, config):
     def start_mqtt(event):
         """Launch MQTT component when Home Assistant starts up."""
         MQTT_CLIENT.start()
-        hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP, stop_mqtt)
+        hass.bus.listen_once(EVENT_BLUMATE_STOP, stop_mqtt)
 
     def publish_service(call):
         """Handle MQTT publish service calls."""
@@ -269,7 +269,7 @@ def setup(hass, config):
             return
         MQTT_CLIENT.publish(msg_topic, payload, qos, retain)
 
-    hass.bus.listen_once(EVENT_HOMEASSISTANT_START, start_mqtt)
+    hass.bus.listen_once(EVENT_BLUMATE_START, start_mqtt)
 
     descriptions = load_yaml_config_file(
         os.path.join(os.path.dirname(__file__), 'services.yaml'))

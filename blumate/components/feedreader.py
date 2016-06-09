@@ -11,7 +11,7 @@ from threading import Lock
 import pickle
 import voluptuous as vol
 
-from blumate.const import EVENT_HOMEASSISTANT_START
+from blumate.const import EVENT_BLUMATE_START
 from blumate.helpers.event import track_utc_time_change
 
 REQUIREMENTS = ['feedparser==5.2.1']
@@ -40,7 +40,7 @@ class FeedManager(object):
         self._storage = storage
         self._last_entry_timestamp = None
         self._has_published_parsed = False
-        hass.bus.listen_once(EVENT_HOMEASSISTANT_START,
+        hass.bus.listen_once(EVENT_BLUMATE_START,
                              lambda _: self._update())
         track_utc_time_change(hass, lambda now: self._update(),
                               minute=0, second=0)

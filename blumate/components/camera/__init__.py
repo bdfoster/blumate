@@ -11,7 +11,7 @@ from blumate.helpers.entity import Entity
 from blumate.helpers.entity_component import EntityComponent
 from blumate.components import bloomsky
 from blumate.helpers.config_validation import PLATFORM_SCHEMA  # noqa
-from blumate.components.http import HomeAssistantView
+from blumate.components.http import BluMateView
 
 DOMAIN = 'camera'
 DEPENDENCIES = ['http']
@@ -142,7 +142,7 @@ class Camera(Entity):
         return attr
 
 
-class CameraView(HomeAssistantView):
+class CameraView(BluMateView):
     """Base CameraView."""
 
     requires_auth = False

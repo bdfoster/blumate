@@ -27,7 +27,7 @@ def get_test_home_assistant(num_threads=None):
         orig_num_threads = ha.MIN_WORKER_THREAD
         ha.MIN_WORKER_THREAD = num_threads
 
-    hass = ha.HomeAssistant()
+    hass = ha.BluMate()
 
     if num_threads:
         ha.MIN_WORKER_THREAD = orig_num_threads

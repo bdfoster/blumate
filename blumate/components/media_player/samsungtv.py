@@ -39,7 +39,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
 
     # Generate a config for the Samsung lib
     remote_config = {
-        "name": "HomeAssistant",
+        "name": "BluMate",
         "description": config.get(CONF_NAME, ''),
         "id": "ha.component.samsung",
         "port": config.get(CONF_PORT, 55000),

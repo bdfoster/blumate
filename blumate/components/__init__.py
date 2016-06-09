@@ -1,5 +1,5 @@
 """
-This package contains components that can be plugged into Home Assistant.
+This package contains components that can be plugged into BluMate.
 
 Component design guidelines:
 - Each component defines a constant DOMAIN that is equal to its filename.
@@ -74,7 +74,7 @@ def toggle(hass, entity_id=None, **service_data):
 
 
 def setup(hass, config):
-    """Setup general services related to Home Assistant."""
+    """Setup general services related to BluMate."""
     def handle_turn_service(service):
         """Method to handle calls to blumate.turn_on/off."""
         entity_ids = extract_entity_ids(hass, service)

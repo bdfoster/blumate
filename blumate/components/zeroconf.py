@@ -9,7 +9,7 @@ https://home-assistant.io/components/zeroconf/
 import logging
 import socket
 
-from blumate.const import (EVENT_HOMEASSISTANT_STOP, __version__)
+from blumate.const import (EVENT_BLUMATE_STOP, __version__)
 
 REQUIREMENTS = ["zeroconf==0.17.5"]
 
@@ -46,6 +46,6 @@ def setup(hass, config):
         zeroconf.unregister_service(info)
         zeroconf.close()
 
-    hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP, stop_zeroconf)
+    hass.bus.listen_once(EVENT_BLUMATE_STOP, stop_zeroconf)
 
     return True

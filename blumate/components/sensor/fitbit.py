@@ -14,7 +14,7 @@ from blumate.const import TEMP_CELSIUS
 from blumate.util import Throttle
 from blumate.helpers.entity import Entity
 from blumate.loader import get_component
-from blumate.components.http import HomeAssistantView
+from blumate.components.http import BluMateView
 
 _LOGGER = logging.getLogger(__name__)
 REQUIREMENTS = ["fitbit==0.2.2"]
@@ -261,7 +261,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
         request_oauth_completion(hass)
 
 
-class FitbitAuthCallbackView(HomeAssistantView):
+class FitbitAuthCallbackView(BluMateView):
     """Handle OAuth finish callback requests."""
 
     requires_auth = False

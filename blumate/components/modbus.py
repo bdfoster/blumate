@@ -7,7 +7,7 @@ https://home-assistant.io/components/modbus/
 import logging
 
 from blumate.const import (
-    EVENT_HOMEASSISTANT_START, EVENT_HOMEASSISTANT_STOP)
+    EVENT_BLUMATE_START, EVENT_BLUMATE_STOP)
 
 DOMAIN = "modbus"
 
@@ -72,8 +72,8 @@ def setup(hass, config):
     def start_modbus(event):
         """Start Modbus service."""
         NETWORK.connect()
-        hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP, stop_modbus)
+        hass.bus.listen_once(EVENT_BLUMATE_STOP, stop_modbus)
 
-    hass.bus.listen_once(EVENT_HOMEASSISTANT_START, start_modbus)
+    hass.bus.listen_once(EVENT_BLUMATE_START, start_modbus)
 
     return True
