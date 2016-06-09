@@ -3,9 +3,9 @@
 import unittest
 from unittest.mock import patch
 
-import homeassistant.components as core_components
-from homeassistant.components import conversation
-from homeassistant.const import ATTR_ENTITY_ID
+import blumate.components as core_components
+from blumate.components import conversation
+from blumate.const import ATTR_ENTITY_ID
 
 from tests.common import get_test_home_assistant
 
@@ -62,8 +62,8 @@ class TestConversation(unittest.TestCase):
         self.assertEqual('turn_off', call.service)
         self.assertEqual([self.ent_id], call.data[ATTR_ENTITY_ID])
 
-    @patch('homeassistant.components.conversation.logging.Logger.error')
-    @patch('homeassistant.core.ServiceRegistry.call')
+    @patch('blumate.components.conversation.logging.Logger.error')
+    @patch('blumate.core.ServiceRegistry.call')
     def test_bad_request_format(self, mock_logger, mock_call):
         """Setup and perform a badly formatted request."""
         event_data = {
@@ -75,8 +75,8 @@ class TestConversation(unittest.TestCase):
         self.assertTrue(mock_logger.called)
         self.assertFalse(mock_call.called)
 
-    @patch('homeassistant.components.conversation.logging.Logger.error')
-    @patch('homeassistant.core.ServiceRegistry.call')
+    @patch('blumate.components.conversation.logging.Logger.error')
+    @patch('blumate.core.ServiceRegistry.call')
     def test_bad_request_entity(self, mock_logger, mock_call):
         """Setup and perform requests with bad entity id."""
         event_data = {conversation.ATTR_TEXT: 'turn something off'}
@@ -85,8 +85,8 @@ class TestConversation(unittest.TestCase):
         self.assertTrue(mock_logger.called)
         self.assertFalse(mock_call.called)
 
-    @patch('homeassistant.components.conversation.logging.Logger.error')
-    @patch('homeassistant.core.ServiceRegistry.call')
+    @patch('blumate.components.conversation.logging.Logger.error')
+    @patch('blumate.core.ServiceRegistry.call')
     def test_bad_request_command(self, mock_logger, mock_call):
         """Setup and perform requests with bad command."""
         event_data = {conversation.ATTR_TEXT: 'turn kitchen lights over'}
@@ -95,8 +95,8 @@ class TestConversation(unittest.TestCase):
         self.assertTrue(mock_logger.called)
         self.assertFalse(mock_call.called)
 
-    @patch('homeassistant.components.conversation.logging.Logger.error')
-    @patch('homeassistant.core.ServiceRegistry.call')
+    @patch('blumate.components.conversation.logging.Logger.error')
+    @patch('blumate.core.ServiceRegistry.call')
     def test_bad_request_notext(self, mock_logger, mock_call):
         """Setup and perform requests with bad command with no text."""
         event_data = {}

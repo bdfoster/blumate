@@ -3,7 +3,7 @@ import os
 import tempfile
 import unittest
 
-import homeassistant.components.notify as notify
+import blumate.components.notify as notify
 
 from tests.common import get_test_home_assistant
 
@@ -56,7 +56,7 @@ class TestCommandLine(unittest.TestCase):
             # the echo command adds a line break
             self.assertEqual(result, "{}\n".format(message))
 
-    @patch('homeassistant.components.notify.command_line._LOGGER.error')
+    @patch('blumate.components.notify.command_line._LOGGER.error')
     def test_error_for_none_zero_exit_code(self, mock_error):
         """Test if an error is logged for non zero exit codes."""
         self.assertTrue(notify.setup(self.hass, {

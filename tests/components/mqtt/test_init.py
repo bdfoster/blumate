@@ -6,9 +6,9 @@ import socket
 
 import voluptuous as vol
 
-from homeassistant.bootstrap import _setup_component
-import homeassistant.components.mqtt as mqtt
-from homeassistant.const import (
+from blumate.bootstrap import _setup_component
+import blumate.components.mqtt as mqtt
+from blumate.const import (
     EVENT_CALL_SERVICE, ATTR_DOMAIN, ATTR_SERVICE, EVENT_HOMEASSISTANT_START,
     EVENT_HOMEASSISTANT_STOP)
 
@@ -49,7 +49,7 @@ class TestMQTT(unittest.TestCase):
 
     def test_setup_fails_if_no_connect_broker(self):
         """Test for setup failure if connection to broker is missing."""
-        with mock.patch('homeassistant.components.mqtt.MQTT',
+        with mock.patch('blumate.components.mqtt.MQTT',
                         side_effect=socket.error()):
             self.hass.config.components = []
             assert not _setup_component(self.hass, mqtt.DOMAIN, {
@@ -300,7 +300,7 @@ class TestMQTTCallbacks(unittest.TestCase):
         mqtt.MQTT_CLIENT._mqtt_on_disconnect(None, None, 0)
         self.assertFalse(mqtt.MQTT_CLIENT._mqttc.reconnect.called)
 
-    @mock.patch('homeassistant.components.mqtt.time.sleep')
+    @mock.patch('blumate.components.mqtt.time.sleep')
     def test_mqtt_disconnect_tries_reconnect(self, mock_sleep):
         """Test the re-connect tries."""
         mqtt.MQTT_CLIENT.topics = {

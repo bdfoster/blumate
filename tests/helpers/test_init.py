@@ -2,13 +2,13 @@
 # pylint: disable=protected-access,too-many-public-methods
 import unittest
 
-from homeassistant import helpers
+from blumate import helpers
 
 from tests.common import get_test_home_assistant
 
 
 class TestHelpers(unittest.TestCase):
-    """Tests homeassistant.helpers module."""
+    """Tests blumate.helpers module."""
 
     def setUp(self):  # pylint: disable=invalid-name
         """Init needed objects."""

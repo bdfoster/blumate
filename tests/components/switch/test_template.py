@@ -1,8 +1,8 @@
 """The tests for the  Template switch platform."""
-import homeassistant.components as core
-import homeassistant.components.switch as switch
+import blumate.components as core
+import blumate.components.switch as switch
 
-from homeassistant.const import (
+from blumate.const import (
     STATE_ON,
     STATE_OFF)
 

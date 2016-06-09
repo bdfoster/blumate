@@ -2,14 +2,14 @@
 # pylint: disable=protected-access,too-many-public-methods
 import unittest
 
-import homeassistant.helpers.entity as entity
-from homeassistant.const import ATTR_HIDDEN
+import blumate.helpers.entity as entity
+from blumate.const import ATTR_HIDDEN
 
 from tests.common import get_test_home_assistant
 
 
 class TestHelpersEntity(unittest.TestCase):
-    """Test homeassistant.helpers.entity module."""
+    """Test blumate.helpers.entity module."""
 
     def setUp(self):  # pylint: disable=invalid-name
         """Setup things to be run when tests are started."""

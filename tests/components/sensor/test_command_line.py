@@ -1,7 +1,7 @@
 """The tests for the Command line sensor platform."""
 import unittest
 
-from homeassistant.components.sensor import command_line
+from blumate.components.sensor import command_line
 
 from tests.common import get_test_home_assistant
 

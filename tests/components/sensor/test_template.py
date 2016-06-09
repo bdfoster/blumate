@@ -1,5 +1,5 @@
 """The test for the Template sensor platform."""
-import homeassistant.components.sensor as sensor
+import blumate.components.sensor as sensor
 
 from tests.common import get_test_home_assistant
 

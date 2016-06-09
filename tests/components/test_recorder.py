@@ -5,8 +5,8 @@ import time
 import json
 from unittest.mock import patch
 
-from homeassistant.const import MATCH_ALL
-from homeassistant.components import recorder
+from blumate.const import MATCH_ALL
+from blumate.components import recorder
 
 from tests.common import get_test_home_assistant
 
@@ -17,7 +17,7 @@ class TestRecorder(unittest.TestCase):
     def setUp(self):  # pylint: disable=invalid-name
         """Setup things to be run when tests are started."""
         self.hass = get_test_home_assistant()
-        with patch('homeassistant.core.Config.path', return_value=':memory:'):
+        with patch('blumate.core.Config.path', return_value=':memory:'):
             recorder.setup(self.hass, {})
         self.hass.start()
         recorder._INSTANCE.block_till_done()

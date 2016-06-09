@@ -4,7 +4,7 @@ import unittest
 import os
 import tempfile
 
-from homeassistant.util import yaml
+from blumate.util import yaml
 
 
 class TestYaml(unittest.TestCase):

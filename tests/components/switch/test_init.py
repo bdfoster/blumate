@@ -2,9 +2,9 @@
 # pylint: disable=too-many-public-methods,protected-access
 import unittest
 
-from homeassistant import loader
-from homeassistant.components import switch
-from homeassistant.const import STATE_ON, STATE_OFF, CONF_PLATFORM
+from blumate import loader
+from blumate.components import switch
+from blumate.const import STATE_ON, STATE_OFF, CONF_PLATFORM
 
 from tests.common import get_test_home_assistant
 

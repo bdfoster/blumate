@@ -3,8 +3,8 @@ import os
 import tempfile
 import unittest
 
-import homeassistant.bootstrap as bootstrap
-import homeassistant.util.package as package
+import blumate.bootstrap as bootstrap
+import blumate.util.package as package
 
 RESOURCE_DIR = os.path.abspath(
     os.path.join(os.path.dirname(__file__), '..', 'resources'))
@@ -16,7 +16,7 @@ TEST_ZIP_REQ = 'file://{}#{}' \
 
 
 class TestPackageUtil(unittest.TestCase):
-    """Test for homeassistant.util.package module."""
+    """Test for blumate.util.package module."""
 
     def setUp(self):
         """Create local library for testing."""

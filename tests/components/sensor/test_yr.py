@@ -4,8 +4,8 @@ from unittest.mock import patch
 
 import pytest
 
-from homeassistant.bootstrap import _setup_component
-import homeassistant.util.dt as dt_util
+from blumate.bootstrap import _setup_component
+import blumate.util.dt as dt_util
 from tests.common import get_test_home_assistant
 
 
@@ -27,9 +27,9 @@ class TestSensorYr:
         """Test the default setup."""
         now = datetime(2016, 6, 9, 1, tzinfo=dt_util.UTC)
 
-        with patch('homeassistant.components.sensor.yr.requests.Session',
+        with patch('blumate.components.sensor.yr.requests.Session',
                    return_value=betamax_session):
-            with patch('homeassistant.components.sensor.yr.dt_util.utcnow',
+            with patch('blumate.components.sensor.yr.dt_util.utcnow',
                        return_value=now):
                     assert _setup_component(self.hass, 'sensor', {
                                     'sensor': {'platform': 'yr',
@@ -45,9 +45,9 @@ class TestSensorYr:
         """Test a custom setup."""
         now = datetime(2016, 6, 9, 1, tzinfo=dt_util.UTC)
 
-        with patch('homeassistant.components.sensor.yr.requests.Session',
+        with patch('blumate.components.sensor.yr.requests.Session',
                    return_value=betamax_session):
-            with patch('homeassistant.components.sensor.yr.dt_util.utcnow',
+            with patch('blumate.components.sensor.yr.dt_util.utcnow',
                        return_value=now):
                 assert _setup_component(self.hass, 'sensor', {
                                         'sensor': {'platform': 'yr',

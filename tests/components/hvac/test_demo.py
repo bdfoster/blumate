@@ -1,10 +1,10 @@
 """The tests for the demo hvac."""
 import unittest
 
-from homeassistant.const import (
+from blumate.const import (
     TEMP_CELSIUS,
 )
-from homeassistant.components import hvac
+from blumate.components import hvac
 
 from tests.common import get_test_home_assistant
 

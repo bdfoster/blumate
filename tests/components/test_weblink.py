@@ -1,7 +1,7 @@
 """The tests for the weblink component."""
 import unittest
 
-from homeassistant.components import weblink
+from blumate.components import weblink
 
 from tests.common import get_test_home_assistant
 

@@ -3,11 +3,11 @@
 import unittest
 from datetime import timedelta
 
-import homeassistant.core as ha
-from homeassistant.const import (
+import blumate.core as ha
+from blumate.const import (
     EVENT_STATE_CHANGED, EVENT_HOMEASSISTANT_START, EVENT_HOMEASSISTANT_STOP)
-import homeassistant.util.dt as dt_util
-from homeassistant.components import logbook
+import blumate.util.dt as dt_util
+from blumate.components import logbook
 
 from tests.common import mock_http_component, get_test_home_assistant
 

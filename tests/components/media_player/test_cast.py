@@ -3,13 +3,13 @@
 import unittest
 from unittest.mock import patch
 
-from homeassistant.components.media_player import cast
+from blumate.components.media_player import cast
 
 
 class TestCastMediaPlayer(unittest.TestCase):
     """Test the media_player module."""
 
-    @patch('homeassistant.components.media_player.cast.CastDevice')
+    @patch('blumate.components.media_player.cast.CastDevice')
     def test_filter_duplicates(self, mock_device):
         """Test filtering of duplicates."""
         cast.setup_platform(None, {

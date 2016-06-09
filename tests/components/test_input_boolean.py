@@ -2,8 +2,8 @@
 # pylint: disable=too-many-public-methods,protected-access
 import unittest
 
-from homeassistant.components import input_boolean
-from homeassistant.const import (
+from blumate.components import input_boolean
+from blumate.const import (
     STATE_ON, STATE_OFF, ATTR_ICON, ATTR_FRIENDLY_NAME)
 
 from tests.common import get_test_home_assistant

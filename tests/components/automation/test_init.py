@@ -1,9 +1,9 @@
 """The tests for the automation component."""
 import unittest
 
-from homeassistant.bootstrap import _setup_component
-import homeassistant.components.automation as automation
-from homeassistant.const import ATTR_ENTITY_ID
+from blumate.bootstrap import _setup_component
+import blumate.components.automation as automation
+from blumate.const import ATTR_ENTITY_ID
 
 from tests.common import get_test_home_assistant
 

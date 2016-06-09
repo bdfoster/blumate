@@ -1,9 +1,9 @@
 """The tests for the Rfxtrx sensor platform."""
 import unittest
 
-from homeassistant.bootstrap import _setup_component
-from homeassistant.components import rfxtrx as rfxtrx_core
-from homeassistant.const import TEMP_CELSIUS
+from blumate.bootstrap import _setup_component
+from blumate.components import rfxtrx as rfxtrx_core
+from blumate.const import TEMP_CELSIUS
 
 from tests.common import get_test_home_assistant
 

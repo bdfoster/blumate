@@ -2,8 +2,8 @@
 # pylint: disable=too-many-public-methods,protected-access
 import unittest
 
-import homeassistant.loader as loader
-import homeassistant.components.http as http
+import blumate.loader as loader
+import blumate.components.http as http
 
 from tests.common import get_test_home_assistant, MockModule
 

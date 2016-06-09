@@ -3,11 +3,11 @@ from datetime import timedelta
 import unittest
 from unittest.mock import patch
 
-from homeassistant.const import (
+from blumate.const import (
     STATE_ALARM_DISARMED, STATE_ALARM_ARMED_HOME, STATE_ALARM_ARMED_AWAY,
     STATE_ALARM_PENDING, STATE_ALARM_TRIGGERED)
-from homeassistant.components import alarm_control_panel
-import homeassistant.util.dt as dt_util
+from blumate.components import alarm_control_panel
+import blumate.util.dt as dt_util
 
 from tests.common import fire_time_changed, get_test_home_assistant
 
@@ -68,7 +68,7 @@ class TestAlarmControlPanelManual(unittest.TestCase):
                          self.hass.states.get(entity_id).state)
 
         future = dt_util.utcnow() + timedelta(seconds=1)
-        with patch(('homeassistant.components.alarm_control_panel.manual.'
+        with patch(('blumate.components.alarm_control_panel.manual.'
                     'dt_util.utcnow'), return_value=future):
             fire_time_changed(self.hass, future)
             self.hass.pool.block_till_done()
@@ -140,7 +140,7 @@ class TestAlarmControlPanelManual(unittest.TestCase):
                          self.hass.states.get(entity_id).state)
 
         future = dt_util.utcnow() + timedelta(seconds=1)
-        with patch(('homeassistant.components.alarm_control_panel.manual.'
+        with patch(('blumate.components.alarm_control_panel.manual.'
                     'dt_util.utcnow'), return_value=future):
             fire_time_changed(self.hass, future)
             self.hass.pool.block_till_done()
@@ -211,7 +211,7 @@ class TestAlarmControlPanelManual(unittest.TestCase):
                          self.hass.states.get(entity_id).state)
 
         future = dt_util.utcnow() + timedelta(seconds=2)
-        with patch(('homeassistant.components.alarm_control_panel.manual.'
+        with patch(('blumate.components.alarm_control_panel.manual.'
                     'dt_util.utcnow'), return_value=future):
             fire_time_changed(self.hass, future)
             self.hass.pool.block_till_done()
@@ -220,7 +220,7 @@ class TestAlarmControlPanelManual(unittest.TestCase):
                          self.hass.states.get(entity_id).state)
 
         future = dt_util.utcnow() + timedelta(seconds=5)
-        with patch(('homeassistant.components.alarm_control_panel.manual.'
+        with patch(('blumate.components.alarm_control_panel.manual.'
                     'dt_util.utcnow'), return_value=future):
             fire_time_changed(self.hass, future)
             self.hass.pool.block_till_done()
@@ -255,7 +255,7 @@ class TestAlarmControlPanelManual(unittest.TestCase):
                          self.hass.states.get(entity_id).state)
 
         future = dt_util.utcnow() + timedelta(seconds=5)
-        with patch(('homeassistant.components.alarm_control_panel.manual.'
+        with patch(('blumate.components.alarm_control_panel.manual.'
                     'dt_util.utcnow'), return_value=future):
             fire_time_changed(self.hass, future)
             self.hass.pool.block_till_done()
@@ -291,7 +291,7 @@ class TestAlarmControlPanelManual(unittest.TestCase):
                          self.hass.states.get(entity_id).state)
 
         future = dt_util.utcnow() + timedelta(seconds=5)
-        with patch(('homeassistant.components.alarm_control_panel.manual.'
+        with patch(('blumate.components.alarm_control_panel.manual.'
                     'dt_util.utcnow'), return_value=future):
             fire_time_changed(self.hass, future)
             self.hass.pool.block_till_done()

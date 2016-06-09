@@ -3,11 +3,11 @@ import json
 import unittest
 from unittest.mock import ANY, patch
 
-import homeassistant.components.mqtt_eventstream as eventstream
-from homeassistant.const import EVENT_STATE_CHANGED
-from homeassistant.core import State
-from homeassistant.remote import JSONEncoder
-import homeassistant.util.dt as dt_util
+import blumate.components.mqtt_eventstream as eventstream
+from blumate.const import EVENT_STATE_CHANGED
+from blumate.core import State
+from blumate.remote import JSONEncoder
+import blumate.util.dt as dt_util
 
 from tests.common import (
     get_test_home_assistant,
@@ -55,7 +55,7 @@ class TestMqttEventStream(unittest.TestCase):
         # Verify that the event handler has been added as a listener
         self.assertEqual(self.hass.bus.listeners.get('*'), 1)
 
-    @patch('homeassistant.components.mqtt.subscribe')
+    @patch('blumate.components.mqtt.subscribe')
     def test_subscribe(self, mock_sub):
         """"Test the subscription."""
         sub_topic = 'foo'
@@ -65,8 +65,8 @@ class TestMqttEventStream(unittest.TestCase):
         # Verify that the this entity was subscribed to the topic
         mock_sub.assert_called_with(self.hass, sub_topic, ANY)
 
-    @patch('homeassistant.components.mqtt.publish')
-    @patch('homeassistant.core.dt_util.utcnow')
+    @patch('blumate.components.mqtt.publish')
+    @patch('blumate.core.dt_util.utcnow')
     def test_state_changed_event_sends_message(self, mock_utcnow, mock_pub):
         """"Test the sending of a new message if event changed."""
         now = dt_util.as_utc(dt_util.now())
@@ -108,7 +108,7 @@ class TestMqttEventStream(unittest.TestCase):
         # Verify that the message received was that expected
         self.assertEqual(json.loads(msg), event)
 
-    @patch('homeassistant.components.mqtt.publish')
+    @patch('blumate.components.mqtt.publish')
     def test_time_event_does_not_send_message(self, mock_pub):
         """"Test the sending of a new message if time event."""
         self.assertTrue(self.add_eventstream(pub_topic='bar'))

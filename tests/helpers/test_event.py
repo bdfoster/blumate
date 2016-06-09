@@ -6,9 +6,9 @@ from datetime import datetime, timedelta
 
 from astral import Astral
 
-import homeassistant.core as ha
-from homeassistant.const import MATCH_ALL
-from homeassistant.helpers.event import (
+import blumate.core as ha
+from blumate.const import MATCH_ALL
+from blumate.helpers.event import (
     track_point_in_utc_time,
     track_point_in_time,
     track_utc_time_change,
@@ -17,8 +17,8 @@ from homeassistant.helpers.event import (
     track_sunrise,
     track_sunset,
 )
-from homeassistant.components import sun
-import homeassistant.util.dt as dt_util
+from blumate.components import sun
+import blumate.util.dt as dt_util
 
 from tests.common import get_test_home_assistant
 

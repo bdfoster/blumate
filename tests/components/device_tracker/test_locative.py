@@ -5,9 +5,9 @@ from unittest.mock import patch
 import eventlet
 import requests
 
-from homeassistant import bootstrap, const
-import homeassistant.components.device_tracker as device_tracker
-import homeassistant.components.http as http
+from blumate import bootstrap, const
+import blumate.components.device_tracker as device_tracker
+import blumate.components.http as http
 
 from tests.common import get_test_home_assistant, get_test_instance_port
 
@@ -55,7 +55,7 @@ def tearDownModule():   # pylint: disable=invalid-name
 
 
 # Stub out update_config or else Travis CI raises an exception
-@patch('homeassistant.components.device_tracker.update_config')
+@patch('blumate.components.device_tracker.update_config')
 class TestLocative(unittest.TestCase):
     """Test Locative platform."""
 

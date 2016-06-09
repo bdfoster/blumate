@@ -2,13 +2,13 @@
 from copy import copy
 from unittest.mock import patch, Mock
 
-from homeassistant.components.sensor import tcp
-from homeassistant.components.binary_sensor import tcp as bin_tcp
+from blumate.components.sensor import tcp
+from blumate.components.binary_sensor import tcp as bin_tcp
 from tests.common import get_test_home_assistant
 from tests.components.sensor import test_tcp
 
 
-@patch('homeassistant.components.sensor.tcp.Sensor.update')
+@patch('blumate.components.sensor.tcp.Sensor.update')
 def test_setup_platform_valid_config(mock_update):
     """Should check the supplied config and call add_entities with Sensor."""
     add_entities = Mock()
@@ -44,14 +44,14 @@ class TestTCPBinarySensor():
         assert len(config) != len(test_tcp.TEST_CONFIG)
         assert not bin_tcp.BinarySensor.validate_config(config)
 
-    @patch('homeassistant.components.sensor.tcp.Sensor.update')
+    @patch('blumate.components.sensor.tcp.Sensor.update')
     def test_is_on_true(self, mock_update):
         """Should return True if _state is the same as value_on."""
         sensor = bin_tcp.BinarySensor(self.hass, test_tcp.TEST_CONFIG)
         sensor._state = test_tcp.TEST_CONFIG[tcp.CONF_VALUE_ON]
         assert sensor.is_on
 
-    @patch('homeassistant.components.sensor.tcp.Sensor.update')
+    @patch('blumate.components.sensor.tcp.Sensor.update')
     def test_is_on_false(self, mock_update):
         """Should return False if _state is not the same as value_on."""
         sensor = bin_tcp.BinarySensor(self.hass, test_tcp.TEST_CONFIG)

@@ -3,16 +3,16 @@
 import unittest
 from unittest.mock import patch
 
-import homeassistant.core as ha
-from homeassistant.const import (
+import blumate.core as ha
+from blumate.const import (
     STATE_ON, STATE_OFF, SERVICE_TURN_ON, SERVICE_TURN_OFF, SERVICE_TOGGLE)
-import homeassistant.components as comps
+import blumate.components as comps
 
 from tests.common import get_test_home_assistant
 
 
 class TestComponentsCore(unittest.TestCase):
-    """Test homeassistant.components module."""
+    """Test blumate.components module."""
 
     def setUp(self):  # pylint: disable=invalid-name
         """Setup things to be run when tests are started."""
@@ -68,7 +68,7 @@ class TestComponentsCore(unittest.TestCase):
 
         self.assertEqual(1, len(runs))
 
-    @patch('homeassistant.core.ServiceRegistry.call')
+    @patch('blumate.core.ServiceRegistry.call')
     def test_turn_on_to_not_block_for_domains_without_service(self, mock_call):
         """Test if turn_on is blocking domain with no service."""
         self.hass.services.register('light', SERVICE_TURN_ON, lambda x: x)
@@ -76,10 +76,10 @@ class TestComponentsCore(unittest.TestCase):
         # We can't test if our service call results in services being called
         # because by mocking out the call service method, we mock out all
         # So we mimick how the service registry calls services
-        service_call = ha.ServiceCall('homeassistant', 'turn_on', {
+        service_call = ha.ServiceCall('blumate', 'turn_on', {
             'entity_id': ['light.test', 'sensor.bla', 'light.bla']
         })
-        self.hass.services._services['homeassistant']['turn_on'](service_call)
+        self.hass.services._services['blumate']['turn_on'](service_call)
 
         self.assertEqual(2, mock_call.call_count)
         self.assertEqual(

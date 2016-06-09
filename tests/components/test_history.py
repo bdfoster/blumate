@@ -4,9 +4,9 @@ from datetime import timedelta
 import unittest
 from unittest.mock import patch, sentinel
 
-import homeassistant.core as ha
-import homeassistant.util.dt as dt_util
-from homeassistant.components import history, recorder
+import blumate.core as ha
+import blumate.util.dt as dt_util
+from blumate.components import history, recorder
 
 from tests.common import (
     mock_http_component, mock_state_change_event, get_test_home_assistant)
@@ -25,7 +25,7 @@ class TestComponentHistory(unittest.TestCase):
 
     def init_recorder(self):
         """Initialize the recorder."""
-        with patch('homeassistant.core.Config.path', return_value=':memory:'):
+        with patch('blumate.core.Config.path', return_value=':memory:'):
             recorder.setup(self.hass, {})
         self.hass.start()
         self.wait_recording_done()
@@ -64,7 +64,7 @@ class TestComponentHistory(unittest.TestCase):
         states = []
 
         now = dt_util.utcnow()
-        with patch('homeassistant.components.recorder.dt_util.utcnow',
+        with patch('blumate.components.recorder.dt_util.utcnow',
                    return_value=now):
             for i in range(5):
                 state = ha.State(
@@ -79,7 +79,7 @@ class TestComponentHistory(unittest.TestCase):
             self.wait_recording_done()
 
         future = now + timedelta(seconds=1)
-        with patch('homeassistant.components.recorder.dt_util.utcnow',
+        with patch('blumate.components.recorder.dt_util.utcnow',
                    return_value=future):
             for i in range(5):
                 state = ha.State(
@@ -114,12 +114,12 @@ class TestComponentHistory(unittest.TestCase):
         point = start + timedelta(seconds=1)
         end = point + timedelta(seconds=1)
 
-        with patch('homeassistant.components.recorder.dt_util.utcnow',
+        with patch('blumate.components.recorder.dt_util.utcnow',
                    return_value=start):
             set_state('idle')
             set_state('YouTube')
 
-        with patch('homeassistant.components.recorder.dt_util.utcnow',
+        with patch('blumate.components.recorder.dt_util.utcnow',
                    return_value=point):
             states = [
                 set_state('idle'),
@@ -128,7 +128,7 @@ class TestComponentHistory(unittest.TestCase):
                 set_state('YouTube'),
             ]
 
-        with patch('homeassistant.components.recorder.dt_util.utcnow',
+        with patch('blumate.components.recorder.dt_util.utcnow',
                    return_value=end):
             set_state('Netflix')
             set_state('Plex')
@@ -164,7 +164,7 @@ class TestComponentHistory(unittest.TestCase):
         four = three + timedelta(seconds=1)
 
         states = {therm: [], mp: [], script_c: []}
-        with patch('homeassistant.components.recorder.dt_util.utcnow',
+        with patch('blumate.components.recorder.dt_util.utcnow',
                    return_value=one):
             states[mp].append(
                 set_state(mp, 'idle',
@@ -175,7 +175,7 @@ class TestComponentHistory(unittest.TestCase):
             states[therm].append(
                 set_state(therm, 20, attributes={'current_temperature': 19.5}))
 
-        with patch('homeassistant.components.recorder.dt_util.utcnow',
+        with patch('blumate.components.recorder.dt_util.utcnow',
                    return_value=two):
             # This state will be skipped only different in time
             set_state(mp, 'YouTube',
@@ -188,7 +188,7 @@ class TestComponentHistory(unittest.TestCase):
             states[therm].append(
                 set_state(therm, 21, attributes={'current_temperature': 19.8}))
 
-        with patch('homeassistant.components.recorder.dt_util.utcnow',
+        with patch('blumate.components.recorder.dt_util.utcnow',
                    return_value=three):
             states[mp].append(
                 set_state(mp, 'Netflix',

@@ -1,7 +1,7 @@
 """Test zone component."""
 import unittest
 
-from homeassistant.components import zone
+from blumate.components import zone
 
 from tests.common import get_test_home_assistant
 

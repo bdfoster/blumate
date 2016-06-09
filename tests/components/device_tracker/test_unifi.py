@@ -3,15 +3,15 @@ import unittest
 from unittest import mock
 import urllib
 
-from homeassistant.components.device_tracker import unifi as unifi
-from homeassistant.const import CONF_HOST, CONF_USERNAME, CONF_PASSWORD
+from blumate.components.device_tracker import unifi as unifi
+from blumate.const import CONF_HOST, CONF_USERNAME, CONF_PASSWORD
 from unifi import controller
 
 
 class TestUnifiScanner(unittest.TestCase):
     """Test the Unifiy platform."""
 
-    @mock.patch('homeassistant.components.device_tracker.unifi.UnifiScanner')
+    @mock.patch('blumate.components.device_tracker.unifi.UnifiScanner')
     @mock.patch.object(controller, 'Controller')
     def test_config_minimal(self, mock_ctrl, mock_scanner):
         """Test the setup with minimal configuration."""
@@ -27,7 +27,7 @@ class TestUnifiScanner(unittest.TestCase):
                                           8443, 'v4')
         mock_scanner.assert_called_once_with(mock_ctrl.return_value)
 
-    @mock.patch('homeassistant.components.device_tracker.unifi.UnifiScanner')
+    @mock.patch('blumate.components.device_tracker.unifi.UnifiScanner')
     @mock.patch.object(controller, 'Controller')
     def test_config_full(self, mock_ctrl, mock_scanner):
         """Test the setup with full configuration."""
@@ -45,7 +45,7 @@ class TestUnifiScanner(unittest.TestCase):
                                           123, 'v4')
         mock_scanner.assert_called_once_with(mock_ctrl.return_value)
 
-    @mock.patch('homeassistant.components.device_tracker.unifi.UnifiScanner')
+    @mock.patch('blumate.components.device_tracker.unifi.UnifiScanner')
     @mock.patch.object(controller, 'Controller')
     def test_config_error(self, mock_ctrl, mock_scanner):
         """Test for configuration errors."""
@@ -59,7 +59,7 @@ class TestUnifiScanner(unittest.TestCase):
         self.assertFalse(result)
         self.assertFalse(mock_ctrl.called)
 
-    @mock.patch('homeassistant.components.device_tracker.unifi.UnifiScanner')
+    @mock.patch('blumate.components.device_tracker.unifi.UnifiScanner')
     @mock.patch.object(controller, 'Controller')
     def test_config_badport(self, mock_ctrl, mock_scanner):
         """Test the setup with a bad port."""
@@ -75,7 +75,7 @@ class TestUnifiScanner(unittest.TestCase):
         self.assertFalse(result)
         self.assertFalse(mock_ctrl.called)
 
-    @mock.patch('homeassistant.components.device_tracker.unifi.UnifiScanner')
+    @mock.patch('blumate.components.device_tracker.unifi.UnifiScanner')
     @mock.patch.object(controller, 'Controller')
     def test_config_controller_failed(self, mock_ctrl, mock_scanner):
         """Test for controller failure."""

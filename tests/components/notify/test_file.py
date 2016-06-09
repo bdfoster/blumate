@@ -4,10 +4,10 @@ import unittest
 import tempfile
 from unittest.mock import patch
 
-import homeassistant.components.notify as notify
-from homeassistant.components.notify import (
+import blumate.components.notify as notify
+from blumate.components.notify import (
     ATTR_TITLE_DEFAULT)
-import homeassistant.util.dt as dt_util
+import blumate.util.dt as dt_util
 
 from tests.common import get_test_home_assistant
 
@@ -32,7 +32,7 @@ class TestNotifyFile(unittest.TestCase):
             }
         }))
 
-    @patch('homeassistant.util.dt.utcnow')
+    @patch('blumate.util.dt.utcnow')
     def test_notify_file(self, mock_utcnow):
         """Test the notify file output."""
         mock_utcnow.return_value = dt_util.as_utc(dt_util.now())

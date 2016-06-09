@@ -1,9 +1,9 @@
 """The tests for the MQTT roller shutter platform."""
 import unittest
 
-from homeassistant.bootstrap import _setup_component
-from homeassistant.const import STATE_OPEN, STATE_CLOSED, STATE_UNKNOWN
-import homeassistant.components.rollershutter as rollershutter
+from blumate.bootstrap import _setup_component
+from blumate.const import STATE_OPEN, STATE_CLOSED, STATE_UNKNOWN
+import blumate.components.rollershutter as rollershutter
 from tests.common import mock_mqtt_component, fire_mqtt_message
 
 from tests.common import get_test_home_assistant

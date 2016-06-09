@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 import os
 from setuptools import setup, find_packages
-from homeassistant.const import __version__
+from blumate.const import __version__
 
-PACKAGE_NAME = 'homeassistant'
+PACKAGE_NAME = 'blumate'
 HERE = os.path.abspath(os.path.dirname(__file__))
 DOWNLOAD_URL = ('https://github.com/home-assistant/home-assistant/archive/'
                 '{}.zip'.format(__version__))
@@ -37,7 +37,7 @@ setup(
     keywords=['home', 'automation'],
     entry_points={
         'console_scripts': [
-            'hass = homeassistant.__main__:main'
+            'hass = blumate.__main__:main'
         ]
     },
     classifiers=[

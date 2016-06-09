@@ -14,7 +14,7 @@ START_ICONSET = '<iron-iconset-svg'
 
 CUR_VERSION = re.compile(r'VERSION = "([A-Za-z0-9]{32})"')
 
-OUTPUT_BASE = os.path.join('homeassistant', 'components', 'frontend')
+OUTPUT_BASE = os.path.join('blumate', 'components', 'frontend')
 VERSION_OUTPUT = os.path.join(OUTPUT_BASE, 'mdi_version.py')
 ICONSET_OUTPUT = os.path.join(OUTPUT_BASE, 'www_static', 'mdi.html')
 ICONSET_OUTPUT_GZ = os.path.join(OUTPUT_BASE, 'www_static', 'mdi.html.gz')

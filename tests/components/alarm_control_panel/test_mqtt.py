@@ -1,11 +1,11 @@
 """The tests the MQTT alarm control panel component."""
 import unittest
 
-from homeassistant.bootstrap import _setup_component
-from homeassistant.const import (
+from blumate.bootstrap import _setup_component
+from blumate.const import (
     STATE_ALARM_DISARMED, STATE_ALARM_ARMED_HOME, STATE_ALARM_ARMED_AWAY,
     STATE_ALARM_PENDING, STATE_ALARM_TRIGGERED, STATE_UNKNOWN)
-from homeassistant.components import alarm_control_panel
+from blumate.components import alarm_control_panel
 
 from tests.common import (
     mock_mqtt_component, fire_mqtt_message, get_test_home_assistant)

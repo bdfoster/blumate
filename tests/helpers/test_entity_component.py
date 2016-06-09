@@ -5,12 +5,12 @@ import logging
 import unittest
 from unittest.mock import patch, Mock
 
-import homeassistant.core as ha
-import homeassistant.loader as loader
-from homeassistant.helpers.entity import Entity
-from homeassistant.helpers.entity_component import EntityComponent
-from homeassistant.components import discovery
-import homeassistant.util.dt as dt_util
+import blumate.core as ha
+import blumate.loader as loader
+from blumate.helpers.entity import Entity
+from blumate.helpers.entity_component import EntityComponent
+from blumate.components import discovery
+import blumate.util.dt as dt_util
 
 from tests.common import (
     get_test_home_assistant, MockPlatform, MockModule, fire_time_changed)
@@ -52,7 +52,7 @@ class EntityTest(Entity):
 
 
 class TestHelpersEntityComponent(unittest.TestCase):
-    """Test homeassistant.helpers.entity_component module."""
+    """Test blumate.helpers.entity_component module."""
 
     def setUp(self):  # pylint: disable=invalid-name
         """Initialize a test Home Assistant instance."""
@@ -224,7 +224,7 @@ class TestHelpersEntityComponent(unittest.TestCase):
         assert platform1_setup.called
         assert platform2_setup.called
 
-    @patch('homeassistant.helpers.entity_component.EntityComponent'
+    @patch('blumate.helpers.entity_component.EntityComponent'
            '._setup_platform')
     def test_setup_does_discovery(self, mock_setup):
         """Test setup for discovery."""
@@ -246,7 +246,7 @@ class TestHelpersEntityComponent(unittest.TestCase):
         assert ('platform_test', {}, 'discovery_info') == \
             mock_setup.call_args[0]
 
-    @patch('homeassistant.helpers.entity_component.track_utc_time_change')
+    @patch('blumate.helpers.entity_component.track_utc_time_change')
     def test_set_scan_interval_via_config(self, mock_track):
         """Test the setting of the scan interval via configuration."""
         def platform_setup(hass, config, add_devices, discovery_info=None):
@@ -268,7 +268,7 @@ class TestHelpersEntityComponent(unittest.TestCase):
         assert mock_track.called
         assert [0, 30] == list(mock_track.call_args[1]['second'])
 
-    @patch('homeassistant.helpers.entity_component.track_utc_time_change')
+    @patch('blumate.helpers.entity_component.track_utc_time_change')
     def test_set_scan_interval_via_platform(self, mock_track):
         """Test the setting of the scan interval via platform."""
         def platform_setup(hass, config, add_devices, discovery_info=None):

@@ -1,8 +1,8 @@
 """The tests for the Event automation."""
 import unittest
 
-from homeassistant.bootstrap import _setup_component
-import homeassistant.components.automation as automation
+from blumate.bootstrap import _setup_component
+import blumate.components.automation as automation
 
 from tests.common import get_test_home_assistant
 

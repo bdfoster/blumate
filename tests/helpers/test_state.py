@@ -3,19 +3,19 @@ from datetime import timedelta
 import unittest
 from unittest.mock import patch
 
-import homeassistant.core as ha
-import homeassistant.components as core_components
-from homeassistant.const import (SERVICE_TURN_ON, SERVICE_TURN_OFF)
-from homeassistant.util import dt as dt_util
-from homeassistant.helpers import state
-from homeassistant.const import (
+import blumate.core as ha
+import blumate.components as core_components
+from blumate.const import (SERVICE_TURN_ON, SERVICE_TURN_OFF)
+from blumate.util import dt as dt_util
+from blumate.helpers import state
+from blumate.const import (
     STATE_OPEN, STATE_CLOSED,
     STATE_LOCKED, STATE_UNLOCKED,
     STATE_ON, STATE_OFF)
-from homeassistant.components.media_player import (
+from blumate.components.media_player import (
     SERVICE_PLAY_MEDIA, SERVICE_MEDIA_PLAY, SERVICE_MEDIA_PAUSE)
-from homeassistant.components.sun import (STATE_ABOVE_HORIZON,
-                                          STATE_BELOW_HORIZON)
+from blumate.components.sun import (STATE_ABOVE_HORIZON,
+                                    STATE_BELOW_HORIZON)
 
 from tests.common import get_test_home_assistant, mock_service
 
@@ -38,15 +38,15 @@ class TestStateHelpers(unittest.TestCase):
         point2 = point1 + timedelta(seconds=5)
         point3 = point2 + timedelta(seconds=5)
 
-        with patch('homeassistant.core.dt_util.utcnow', return_value=point1):
+        with patch('blumate.core.dt_util.utcnow', return_value=point1):
             self.hass.states.set('light.test', 'on')
             state1 = self.hass.states.get('light.test')
 
-        with patch('homeassistant.core.dt_util.utcnow', return_value=point2):
+        with patch('blumate.core.dt_util.utcnow', return_value=point2):
             self.hass.states.set('light.test2', 'on')
             state2 = self.hass.states.get('light.test2')
 
-        with patch('homeassistant.core.dt_util.utcnow', return_value=point3):
+        with patch('blumate.core.dt_util.utcnow', return_value=point3):
             self.hass.states.set('light.test3', 'on')
             state3 = self.hass.states.get('light.test3')
 
@@ -60,7 +60,7 @@ class TestStateHelpers(unittest.TestCase):
         point2 = point1 + timedelta(seconds=5)
         point3 = point2 + timedelta(seconds=5)
 
-        with patch('homeassistant.core.dt_util.utcnow') as mock_utcnow:
+        with patch('blumate.core.dt_util.utcnow') as mock_utcnow:
             mock_utcnow.return_value = point2
 
             with state.TrackStates(self.hass) as states:

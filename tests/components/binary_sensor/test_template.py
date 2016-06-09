@@ -2,9 +2,9 @@
 import unittest
 from unittest import mock
 
-from homeassistant.const import EVENT_STATE_CHANGED, MATCH_ALL
-from homeassistant.components.binary_sensor import template
-from homeassistant.exceptions import TemplateError
+from blumate.const import EVENT_STATE_CHANGED, MATCH_ALL
+from blumate.components.binary_sensor import template
+from blumate.exceptions import TemplateError
 
 from tests.common import get_test_home_assistant
 
@@ -105,7 +105,7 @@ class TestBinarySensorTemplate(unittest.TestCase):
             finally:
                 hass.stop()
 
-    @mock.patch('homeassistant.helpers.template.render')
+    @mock.patch('blumate.helpers.template.render')
     def test_update_template_error(self, mock_render):
         """"Test the template update error."""
         hass = mock.MagicMock()

@@ -3,10 +3,10 @@ import unittest
 from unittest.mock import patch
 
 # To prevent circular import when running just this file
-import homeassistant.components  # noqa
-from homeassistant import core as ha, loader
-from homeassistant.const import STATE_ON, STATE_OFF, ATTR_ENTITY_ID
-from homeassistant.helpers import service
+import blumate.components  # noqa
+from blumate import core as ha, loader
+from blumate.const import STATE_ON, STATE_OFF, ATTR_ENTITY_ID
+from blumate.helpers import service
 
 from tests.common import get_test_home_assistant, mock_service
 
@@ -106,7 +106,7 @@ class TestServiceHelpers(unittest.TestCase):
             },
         }, orig)
 
-    @patch('homeassistant.helpers.service._LOGGER.error')
+    @patch('blumate.helpers.service._LOGGER.error')
     def test_fail_silently_if_no_service(self, mock_log):
         """Test failling if service is missing."""
         service.call_from_config(self.hass, None)

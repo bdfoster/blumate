@@ -55,7 +55,7 @@ def gather_modules():
     errors = []
     output = []
 
-    for package in sorted(explore_module('homeassistant.components', True)):
+    for package in sorted(explore_module('blumate.components', True)):
         try:
             module = importlib.import_module(package)
         except ImportError:

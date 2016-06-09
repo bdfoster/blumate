@@ -3,8 +3,8 @@
 import unittest
 import time
 
-from homeassistant.bootstrap import _setup_component
-from homeassistant.components import rfxtrx as rfxtrx
+from blumate.bootstrap import _setup_component
+from blumate.components import rfxtrx as rfxtrx
 from tests.common import get_test_home_assistant
 
 

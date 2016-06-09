@@ -4,12 +4,12 @@ import unittest
 
 import eventlet
 
-import homeassistant.core as ha
-import homeassistant.bootstrap as bootstrap
-import homeassistant.remote as remote
-import homeassistant.components.http as http
-from homeassistant.const import HTTP_HEADER_HA_AUTH
-import homeassistant.util.dt as dt_util
+import blumate.core as ha
+import blumate.bootstrap as bootstrap
+import blumate.remote as remote
+import blumate.components.http as http
+from blumate.const import HTTP_HEADER_HA_AUTH
+import blumate.util.dt as dt_util
 
 from tests.common import get_test_instance_port, get_test_home_assistant
 
@@ -75,7 +75,7 @@ def tearDownModule():   # pylint: disable=invalid-name
 
 
 class TestRemoteMethods(unittest.TestCase):
-    """Test the homeassistant.remote module."""
+    """Test the blumate.remote module."""
 
     def tearDown(self):
         """Stop everything that was started."""
@@ -210,7 +210,7 @@ class TestRemoteMethods(unittest.TestCase):
 
 
 class TestRemoteClasses(unittest.TestCase):
-    """Test the homeassistant.remote module."""
+    """Test the blumate.remote module."""
 
     def tearDown(self):
         """Stop everything that was started."""

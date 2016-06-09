@@ -1,8 +1,8 @@
 """The tests for the Command line Binary sensor platform."""
 import unittest
 
-from homeassistant.const import (STATE_ON, STATE_OFF)
-from homeassistant.components.binary_sensor import command_line
+from blumate.const import (STATE_ON, STATE_OFF)
+from blumate.components.binary_sensor import command_line
 
 from tests.common import get_test_home_assistant
 

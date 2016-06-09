@@ -4,13 +4,13 @@ import os
 import unittest
 from unittest.mock import patch
 
-from homeassistant.components import demo, device_tracker
-from homeassistant.remote import JSONEncoder
+from blumate.components import demo, device_tracker
+from blumate.remote import JSONEncoder
 
 from tests.common import mock_http_component, get_test_home_assistant
 
 
-@patch('homeassistant.components.sun.setup')
+@patch('blumate.components.sun.setup')
 class TestDemo(unittest.TestCase):
     """Test the Demo component."""
 

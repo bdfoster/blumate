@@ -1,9 +1,9 @@
 """The tests for the MQTT switch platform."""
 import unittest
 
-from homeassistant.bootstrap import _setup_component
-from homeassistant.const import STATE_ON, STATE_OFF, ATTR_ASSUMED_STATE
-import homeassistant.components.switch as switch
+from blumate.bootstrap import _setup_component
+from blumate.const import STATE_ON, STATE_OFF, ATTR_ASSUMED_STATE
+import blumate.components.switch as switch
 from tests.common import (
     mock_mqtt_component, fire_mqtt_message, get_test_home_assistant)
 
