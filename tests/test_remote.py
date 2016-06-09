@@ -55,7 +55,7 @@ def setUpModule():   # pylint: disable=invalid-name
     master_api = remote.API("127.0.0.1", API_PASSWORD, MASTER_PORT)
 
     # Start slave
-    slave = remote.HomeAssistant(master_api)
+    slave = remote.BluMate(master_api)
     bootstrap.setup_component(
         slave, http.DOMAIN,
         {http.DOMAIN: {http.CONF_API_PASSWORD: API_PASSWORD,
@@ -218,15 +218,15 @@ class TestRemoteClasses(unittest.TestCase):
         hass.pool.block_till_done()
 
     def test_home_assistant_init(self):
-        """Test HomeAssistant init."""
+        """Test BluMate init."""
         # Wrong password
         self.assertRaises(
-            ha.HomeAssistantError, remote.HomeAssistant,
+            ha.HomeAssistantError, remote.BluMate,
             remote.API('127.0.0.1', API_PASSWORD + 'A', 8124))
 
         # Wrong port
         self.assertRaises(
-            ha.HomeAssistantError, remote.HomeAssistant,
+            ha.HomeAssistantError, remote.BluMate,
             remote.API('127.0.0.1', API_PASSWORD, BROKEN_PORT))
 
     def test_statemachine_init(self):

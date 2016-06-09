@@ -10,7 +10,7 @@ from urllib.parse import urlparse
 from blumate import bootstrap
 from blumate.const import (
     ATTR_DISCOVERED, ATTR_SERVICE, CONF_HOST, CONF_PASSWORD, CONF_USERNAME,
-    EVENT_HOMEASSISTANT_STOP, EVENT_PLATFORM_DISCOVERED)
+    EVENT_BLUMATE_STOP, EVENT_PLATFORM_DISCOVERED)
 from blumate.helpers import validate_config
 from blumate.helpers.entity import ToggleEntity
 from blumate.loader import get_component
@@ -74,7 +74,7 @@ def setup(hass, config):
         return False
 
     # Listen for HA stop to disconnect.
-    hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP, stop)
+    hass.bus.listen_once(EVENT_BLUMATE_STOP, stop)
 
     # Load components for the devices in the ISY controller that we support.
     for comp_name, discovery in ((('sensor', DISCOVER_SENSORS),

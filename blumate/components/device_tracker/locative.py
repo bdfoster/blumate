@@ -8,7 +8,7 @@ import logging
 
 from blumate.components.device_tracker import DOMAIN
 from blumate.const import HTTP_UNPROCESSABLE_ENTITY, STATE_NOT_HOME
-from blumate.components.http import HomeAssistantView
+from blumate.components.http import BluMateView
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -22,7 +22,7 @@ def setup_scanner(hass, config, see):
     return True
 
 
-class LocativeView(HomeAssistantView):
+class LocativeView(BluMateView):
     """View to handle locative requests."""
 
     url = "/api/locative"

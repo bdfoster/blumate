@@ -16,7 +16,7 @@ from blumate.exceptions import (
     HomeAssistantError, InvalidEntityFormatError)
 import blumate.util.dt as dt_util
 from blumate.const import (
-    __version__, EVENT_HOMEASSISTANT_START, EVENT_HOMEASSISTANT_STOP,
+    __version__, EVENT_BLUMATE_START, EVENT_BLUMATE_STOP,
     EVENT_STATE_CHANGED, ATTR_FRIENDLY_NAME, TEMP_CELSIUS,
     TEMP_FAHRENHEIT)
 
@@ -45,7 +45,7 @@ class TestHomeAssistant(unittest.TestCase):
     def test_start(self):
         """Start the test."""
         calls = []
-        self.hass.bus.listen_once(EVENT_HOMEASSISTANT_START,
+        self.hass.bus.listen_once(EVENT_BLUMATE_START,
                                   lambda event: calls.append(1))
         self.hass.start()
         self.hass.pool.block_till_done()
@@ -64,7 +64,7 @@ class TestHomeAssistant(unittest.TestCase):
 
             self.assertTrue(blocking_thread.is_alive())
 
-            self.hass.services.call(ha.DOMAIN, ha.SERVICE_HOMEASSISTANT_STOP)
+            self.hass.services.call(ha.DOMAIN, ha.SERVICE_BLUMATE_STOP)
             self.hass.pool.block_till_done()
 
         # Wait for thread to stop
@@ -78,7 +78,7 @@ class TestHomeAssistant(unittest.TestCase):
     def test_stopping_with_sigterm(self):
         """Test for stopping with sigterm."""
         calls = []
-        self.hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP,
+        self.hass.bus.listen_once(EVENT_BLUMATE_STOP,
                                   lambda event: calls.append(1))
 
         def send_sigterm(length):

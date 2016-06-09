@@ -7,7 +7,7 @@ https://home-assistant.io/components/wemo/
 import logging
 
 from blumate.components import discovery
-from blumate.const import EVENT_HOMEASSISTANT_STOP
+from blumate.const import EVENT_BLUMATE_STOP
 
 REQUIREMENTS = ['pywemo==0.4.3']
 
@@ -51,7 +51,7 @@ def setup(hass, config):
         _LOGGER.info("Shutting down subscriptions.")
         SUBSCRIPTION_REGISTRY.stop()
 
-    hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP, stop_wemo)
+    hass.bus.listen_once(EVENT_BLUMATE_STOP, stop_wemo)
 
     def discovery_dispatch(service, discovery_info):
         """Dispatcher for WeMo discovery events."""

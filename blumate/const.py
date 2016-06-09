@@ -54,8 +54,8 @@ CONF_WEEKDAY = 'weekday'
 CONF_ZONE = 'zone'
 
 # #### EVENTS ####
-EVENT_HOMEASSISTANT_START = "homeassistant_start"
-EVENT_HOMEASSISTANT_STOP = "homeassistant_stop"
+EVENT_BLUMATE_START = "blumate_start"
+EVENT_BLUMATE_STOP = "blumate_stop"
 EVENT_STATE_CHANGED = "state_changed"
 EVENT_TIME_CHANGED = "time_changed"
 EVENT_CALL_SERVICE = "call_service"
@@ -157,8 +157,8 @@ ATTR_GPS_ACCURACY = 'gps_accuracy'
 ATTR_ASSUMED_STATE = 'assumed_state'
 
 # #### SERVICES ####
-SERVICE_HOMEASSISTANT_STOP = "stop"
-SERVICE_HOMEASSISTANT_RESTART = "restart"
+SERVICE_BLUMATE_STOP = "stop"
+SERVICE_BLUMATE_RESTART = "restart"
 
 SERVICE_TURN_ON = 'turn_on'
 SERVICE_TURN_OFF = 'turn_off'

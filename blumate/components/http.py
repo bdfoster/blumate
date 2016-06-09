@@ -94,7 +94,7 @@ def setup(hass, config):
     )
 
     hass.bus.listen_once(
-        ha.EVENT_HOMEASSISTANT_START,
+        ha.EVENT_BLUMATE_START,
         lambda event:
         threading.Thread(target=server.start, daemon=True,
                          name='WSGI-server').start())
@@ -220,7 +220,7 @@ class HomeAssistantWSGI(object):
     def register_view(self, view):
         """Register a view with the WSGI server.
 
-        The view argument must be a class that inherits from HomeAssistantView.
+        The view argument must be a class that inherits from BluMateView.
         It is optional to instantiate it before registering; this method will
         handle it either way.
         """
@@ -345,7 +345,7 @@ class HomeAssistantWSGI(object):
         return app(environ, start_response)
 
 
-class HomeAssistantView(object):
+class BluMateView(object):
     """Base view for all views."""
 
     extra_urls = []

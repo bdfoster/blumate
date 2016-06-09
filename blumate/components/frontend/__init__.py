@@ -3,7 +3,7 @@ import os
 
 from . import version, mdi_version
 from blumate.components import api
-from blumate.components.http import HomeAssistantView
+from blumate.components.http import BluMateView
 
 DOMAIN = 'frontend'
 DEPENDENCIES = ['api']
@@ -35,7 +35,7 @@ def setup(hass, config):
     return True
 
 
-class BootstrapView(HomeAssistantView):
+class BootstrapView(BluMateView):
     """View to bootstrap frontend with all needed data."""
 
     url = "/api/bootstrap"
@@ -51,7 +51,7 @@ class BootstrapView(HomeAssistantView):
         })
 
 
-class IndexView(HomeAssistantView):
+class IndexView(BluMateView):
     """Serve the frontend."""
 
     url = '/'

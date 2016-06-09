@@ -11,7 +11,7 @@ import threading
 
 from blumate import bootstrap
 from blumate.const import (
-    ATTR_DISCOVERED, ATTR_SERVICE, EVENT_HOMEASSISTANT_START,
+    ATTR_DISCOVERED, ATTR_SERVICE, EVENT_BLUMATE_START,
     EVENT_PLATFORM_DISCOVERED)
 
 DOMAIN = "discovery"
@@ -141,6 +141,6 @@ def setup(hass, config):
         netdisco.add_listener(new_service_listener)
         netdisco.start()
 
-    hass.bus.listen_once(EVENT_HOMEASSISTANT_START, start_discovery)
+    hass.bus.listen_once(EVENT_BLUMATE_START, start_discovery)
 
     return True

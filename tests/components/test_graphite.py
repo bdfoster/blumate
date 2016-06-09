@@ -7,7 +7,7 @@ import blumate.core as ha
 import blumate.components.graphite as graphite
 from blumate.const import (
     EVENT_STATE_CHANGED,
-    EVENT_HOMEASSISTANT_START, EVENT_HOMEASSISTANT_STOP,
+    EVENT_BLUMATE_START, EVENT_BLUMATE_STOP,
     STATE_ON, STATE_OFF)
 
 from tests.common import get_test_home_assistant
@@ -63,8 +63,8 @@ class TestGraphite(unittest.TestCase):
         fake_hass = mock.MagicMock()
         gf = graphite.GraphiteFeeder(fake_hass, 'foo', 123, 'ha')
         fake_hass.bus.listen_once.has_calls([
-            mock.call(EVENT_HOMEASSISTANT_START, gf.start_listen),
-            mock.call(EVENT_HOMEASSISTANT_STOP, gf.shutdown),
+            mock.call(EVENT_BLUMATE_START, gf.start_listen),
+            mock.call(EVENT_BLUMATE_STOP, gf.shutdown),
         ])
         fake_hass.bus.listen.assert_called_once_with(
             EVENT_STATE_CHANGED, gf.event_listener)

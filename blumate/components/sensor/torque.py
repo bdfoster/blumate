@@ -8,7 +8,7 @@ https://home-assistant.io/components/sensor.torque/
 import re
 
 from blumate.helpers.entity import Entity
-from blumate.components.http import HomeAssistantView
+from blumate.components.http import BluMateView
 
 DOMAIN = 'torque'
 DEPENDENCIES = ['http']
@@ -48,7 +48,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
     return True
 
 
-class TorqueReceiveDataView(HomeAssistantView):
+class TorqueReceiveDataView(BluMateView):
     """Handle data from Torque requests."""
 
     url = API_PATH

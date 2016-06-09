@@ -104,7 +104,7 @@ class API(object):
             self.host, self.api_password, self.port)
 
 
-class HomeAssistant(ha.HomeAssistant):
+class BluMate(ha.BluMate):
     """Home Assistant that forwards work."""
 
     # pylint: disable=super-init-not-called,too-many-instance-attributes
@@ -136,7 +136,7 @@ class HomeAssistant(ha.HomeAssistant):
 
         ha.create_timer(self)
 
-        self.bus.fire(ha.EVENT_HOMEASSISTANT_START,
+        self.bus.fire(ha.EVENT_BLUMATE_START,
                       origin=ha.EventOrigin.remote)
 
         # Give eventlet time to startup
@@ -154,7 +154,7 @@ class HomeAssistant(ha.HomeAssistant):
         """Stop Home Assistant and shuts down all threads."""
         _LOGGER.info("Stopping")
 
-        self.bus.fire(ha.EVENT_HOMEASSISTANT_STOP,
+        self.bus.fire(ha.EVENT_BLUMATE_STOP,
                       origin=ha.EventOrigin.remote)
 
         self.pool.stop()

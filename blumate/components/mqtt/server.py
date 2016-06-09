@@ -10,7 +10,7 @@ import tempfile
 import threading
 
 from blumate.components.mqtt import PROTOCOL_311
-from blumate.const import EVENT_HOMEASSISTANT_STOP
+from blumate.const import EVENT_BLUMATE_STOP
 
 REQUIREMENTS = ['hbmqtt==0.7.1']
 DEPENDENCIES = ['http']
@@ -67,7 +67,7 @@ def start(hass, server_config):
         loop.call_soon_threadsafe(loop.stop)
         shutdown_complete.wait()
 
-    hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP, shutdown)
+    hass.bus.listen_once(EVENT_BLUMATE_STOP, shutdown)
 
     threading.Thread(target=loop_run, args=(loop, broker, shutdown_complete),
                      name="MQTT-server").start()

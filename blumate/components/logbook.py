@@ -14,14 +14,14 @@ import voluptuous as vol
 import blumate.util.dt as dt_util
 from blumate.components import recorder, sun
 from blumate.const import (
-    EVENT_HOMEASSISTANT_START, EVENT_HOMEASSISTANT_STOP, EVENT_STATE_CHANGED,
+    EVENT_BLUMATE_START, EVENT_BLUMATE_STOP, EVENT_STATE_CHANGED,
     STATE_NOT_HOME, STATE_OFF, STATE_ON)
 from blumate.core import DOMAIN as HA_DOMAIN
 from blumate.core import State
 from blumate.helpers.entity import split_entity_id
 from blumate.helpers import template
 import blumate.helpers.config_validation as cv
-from blumate.components.http import HomeAssistantView
+from blumate.components.http import BluMateView
 
 DOMAIN = "logbook"
 DEPENDENCIES = ['recorder', 'http']
@@ -84,7 +84,7 @@ def setup(hass, config):
     return True
 
 
-class LogbookView(HomeAssistantView):
+class LogbookView(BluMateView):
     """Handle logbook view requests."""
 
     url = '/api/logbook'
@@ -164,13 +164,13 @@ def humanify(events):
                 if entity_id.startswith('sensor.'):
                     last_sensor_event[entity_id] = event
 
-            elif event.event_type == EVENT_HOMEASSISTANT_STOP:
+            elif event.event_type == EVENT_BLUMATE_STOP:
                 if event.time_fired.minute in start_stop_events:
                     continue
 
                 start_stop_events[event.time_fired.minute] = 1
 
-            elif event.event_type == EVENT_HOMEASSISTANT_START:
+            elif event.event_type == EVENT_BLUMATE_START:
                 if event.time_fired.minute not in start_stop_events:
                     continue
 
@@ -208,7 +208,7 @@ def humanify(events):
                     domain=domain,
                     entity_id=to_state.entity_id)
 
-            elif event.event_type == EVENT_HOMEASSISTANT_START:
+            elif event.event_type == EVENT_BLUMATE_START:
                 if start_stop_events.get(event.time_fired.minute) == 2:
                     continue
 
@@ -216,7 +216,7 @@ def humanify(events):
                     event.time_fired, "Home Assistant", "started",
                     domain=HA_DOMAIN)
 
-            elif event.event_type == EVENT_HOMEASSISTANT_STOP:
+            elif event.event_type == EVENT_BLUMATE_STOP:
                 if start_stop_events.get(event.time_fired.minute) == 2:
                     action = "restarted"
                 else:

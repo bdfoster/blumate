@@ -7,7 +7,7 @@ https://home-assistant.io/components/arduino/
 import logging
 
 from blumate.const import (
-    EVENT_HOMEASSISTANT_START, EVENT_HOMEASSISTANT_STOP)
+    EVENT_BLUMATE_START, EVENT_BLUMATE_STOP)
 from blumate.helpers import validate_config
 
 DOMAIN = "arduino"
@@ -41,9 +41,9 @@ def setup(hass, config):
 
     def start_arduino(event):
         """Start the Arduino service."""
-        hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP, stop_arduino)
+        hass.bus.listen_once(EVENT_BLUMATE_STOP, stop_arduino)
 
-    hass.bus.listen_once(EVENT_HOMEASSISTANT_START, start_arduino)
+    hass.bus.listen_once(EVENT_BLUMATE_START, start_arduino)
 
     return True
 

@@ -9,8 +9,8 @@ import voluptuous as vol
 from blumate.bootstrap import _setup_component
 import blumate.components.mqtt as mqtt
 from blumate.const import (
-    EVENT_CALL_SERVICE, ATTR_DOMAIN, ATTR_SERVICE, EVENT_HOMEASSISTANT_START,
-    EVENT_HOMEASSISTANT_STOP)
+    EVENT_CALL_SERVICE, ATTR_DOMAIN, ATTR_SERVICE, EVENT_BLUMATE_START,
+    EVENT_BLUMATE_STOP)
 
 from tests.common import (
     get_test_home_assistant, mock_mqtt_component, fire_mqtt_message)
@@ -35,15 +35,15 @@ class TestMQTT(unittest.TestCase):
 
     def test_client_starts_on_home_assistant_start(self):
         """"Test if client start on HA launch."""
-        self.hass.bus.fire(EVENT_HOMEASSISTANT_START)
+        self.hass.bus.fire(EVENT_BLUMATE_START)
         self.hass.pool.block_till_done()
         self.assertTrue(mqtt.MQTT_CLIENT.start.called)
 
     def test_client_stops_on_home_assistant_start(self):
         """Test if client stops on HA launch."""
-        self.hass.bus.fire(EVENT_HOMEASSISTANT_START)
+        self.hass.bus.fire(EVENT_BLUMATE_START)
         self.hass.pool.block_till_done()
-        self.hass.bus.fire(EVENT_HOMEASSISTANT_STOP)
+        self.hass.bus.fire(EVENT_BLUMATE_STOP)
         self.hass.pool.block_till_done()
         self.assertTrue(mqtt.MQTT_CLIENT.stop.called)
 

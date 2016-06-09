@@ -27,7 +27,7 @@ def get_service(hass, config):
     else:
         app_icon = config.get('app_icon')
 
-    return GNTPNotificationService(config.get('app_name', 'HomeAssistant'),
+    return GNTPNotificationService(config.get('app_name', 'BluMate'),
                                    config.get('app_icon', app_icon),
                                    config.get('hostname', 'localhost'),
                                    config.get('password'),

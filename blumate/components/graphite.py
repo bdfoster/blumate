@@ -11,7 +11,7 @@ import threading
 import time
 
 from blumate.const import (
-    EVENT_HOMEASSISTANT_START, EVENT_HOMEASSISTANT_STOP, EVENT_STATE_CHANGED)
+    EVENT_BLUMATE_START, EVENT_BLUMATE_STOP, EVENT_STATE_CHANGED)
 from blumate.helpers import state
 
 DOMAIN = "graphite"
@@ -48,9 +48,9 @@ class GraphiteFeeder(threading.Thread):
         self._quit_object = object()
         self._we_started = False
 
-        hass.bus.listen_once(EVENT_HOMEASSISTANT_START,
+        hass.bus.listen_once(EVENT_BLUMATE_START,
                              self.start_listen)
-        hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP,
+        hass.bus.listen_once(EVENT_BLUMATE_STOP,
                              self.shutdown)
         hass.bus.listen(EVENT_STATE_CHANGED, self.event_listener)
         _LOGGER.debug('Graphite feeding to %s:%i initialized',

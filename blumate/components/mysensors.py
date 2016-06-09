@@ -10,8 +10,8 @@ import socket
 import blumate.bootstrap as bootstrap
 from blumate.const import (ATTR_BATTERY_LEVEL, ATTR_DISCOVERED,
                            ATTR_SERVICE, CONF_OPTIMISTIC,
-                           EVENT_HOMEASSISTANT_START,
-                           EVENT_HOMEASSISTANT_STOP,
+                           EVENT_BLUMATE_START,
+                           EVENT_BLUMATE_STOP,
                            EVENT_PLATFORM_DISCOVERED, STATE_OFF,
                            STATE_ON, TEMP_CELSIUS)
 from blumate.helpers import validate_config
@@ -97,13 +97,13 @@ def setup(hass, config):  # pylint: disable=too-many-locals
         def gw_start(event):
             """Callback to trigger start of gateway and any persistence."""
             gateway.start()
-            hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP,
+            hass.bus.listen_once(EVENT_BLUMATE_STOP,
                                  lambda event: gateway.stop())
             if persistence:
                 for node_id in gateway.sensors:
                     gateway.event_callback('persistence', node_id)
 
-        hass.bus.listen_once(EVENT_HOMEASSISTANT_START, gw_start)
+        hass.bus.listen_once(EVENT_BLUMATE_START, gw_start)
 
         return gateway
 

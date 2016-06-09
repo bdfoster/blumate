@@ -1,5 +1,5 @@
 config/*
-!config/home-assistant.conf.default
+!config/blumate.conf.default
 
 # There is not a better solution afaik..
 !config/custom_components

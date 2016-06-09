@@ -11,7 +11,7 @@ import voluptuous as vol
 from blumate import bootstrap
 from blumate.const import (
     ATTR_DISCOVERED, ATTR_SERVICE,
-    EVENT_PLATFORM_DISCOVERED, EVENT_HOMEASSISTANT_STOP)
+    EVENT_PLATFORM_DISCOVERED, EVENT_BLUMATE_STOP)
 from blumate.loader import get_component
 from blumate.helpers.entity import Entity
 
@@ -138,7 +138,7 @@ class TellstickRegistry:
             if callback_id is not None:
                 tellcore_lib.unregister_callback(callback_id)
 
-        hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP, clean_up_callback)
+        hass.bus.listen_once(EVENT_BLUMATE_STOP, clean_up_callback)
 
     def register_entity(self, tellcore_id, entity):
         """Register a new entity to receive callback updates."""
