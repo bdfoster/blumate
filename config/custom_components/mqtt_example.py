@@ -14,7 +14,7 @@ To use the mqtt_example component you will need to add the following to your
 configuration.yaml file.
 
 mqtt_example:
-  topic: "home-assistant/mqtt_example"
+  topic: "blumate/mqtt_example"
 """
 import blumate.loader as loader
 
@@ -25,7 +25,7 @@ DOMAIN = "mqtt_example"
 DEPENDENCIES = ['mqtt']
 
 CONF_TOPIC = 'topic'
-DEFAULT_TOPIC = 'home-assistant/mqtt_example'
+DEFAULT_TOPIC = 'blumate/mqtt_example'
 
 
 def setup(hass, config):
@@ -48,7 +48,7 @@ def setup(hass, config):
         """Service to send a message."""
         mqtt.publish(hass, topic, call.data.get('new_state'))
 
-    # Register our service with Home Assistant.
+    # Register our service with BluMate.
     hass.services.register(DOMAIN, 'set_state', set_state_service)
 
     # Return boolean to indicate that initialization was successfully.
