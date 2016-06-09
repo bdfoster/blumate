@@ -78,7 +78,7 @@ def gather_modules():
         print("Make sure you import 3rd party libraries inside methods.")
         return None
 
-    output.append('# Home Assistant core')
+    output.append('# BluMate core')
     output.append('\n')
     output.append('\n'.join(core_requirements()))
     output.append('\n')

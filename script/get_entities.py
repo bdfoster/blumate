@@ -84,15 +84,15 @@ if __name__ == "__main__":
     parser.add_argument('attrs', metavar='ATTRIBUTE', type=str, nargs='*',
                         help='an attribute to read from the state')
     parser.add_argument('--password', dest='password', default=None,
-                        type=str, help='API password for the HA server')
+                        type=str, help='API password for the BM server')
     parser.add_argument('--ask-password', dest='askpass', default=False,
                         action='store_const', const=True,
-                        help='prompt for HA API password')
+                        help='prompt for BM API password')
     parser.add_argument('--addr', dest='address',
                         default='localhost', type=str,
-                        help='address of the HA server')
+                        help='address of the BM server')
     parser.add_argument('--port', dest='port', default='8123',
-                        type=str, help='port that HA is hosting on')
+                        type=str, help='port that BM is hosting on')
 
     args = parser.parse_args()
     main(args.password, args.askpass, args.attrs, args.address, args.port)
