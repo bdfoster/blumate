@@ -90,8 +90,7 @@ section <https://home-assistant.io/help/>`__ how to reach us.
 
 .. |Build Status| image:: https://travis-ci.org/home-assistant/home-assistant.svg?branch=master
    :target: https://travis-ci.org/home-assistant/home-assistant
-.. |Coverage Status| image:: https://img.shields.io/coveralls/home-assistant/home-assistant.svg
-   :target: https://coveralls.io/r/home-assistant/home-assistant?branch=master
+.. |Coverage Status| image:: https://coveralls.io/repos/github/bdfoster/home-assistant/badge.svg?branch=dev :target: https://coveralls.io/github/bdfoster/home-assistant?branch=master
 .. |Join the chat at https://gitter.im/home-assistant/home-assistant| image:: https://img.shields.io/badge/gitter-general-blue.svg
    :target: https://gitter.im/home-assistant/home-assistant?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 .. |Join the dev chat at https://gitter.im/home-assistant/home-assistant/devs| image:: https://img.shields.io/badge/gitter-development-yellowgreen.svg
