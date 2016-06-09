@@ -27,7 +27,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
     if not isinstance(scene_config, list):
         scene_config = [scene_config]
 
-    add_devices(HomeAssistantScene(hass, _process_config(scene))
+    add_devices(BluMateScene(hass, _process_config(scene))
                 for scene in scene_config)
 
     return True
@@ -61,7 +61,7 @@ def _process_config(scene_config):
     return SceneConfig(name, states)
 
 
-class HomeAssistantScene(Scene):
+class BluMateScene(Scene):
     """A scene is a group of entities and the states we want them to be."""
 
     def __init__(self, hass, scene_config):
