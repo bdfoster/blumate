@@ -1,4 +1,4 @@
-"""Starts home assistant."""
+"""Starts BluMate."""
 from __future__ import print_function
 
 import argparse
@@ -23,7 +23,7 @@ def validate_python():
     req_major, req_minor = REQUIRED_PYTHON_VER
 
     if major < req_major or (major == req_major and minor < req_minor):
-        print("Home Assistant requires at least Python {}.{}".format(
+        print("BluMate requires at least Python {}.{}".format(
             req_major, req_minor))
         sys.exit(1)
 
@@ -73,25 +73,25 @@ def get_arguments():
     """Get parsed passed in arguments."""
     import blumate.config as config_util
     parser = argparse.ArgumentParser(
-        description="Home Assistant: Observe, Control, Automate.")
+        description="BluMate: Observe, Control, Automate.")
     parser.add_argument('--version', action='version', version=__version__)
     parser.add_argument(
         '-c', '--config',
         metavar='path_to_config_dir',
         default=config_util.get_default_config_dir(),
-        help="Directory that contains the Home Assistant configuration")
+        help="Directory that contains the BluMate configuration")
     parser.add_argument(
         '--demo-mode',
         action='store_true',
-        help='Start Home Assistant in demo mode')
+        help='Start BluMate in demo mode')
     parser.add_argument(
         '--debug',
         action='store_true',
-        help='Start Home Assistant in debug mode')
+        help='Start BluMate in debug mode')
     parser.add_argument(
         '--open-ui',
         action='store_true',
-        help='Open the webinterface in a browser')
+        help='Open the web interface in a browser')
     parser.add_argument(
         '--skip-pip',
         action='store_true',
@@ -130,7 +130,7 @@ def get_arguments():
         parser.add_argument(
             '--daemon',
             action='store_true',
-            help='Run Home Assistant as daemon')
+            help='Run BluMate as daemon')
 
     arguments = parser.parse_args()
     if os.name != "posix" or arguments.debug or arguments.runner:
@@ -198,8 +198,8 @@ def write_pid(pid_file):
 
 def install_osx():
     """Setup to run via launchd on OS X."""
-    with os.popen('which hass') as inp:
-        hass_path = inp.read().strip()
+    with os.popen('which blumate') as inp:
+        blumate_path = inp.read().strip()
 
     with os.popen('whoami') as inp:
         user = inp.read().strip()
@@ -210,7 +210,7 @@ def install_osx():
     with open(template_path, 'r', encoding='utf-8') as inp:
         plist = inp.read()
 
-    plist = plist.replace("$HASS_PATH$", hass_path)
+    plist = plist.replace("$BLUMATE_PATH$", blumate_path)
     plist = plist.replace("$USER$", user)
 
     path = os.path.expanduser("~/Library/LaunchAgents/org.blumate.plist")
@@ -255,15 +255,15 @@ def closefds_osx(min_fd, max_fd):
 
 
 def cmdline():
-    """Collect path and arguments to re-execute the current hass instance."""
+    """Collect path and arguments to re-execute the current blumate instance."""
     if sys.argv[0].endswith('/__main__.py'):
         modulepath = os.path.dirname(sys.argv[0])
         os.environ['PYTHONPATH'] = os.path.dirname(modulepath)
     return [sys.executable] + [arg for arg in sys.argv if arg != '--daemon']
 
 
-def setup_and_run_hass(config_dir, args):
-    """Setup HASS and run."""
+def setup_and_run_blumate(config_dir, args):
+    """Setup blumate and run."""
     from blumate import bootstrap
 
     # Run a simple daemon runner process on Windows to handle restarts
@@ -282,30 +282,30 @@ def setup_and_run_hass(config_dir, args):
             'frontend': {},
             'demo': {}
         }
-        hass = bootstrap.from_config_dict(
+        blumate = bootstrap.from_config_dict(
             config, config_dir=config_dir, verbose=args.verbose,
             skip_pip=args.skip_pip, log_rotate_days=args.log_rotate_days)
     else:
         config_file = ensure_config_file(config_dir)
         print('Config directory:', config_dir)
-        hass = bootstrap.from_config_file(
+        blumate = bootstrap.from_config_file(
             config_file, verbose=args.verbose, skip_pip=args.skip_pip,
             log_rotate_days=args.log_rotate_days)
 
-    if hass is None:
+    if blumate is None:
         return
 
     if args.open_ui:
         def open_browser(event):
             """Open the webinterface in a browser."""
-            if hass.config.api is not None:
+            if blumate.config.api is not None:
                 import webbrowser
-                webbrowser.open(hass.config.api.base_url)
+                webbrowser.open(blumate.config.api.base_url)
 
-        hass.bus.listen_once(EVENT_HOMEASSISTANT_START, open_browser)
+        blumate.bus.listen_once(EVENT_HOMEASSISTANT_START, open_browser)
 
-    hass.start()
-    exit_code = int(hass.block_till_stopped())
+    blumate.start()
+    exit_code = int(blumate.block_till_stopped())
 
     return exit_code
 
@@ -314,7 +314,7 @@ def try_to_restart():
     """Attempt to clean up state and start a new blumate instance."""
     # Things should be mostly shut down already at this point, now just try
     # to clean up things that may have been left behind.
-    sys.stderr.write('Home Assistant attempting to restart.\n')
+    sys.stderr.write('BluMate attempting to restart.\n')
 
     # Count remaining threads, ideally there should only be one non-daemonized
     # thread left (which is us). Nothing we really do with it, but it might be
@@ -343,17 +343,17 @@ def try_to_restart():
     else:
         os.closerange(3, max_fd)
 
-    # Now launch into a new instance of Home-Assistant. If this fails we
+    # Now launch into a new instance of BluMate. If this fails we
     # fall through and exit with error 100 (RESTART_EXIT_CODE) in which case
     # systemd will restart us when RestartForceExitStatus=100 is set in the
     # systemd.service file.
-    sys.stderr.write("Restarting Home-Assistant\n")
+    sys.stderr.write("Restarting BluMate\n")
     args = cmdline()
     os.execv(args[0], args)
 
 
 def main():
-    """Start Home Assistant."""
+    """Start BluMate."""
     validate_python()
 
     args = get_arguments()
@@ -383,7 +383,7 @@ def main():
     if args.pid_file:
         write_pid(args.pid_file)
 
-    exit_code = setup_and_run_hass(config_dir, args)
+    exit_code = setup_and_run_blumate(config_dir, args)
     if exit_code == RESTART_EXIT_CODE and not args.runner:
         try_to_restart()
 

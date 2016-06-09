@@ -34,7 +34,7 @@ _CURRENT_SETUP = []
 
 ATTR_COMPONENT = 'component'
 
-ERROR_LOG_FILENAME = 'home-assistant.log'
+ERROR_LOG_FILENAME = 'blumate.log'
 
 
 def setup_component(hass, domain, config=None):
@@ -260,12 +260,12 @@ def from_config_dict(config, hass=None, config_dir=None, enable_log=True,
                      if key != core.DOMAIN)
 
     if not core_components.setup(hass, config):
-        _LOGGER.error('Home Assistant core failed to initialize. '
+        _LOGGER.error('BluMate core failed to initialize. '
                       'Further initialization aborted.')
 
         return hass
 
-    _LOGGER.info('Home Assistant core initialized')
+    _LOGGER.info('BluMate core initialized')
 
     # Give event decorators access to HASS
     event_decorators.HASS = hass
@@ -450,6 +450,6 @@ def process_ha_core_config(hass, config):
 
 
 def _ensure_loader_prepared(hass):
-    """Ensure Home Assistant loader is prepared."""
+    """Ensure BluMate loader is prepared."""
     if not loader.PREPARED:
         loader.prepare(hass)
