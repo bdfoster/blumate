@@ -21,10 +21,10 @@ DEFAULT_PENDING_TIME = 60
 DEFAULT_TRIGGER_TIME = 120
 
 
-def setup_platform(hass, config, add_devices, discovery_info=None):
+def setup_platform(bmss, config, add_devices, discovery_info=None):
     """Setup the manual alarm platform."""
     add_devices([VirtualAlarm(
-        hass,
+        bmss,
         config.get('name', DEFAULT_ALARM_NAME),
         config.get('code'),
         config.get('pending_time', DEFAULT_PENDING_TIME),
@@ -43,10 +43,10 @@ class VirtualAlarm(alarm.AlarmControlPanel):
     triggered for 'trigger_time', after that we return to disarmed.
     """
 
-    def __init__(self, hass, name, code, pending_time, trigger_time):
+    def __init__(self, bmss, name, code, pending_time, trigger_time):
         """Initalize the manual alarm panel."""
         self._state = STATE_ALARM_DISARMED
-        self._hass = hass
+        self._bmss = bmss
         self._name = name
         self._code = str(code) if code else None
         self._pending_time = datetime.timedelta(seconds=pending_time)
@@ -106,7 +106,7 @@ class VirtualAlarm(alarm.AlarmControlPanel):
 
         if self._pending_time:
             track_point_in_time(
-                self._hass, self.update_ha_state,
+                self._bmss, self.update_ha_state,
                 self._state_ts + self._pending_time)
 
     def alarm_arm_away(self, code=None):
@@ -120,7 +120,7 @@ class VirtualAlarm(alarm.AlarmControlPanel):
 
         if self._pending_time:
             track_point_in_time(
-                self._hass, self.update_ha_state,
+                self._bmss, self.update_ha_state,
                 self._state_ts + self._pending_time)
 
     def alarm_trigger(self, code=None):
@@ -131,11 +131,11 @@ class VirtualAlarm(alarm.AlarmControlPanel):
 
         if self._trigger_time:
             track_point_in_time(
-                self._hass, self.update_ha_state,
+                self._bmss, self.update_ha_state,
                 self._state_ts + self._pending_time)
 
             track_point_in_time(
-                self._hass, self.update_ha_state,
+                self._bmss, self.update_ha_state,
                 self._state_ts + self._pending_time + self._trigger_time)
 
     def _validate_code(self, code, state):
