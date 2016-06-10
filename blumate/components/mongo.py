@@ -6,12 +6,11 @@ https://home-assistant.io/components/influxdb/
 """
 import logging
 
-import pymongo.errors
+import pymongo.monitoring
 
 from blumate.helpers.entity import Entity
 import blumate.util as util
 from blumate import bootstrap
-from pymongo.monitoring import CommandListener
 from blumate.const import (EVENT_BLUMATE_STOP,
                            EVENT_BLUMATE_START,
                            EVENT_STATE_CHANGED,
@@ -53,7 +52,7 @@ SERVICE_DISCONNECT = 'disconnect'
 __client = None
 
 
-class MongoCommandEvent(CommandListener):
+class MongoCommandEvent(pymongo.monitoring.CommandListener):
     """
     https://api.mongodb.com/python/current/api/pymongo/monitoring.html#module-pymongo.monitoring
     """
