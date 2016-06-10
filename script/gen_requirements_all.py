@@ -120,6 +120,7 @@ def main():
 
     if sys.argv[-1] == 'validate':
         if validate_file(data):
+            print('Requirements validated!')
             sys.exit(0)
         print("******* ERROR")
         print("requirements_all.txt is not up to date")
@@ -127,7 +128,7 @@ def main():
         sys.exit(1)
 
     write_file(data)
-    print('Complete!')
+    print('Requirements generated!')
     sys.exit(0)
 
 if __name__ == '__main__':
