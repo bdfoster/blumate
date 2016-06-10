@@ -13,7 +13,7 @@ As it sits today, much of the code remains unchanged from the original `Home Ass
 project, however this will change in the coming months.
 
 
-Copyright for substantial portions of BluMate are held by Paulus Schoutsen as part of
+Copyright for substantial portions of BluMate is held by Paulus Schoutsen as part of
 `Home Assistant <https://home-assistant.io>`__.
 
 .. |BUILD_STATUS| image:: https://travis-ci.org/bdfoster/blumate.svg?branch=master
