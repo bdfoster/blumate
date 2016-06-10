@@ -20,7 +20,7 @@ ENTITY_ID = 'updater.updater'
 
 def setup(hass, config):
     """Setup the updater component."""
-    if 'dev' in CURRENT_VERSION:
+    if 'master' in CURRENT_VERSION:
         # This component only makes sense in release versions
         _LOGGER.warning('Updater not supported in development version')
         return False

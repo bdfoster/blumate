@@ -247,6 +247,9 @@ pylast==1.6.0
 # blumate.components.sensor.loopenergy
 pyloopenergy==0.0.13
 
+# blumate.components.mongo
+pymongo==3.2.2
+
 # blumate.components.device_tracker.netgear
 pynetgear==0.3.3
 

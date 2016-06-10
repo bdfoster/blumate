@@ -502,7 +502,7 @@ class Service(object):
     def __init__(self, func, description, fields, schema):
         """Initialize a service."""
         self.func = func
-        self.description = description or ''
+        self.description = description or func.__doc__ or ''
         self.fields = fields or {}
         self.schema = schema
 

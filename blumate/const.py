@@ -65,6 +65,7 @@ EVENT_COMPONENT_LOADED = "component_loaded"
 EVENT_SERVICE_REGISTERED = "service_registered"
 
 # #### STATES ####
+STATE_ACTIVE = 'active'
 STATE_ON = 'on'
 STATE_OFF = 'off'
 STATE_HOME = 'home'
@@ -83,6 +84,7 @@ STATE_ALARM_PENDING = 'pending'
 STATE_ALARM_TRIGGERED = 'triggered'
 STATE_LOCKED = 'locked'
 STATE_UNLOCKED = 'unlocked'
+STATE_AVAILABLE = 'available'
 STATE_UNAVAILABLE = 'unavailable'
 
 # #### STATE AND EVENT ATTRIBUTES ####
