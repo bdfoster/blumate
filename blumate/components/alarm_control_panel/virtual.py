@@ -16,7 +16,7 @@ from blumate.helpers.event import track_point_in_time
 
 _LOGGER = logging.getLogger(__name__)
 
-DEFAULT_ALARM_NAME = 'HA Alarm'
+DEFAULT_ALARM_NAME = 'Virtual Alarm'
 DEFAULT_PENDING_TIME = 60
 DEFAULT_TRIGGER_TIME = 120
 
