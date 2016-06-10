@@ -20,5 +20,5 @@ Copyright for substantial portions of BluMate are held by Paulus Schoutsen as pa
 
 .. |BUILD_STATUS| image:: https://travis-ci.org/bdfoster/blumate.svg?branch=master
    :target: https://travis-ci.org/bdfoster/blumate
-.. |COVERAGE_STATUS| image:: https://coveralls.io/repos/github/bdfoster/blumate/badge.svg?branch=dev
-   :target: https://coveralls.io/github/bdfoster/blumate?branch=dev
+.. |COVERAGE_STATUS| image:: https://coveralls.io/repos/github/bdfoster/blumate/badge.svg?branch=master
+   :target: https://coveralls.io/github/bdfoster/blumate?branch=master
