@@ -47,10 +47,10 @@ ALARM_SERVICE_SCHEMA = vol.Schema({
 })
 
 
-def setup(hass, config):
+def setup(bmss, config):
     """Track states and offer events for sensors."""
     component = EntityComponent(
-        logging.getLogger(__name__), DOMAIN, hass, SCAN_INTERVAL,
+        logging.getLogger(__name__), DOMAIN, bmss, SCAN_INTERVAL,
         DISCOVERY_PLATFORMS)
 
     component.setup(config)
@@ -72,13 +72,13 @@ def setup(hass, config):
         os.path.join(os.path.dirname(__file__), 'services.yaml'))
 
     for service in SERVICE_TO_METHOD:
-        hass.services.register(DOMAIN, service, alarm_service_handler,
+        bmss.services.register(DOMAIN, service, alarm_service_handler,
                                descriptions.get(service),
                                schema=ALARM_SERVICE_SCHEMA)
     return True
 
 
-def alarm_disarm(hass, code=None, entity_id=None):
+def alarm_disarm(bmss, code=None, entity_id=None):
     """Send the alarm the command for disarm."""
     data = {}
     if code:
@@ -86,10 +86,10 @@ def alarm_disarm(hass, code=None, entity_id=None):
     if entity_id:
         data[ATTR_ENTITY_ID] = entity_id
 
-    hass.services.call(DOMAIN, SERVICE_ALARM_DISARM, data)
+    bmss.services.call(DOMAIN, SERVICE_ALARM_DISARM, data)
 
 
-def alarm_arm_home(hass, code=None, entity_id=None):
+def alarm_arm_home(bmss, code=None, entity_id=None):
     """Send the alarm the command for arm home."""
     data = {}
     if code:
@@ -97,10 +97,10 @@ def alarm_arm_home(hass, code=None, entity_id=None):
     if entity_id:
         data[ATTR_ENTITY_ID] = entity_id
 
-    hass.services.call(DOMAIN, SERVICE_ALARM_ARM_HOME, data)
+    bmss.services.call(DOMAIN, SERVICE_ALARM_ARM_HOME, data)
 
 
-def alarm_arm_away(hass, code=None, entity_id=None):
+def alarm_arm_away(bmss, code=None, entity_id=None):
     """Send the alarm the command for arm away."""
     data = {}
     if code:
@@ -108,10 +108,10 @@ def alarm_arm_away(hass, code=None, entity_id=None):
     if entity_id:
         data[ATTR_ENTITY_ID] = entity_id
 
-    hass.services.call(DOMAIN, SERVICE_ALARM_ARM_AWAY, data)
+    bmss.services.call(DOMAIN, SERVICE_ALARM_ARM_AWAY, data)
 
 
-def alarm_trigger(hass, code=None, entity_id=None):
+def alarm_trigger(bmss, code=None, entity_id=None):
     """Send the alarm the command for trigger."""
     data = {}
     if code:
@@ -119,7 +119,7 @@ def alarm_trigger(hass, code=None, entity_id=None):
     if entity_id:
         data[ATTR_ENTITY_ID] = entity_id
 
-    hass.services.call(DOMAIN, SERVICE_ALARM_TRIGGER, data)
+    bmss.services.call(DOMAIN, SERVICE_ALARM_TRIGGER, data)
 
 
 # pylint: disable=no-self-use
