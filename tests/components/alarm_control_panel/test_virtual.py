@@ -1,4 +1,4 @@
-"""The tests for the manual Alarm Control Panel component."""
+"""The tests for the virtual Alarm Control Panel component."""
 from datetime import timedelta
 import unittest
 from unittest.mock import patch
@@ -14,8 +14,8 @@ from tests.common import fire_time_changed, get_test_home_assistant
 CODE = 'HELLO_CODE'
 
 
-class TestAlarmControlPanelManual(unittest.TestCase):
-    """Test the manual alarm module."""
+class TestAlarmControlPanelVirtual(unittest.TestCase):
+    """Test the virtual alarm module."""
 
     def setUp(self):  # pylint: disable=invalid-name
         """Setup things to be run when tests are started."""
@@ -29,7 +29,7 @@ class TestAlarmControlPanelManual(unittest.TestCase):
         """Test arm home method."""
         self.assertTrue(alarm_control_panel.setup(self.hass, {
             'alarm_control_panel': {
-                'platform': 'manual',
+                'platform': 'virtual',
                 'name': 'test',
                 'code': CODE,
                 'pending_time': 0
@@ -50,7 +50,7 @@ class TestAlarmControlPanelManual(unittest.TestCase):
         """Test arm home method."""
         self.assertTrue(alarm_control_panel.setup(self.hass, {
             'alarm_control_panel': {
-                'platform': 'manual',
+                'platform': 'virtual',
                 'name': 'test',
                 'code': CODE,
                 'pending_time': 1
@@ -68,7 +68,7 @@ class TestAlarmControlPanelManual(unittest.TestCase):
                          self.hass.states.get(entity_id).state)
 
         future = dt_util.utcnow() + timedelta(seconds=1)
-        with patch(('blumate.components.alarm_control_panel.manual.'
+        with patch(('blumate.components.alarm_control_panel.virtual.'
                     'dt_util.utcnow'), return_value=future):
             fire_time_changed(self.hass, future)
             self.hass.pool.block_till_done()
@@ -80,7 +80,7 @@ class TestAlarmControlPanelManual(unittest.TestCase):
         """Attempt to arm home without a valid code."""
         self.assertTrue(alarm_control_panel.setup(self.hass, {
             'alarm_control_panel': {
-                'platform': 'manual',
+                'platform': 'virtual',
                 'name': 'test',
                 'code': CODE,
                 'pending_time': 1
@@ -101,7 +101,7 @@ class TestAlarmControlPanelManual(unittest.TestCase):
         """Test arm home method."""
         self.assertTrue(alarm_control_panel.setup(self.hass, {
             'alarm_control_panel': {
-                'platform': 'manual',
+                'platform': 'virtual',
                 'name': 'test',
                 'code': CODE,
                 'pending_time': 0
@@ -122,7 +122,7 @@ class TestAlarmControlPanelManual(unittest.TestCase):
         """Test arm home method."""
         self.assertTrue(alarm_control_panel.setup(self.hass, {
             'alarm_control_panel': {
-                'platform': 'manual',
+                'platform': 'virtual',
                 'name': 'test',
                 'code': CODE,
                 'pending_time': 1
@@ -140,7 +140,7 @@ class TestAlarmControlPanelManual(unittest.TestCase):
                          self.hass.states.get(entity_id).state)
 
         future = dt_util.utcnow() + timedelta(seconds=1)
-        with patch(('blumate.components.alarm_control_panel.manual.'
+        with patch(('blumate.components.alarm_control_panel.virtual.'
                     'dt_util.utcnow'), return_value=future):
             fire_time_changed(self.hass, future)
             self.hass.pool.block_till_done()
@@ -152,7 +152,7 @@ class TestAlarmControlPanelManual(unittest.TestCase):
         """Attempt to arm away without a valid code."""
         self.assertTrue(alarm_control_panel.setup(self.hass, {
             'alarm_control_panel': {
-                'platform': 'manual',
+                'platform': 'virtual',
                 'name': 'test',
                 'code': CODE,
                 'pending_time': 1
@@ -173,7 +173,7 @@ class TestAlarmControlPanelManual(unittest.TestCase):
         """Test arm home method."""
         self.assertTrue(alarm_control_panel.setup(self.hass, {
             'alarm_control_panel': {
-                'platform': 'manual',
+                'platform': 'virtual',
                 'name': 'test',
                 'trigger_time': 0
             }}))
@@ -193,7 +193,7 @@ class TestAlarmControlPanelManual(unittest.TestCase):
         """Test arm home method."""
         self.assertTrue(alarm_control_panel.setup(self.hass, {
             'alarm_control_panel': {
-                'platform': 'manual',
+                'platform': 'virtual',
                 'name': 'test',
                 'pending_time': 2,
                 'trigger_time': 3
@@ -211,7 +211,7 @@ class TestAlarmControlPanelManual(unittest.TestCase):
                          self.hass.states.get(entity_id).state)
 
         future = dt_util.utcnow() + timedelta(seconds=2)
-        with patch(('blumate.components.alarm_control_panel.manual.'
+        with patch(('blumate.components.alarm_control_panel.virtual.'
                     'dt_util.utcnow'), return_value=future):
             fire_time_changed(self.hass, future)
             self.hass.pool.block_till_done()
@@ -220,7 +220,7 @@ class TestAlarmControlPanelManual(unittest.TestCase):
                          self.hass.states.get(entity_id).state)
 
         future = dt_util.utcnow() + timedelta(seconds=5)
-        with patch(('blumate.components.alarm_control_panel.manual.'
+        with patch(('blumate.components.alarm_control_panel.virtual.'
                     'dt_util.utcnow'), return_value=future):
             fire_time_changed(self.hass, future)
             self.hass.pool.block_till_done()
@@ -232,7 +232,7 @@ class TestAlarmControlPanelManual(unittest.TestCase):
         """Test disarming while pending state."""
         self.assertTrue(alarm_control_panel.setup(self.hass, {
             'alarm_control_panel': {
-                'platform': 'manual',
+                'platform': 'virtual',
                 'name': 'test',
                 'trigger_time': 5
             }}))
@@ -255,7 +255,7 @@ class TestAlarmControlPanelManual(unittest.TestCase):
                          self.hass.states.get(entity_id).state)
 
         future = dt_util.utcnow() + timedelta(seconds=5)
-        with patch(('blumate.components.alarm_control_panel.manual.'
+        with patch(('blumate.components.alarm_control_panel.virtual.'
                     'dt_util.utcnow'), return_value=future):
             fire_time_changed(self.hass, future)
             self.hass.pool.block_till_done()
@@ -267,7 +267,7 @@ class TestAlarmControlPanelManual(unittest.TestCase):
         """Test disarming while code is invalid."""
         self.assertTrue(alarm_control_panel.setup(self.hass, {
             'alarm_control_panel': {
-                'platform': 'manual',
+                'platform': 'virtual',
                 'name': 'test',
                 'pending_time': 5,
                 'code': CODE + '2'
@@ -291,7 +291,7 @@ class TestAlarmControlPanelManual(unittest.TestCase):
                          self.hass.states.get(entity_id).state)
 
         future = dt_util.utcnow() + timedelta(seconds=5)
-        with patch(('blumate.components.alarm_control_panel.manual.'
+        with patch(('blumate.components.alarm_control_panel.virtual.'
                     'dt_util.utcnow'), return_value=future):
             fire_time_changed(self.hass, future)
             self.hass.pool.block_till_done()
