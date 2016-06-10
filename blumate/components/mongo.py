@@ -6,8 +6,6 @@ https://home-assistant.io/components/influxdb/
 """
 import logging
 
-import pymongo.monitoring
-
 from blumate.helpers.entity import Entity
 import blumate.util as util
 from blumate import bootstrap
@@ -52,29 +50,6 @@ SERVICE_DISCONNECT = 'disconnect'
 __client = None
 
 
-class MongoCommandEvent(pymongo.monitoring.CommandListener):
-    """
-    https://api.mongodb.com/python/current/api/pymongo/monitoring.html#module-pymongo.monitoring
-    """
-
-    def started(self, event):
-        _LOGGER.debug("Command {0.command_name} with request id "
-                      "{0.request_id} started on server "
-                      "{0.connection_id}".format(event))
-
-    def succeeded(self, event):
-        _LOGGER.info("Command {0.command_name} with request id "
-                     "{0.request_id} on server {0.connection_id} "
-                     "succeeded in {0.duration_micros} "
-                     "microseconds".format(event))
-
-    def failed(self, event):
-        _LOGGER.warn("Command {0.command_name} with request id "
-                     "{0.request_id} on server {0.connection_id} "
-                     "failed in {0.duration_micros} "
-                     "microseconds".format(event))
-
-
 class Mongo(Entity):
     def __init__(self, bmss, config):
         """Setup the MongoDB component."""
@@ -94,6 +69,29 @@ class Mongo(Entity):
                                                 DEFAULT_SOCKET_KEEP_ALIVE)
 
         from pymongo import MongoClient
+        from pymongo.monitoring import CommandListener
+
+        class MongoCommandEvent(CommandListener):
+            """
+            https://api.mongodb.com/python/current/api/pymongo/monitoring.html#module-pymongo.monitoring
+            """
+
+            def started(self, event):
+                _LOGGER.debug("Command {0.command_name} with request id "
+                              "{0.request_id} started on server "
+                              "{0.connection_id}".format(event))
+
+            def succeeded(self, event):
+                _LOGGER.info("Command {0.command_name} with request id "
+                             "{0.request_id} on server {0.connection_id} "
+                             "succeeded in {0.duration_micros} "
+                             "microseconds".format(event))
+
+            def failed(self, event):
+                _LOGGER.warn("Command {0.command_name} with request id "
+                             "{0.request_id} on server {0.connection_id} "
+                             "failed in {0.duration_micros} "
+                             "microseconds".format(event))
 
         self.__client = MongoClient(host = self.__host,
                                     port = self.__port,
@@ -119,7 +117,7 @@ class Mongo(Entity):
         """Discover available databases."""
         self.__state = STATE_ACTIVE
         database_list = self.__client.database_names()
-        self.__state = STATE_ACTIVE
+        self.__state = STATE_IDLE
         _LOGGER.info("Available Databases: %s", database_list)
 
     def unlock(self, event):
