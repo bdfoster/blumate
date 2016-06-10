@@ -255,7 +255,7 @@ def closefds_osx(min_fd, max_fd):
 
 
 def cmdline():
-    """Collect path and arguments to re-execute the current blumate instance."""
+    """Collect path and arguments to re-execute the current BM instance."""
     if sys.argv[0].endswith('/__main__.py'):
         modulepath = os.path.dirname(sys.argv[0])
         os.environ['PYTHONPATH'] = os.path.dirname(modulepath)
