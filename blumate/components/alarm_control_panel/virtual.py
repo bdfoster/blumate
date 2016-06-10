@@ -23,7 +23,7 @@ DEFAULT_TRIGGER_TIME = 120
 
 def setup_platform(hass, config, add_devices, discovery_info=None):
     """Setup the manual alarm platform."""
-    add_devices([ManualAlarm(
+    add_devices([VirtualAlarm(
         hass,
         config.get('name', DEFAULT_ALARM_NAME),
         config.get('code'),
@@ -34,7 +34,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
 
 # pylint: disable=too-many-arguments, too-many-instance-attributes
 # pylint: disable=abstract-method
-class ManualAlarm(alarm.AlarmControlPanel):
+class VirtualAlarm(alarm.AlarmControlPanel):
     """
     Represents an alarm status.
 
