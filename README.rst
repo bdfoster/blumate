@@ -1,7 +1,5 @@
 BluMate |BUILD_STATUS| |COVERAGE_STATUS|
 ========================================
-.. image:: https://travis-ci.org/bdfoster/blumate.svg?branch=master
-    :target: https://travis-ci.org/bdfoster/blumate
 
 BluMate is an automation hub built using Python 3. It is a fork of `Home Assistant <https://home-assistant.io>`__
 that hopes to improve some aspects related to complexity and generality (making this suitable for both home and business
