@@ -8,12 +8,17 @@ import logging
 
 import pymongo.errors
 
+from blumate.helpers.entity import Entity
 import blumate.util as util
 from blumate import bootstrap
 from pymongo.monitoring import CommandListener
 from blumate.const import (EVENT_BLUMATE_STOP,
                            EVENT_BLUMATE_START,
+                           EVENT_STATE_CHANGED,
                            EVENT_PLATFORM_DISCOVERED,
+                           STATE_ACTIVE,
+                           STATE_IDLE,
+                           STATE_UNKNOWN,
                            ATTR_DISCOVERED,
                            ATTR_FRIENDLY_NAME,
                            ATTR_SERVICE)
@@ -71,10 +76,12 @@ class MongoCommandEvent(CommandListener):
                      "microseconds".format(event))
 
 
-class Mongo(object):
+class Mongo(Entity):
     def __init__(self, bmss, config):
         """Setup the MongoDB component."""
-        self.__bmss = bmss
+        self.__state = STATE_UNKNOWN
+
+        self.bmss = bmss
 
         self.__config = config[DOMAIN]
         self.__host = util.convert(self.__config.get(CONF_HOST), str, DEFAULT_HOST)
@@ -102,7 +109,7 @@ class Mongo(object):
 
         # Will fail here if connection is not able to be established
         assert(self.__client is not None)
-
+        self.__state = STATE_IDLE
         bmss.bus.listen_once(EVENT_BLUMATE_STOP, self.disconnect)
         bmss.bus.listen_once(EVENT_BLUMATE_START, self.discover_databases)
         bmss.services.register(DOMAIN, SERVICE_DISCOVER_DATABASES, self.discover_databases)
@@ -111,7 +118,9 @@ class Mongo(object):
 
     def discover_databases(self, event):
         """Discover available databases."""
+        self.__state = STATE_ACTIVE
         database_list = self.__client.database_names()
+        self.__state = STATE_ACTIVE
         _LOGGER.info("Available Databases: %s", database_list)
 
     def unlock(self, event):

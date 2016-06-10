@@ -1,3 +1,4 @@
+import abc
 import logging
 from blumate.const import STATE_ACTIVE, STATE_IDLE, STATE_UNKNOWN,  STATE_UNAVAILABLE
 from blumate.helpers.entity import Entity
@@ -5,12 +6,11 @@ from blumate.helpers.entity_component import EntityComponent
 
 DOMAIN = 'database'
 SCAN_INTERVAL = 30
-DISCOVERY_PLATFORMS =
+DISCOVERY_PLATFORMS = {}
 
 ENTITY_ID_FORMAT = DOMAIN + '.{}'
 
 def setup(bmss, config):
-    """Track states and offer events for sensors."""
     component = EntityComponent(
         logging.getLogger(__name__), DOMAIN, bmss, SCAN_INTERVAL,
         DISCOVERY_PLATFORMS)
@@ -23,12 +23,14 @@ class Database(Entity):
             return STATE_ACTIVE
         elif self.is_available:
             return STATE_IDLE
+        elif self.is_available is None:
+            return STATE_UNKNOWN
         else:
             return STATE_UNAVAILABLE
 
     @property
     def is_active(self):
-        """Returns True if an operation is occuring on the database."""
+        """Returns True if an operation is occurring on the database."""
         return False
 
     @abc.abstractproperty
