@@ -74,7 +74,7 @@ class TestUpdater(unittest.TestCase):
 
     def test_updater_disabled_on_dev(self):
         """Test if the updater component is disabled on dev."""
-        updater.CURRENT_VERSION = MOCK_CURRENT_VERSION + 'dev'
+        updater.CURRENT_VERSION = 'master'
 
         self.assertFalse(updater.setup(self.hass, {
             'updater': None
