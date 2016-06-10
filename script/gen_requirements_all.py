@@ -110,8 +110,8 @@ def validate_file(data):
 def main():
     """Main section of the script."""
     if not os.path.isfile('requirements_all.txt'):
-        print('Run this from HA root dir')
-        return
+        print('Run this from BluMate root directory')
+        sys.exit(1)
 
     data = gather_modules()
 
@@ -127,6 +127,8 @@ def main():
         sys.exit(1)
 
     write_file(data)
+    print('Complete!')
+    sys.exit(0)
 
 if __name__ == '__main__':
     main()
