@@ -41,10 +41,14 @@ setup(
         ]
     },
     classifiers=[
-        'Intended Audience :: End Users/Desktop',
+        'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+        'Topic :: Adaptive Technologies',
+        'Topic :: Home Automation',
+        'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
+        'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5'
     ],
 )

@@ -2,11 +2,11 @@
 
 cd "$(dirname "$0")/.."
 
-head -n 3 blumate/const.py | tail -n 1 | grep dev
+head -n 3 blumate/const.py | tail -n 1 | grep master
 
 if [ $? -eq 0 ]
 then
-  echo "Release version should not contain dev tag"
+  echo "Release version should not be from master branch"
   exit 1
 fi
 
