@@ -104,7 +104,7 @@ class API(object):
             self.host, self.api_password, self.port)
 
 
-class BluMate(.BluMate):
+class BluMate(bm.BluMate):
     """Home Assistant that forwards work."""
 
     # pylint: disable=super-init-not-called,too-many-instance-attributes
