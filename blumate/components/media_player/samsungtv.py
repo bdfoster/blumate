@@ -41,7 +41,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
     remote_config = {
         "name": "BluMate",
         "description": config.get(CONF_NAME, ''),
-        "id": "ha.component.samsung",
+        "id": "bm.component.samsung",
         "port": config.get(CONF_PORT, 55000),
         "host": config.get(CONF_HOST),
         "timeout": config.get(CONF_TIMEOUT, 0),

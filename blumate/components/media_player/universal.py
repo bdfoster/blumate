@@ -144,7 +144,7 @@ class UniversalMediaPlayer(MediaPlayerDevice):
         self._child_state = None
 
         def on_dependency_update(*_):
-            """Update ha state when dependencies update."""
+            """Update bm state when dependencies update."""
             self.update_ha_state(True)
 
         depend = copy(children)

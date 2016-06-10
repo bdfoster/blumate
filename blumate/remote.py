@@ -17,7 +17,7 @@ import urllib.parse
 import requests
 
 import blumate.bootstrap as bootstrap
-import blumate.core as ha
+import blumate.core as bm
 from blumate.const import (
     HTTP_HEADER_HA_AUTH, SERVER_PORT, URL_API, URL_API_EVENT_FORWARD,
     URL_API_EVENTS, URL_API_EVENTS_EVENT, URL_API_SERVICES,
@@ -104,7 +104,7 @@ class API(object):
             self.host, self.api_password, self.port)
 
 
-class BluMate(ha.BluMate):
+class BluMate(.BluMate):
     """Home Assistant that forwards work."""
 
     # pylint: disable=super-init-not-called,too-many-instance-attributes
@@ -117,12 +117,12 @@ class BluMate(ha.BluMate):
 
         self.remote_api = remote_api
 
-        self.pool = pool = ha.create_worker_pool()
+        self.pool = pool = bm.create_worker_pool()
 
         self.bus = EventBus(remote_api, pool)
-        self.services = ha.ServiceRegistry(self.bus, pool)
+        self.services = bm.ServiceRegistry(self.bus, pool)
         self.states = StateMachine(self.bus, self.remote_api)
-        self.config = ha.Config()
+        self.config = bm.Config()
 
         self.config.api = local_api
 
@@ -134,10 +134,10 @@ class BluMate(ha.BluMate):
                 raise BluMateError(
                     'Unable to setup local API to receive events')
 
-        ha.create_timer(self)
+        bm.create_timer(self)
 
-        self.bus.fire(ha.EVENT_BLUMATE_START,
-                      origin=ha.EventOrigin.remote)
+        self.bus.fire(bm.EVENT_BLUMATE_START,
+                      origin=bm.EventOrigin.remote)
 
         # Give eventlet time to startup
         import eventlet
@@ -154,8 +154,8 @@ class BluMate(ha.BluMate):
         """Stop Home Assistant and shuts down all threads."""
         _LOGGER.info("Stopping")
 
-        self.bus.fire(ha.EVENT_BLUMATE_STOP,
-                      origin=ha.EventOrigin.remote)
+        self.bus.fire(bm.EVENT_BLUMATE_STOP,
+                      origin=bm.EventOrigin.remote)
 
         self.pool.stop()
 
@@ -163,7 +163,7 @@ class BluMate(ha.BluMate):
         disconnect_remote_events(self.remote_api, self.config.api)
 
 
-class EventBus(ha.EventBus):
+class EventBus(bm.EventBus):
     """EventBus implementation that forwards fire_event to remote API."""
 
     # pylint: disable=too-few-public-methods
@@ -172,14 +172,14 @@ class EventBus(ha.EventBus):
         super().__init__(pool)
         self._api = api
 
-    def fire(self, event_type, event_data=None, origin=ha.EventOrigin.local):
+    def fire(self, event_type, event_data=None, origin=bm.EventOrigin.local):
         """Forward local events to remote target.
 
         Handles remote event as usual.
         """
         # All local events that are not TIME_CHANGED are forwarded to API
-        if origin == ha.EventOrigin.local and \
-           event_type != ha.EVENT_TIME_CHANGED:
+        if origin == bm.EventOrigin.local and \
+           event_type != bm.EVENT_TIME_CHANGED:
 
             fire_event(self._api, event_type, event_data)
 
@@ -209,7 +209,7 @@ class EventForwarder(object):
         with self._lock:
             if len(self._targets) == 0:
                 # First target we get, setup listener for events
-                self.hass.bus.listen(ha.MATCH_ALL, self._event_listener)
+                self.hass.bus.listen(bm.MATCH_ALL, self._event_listener)
 
             key = (api.host, api.port)
 
@@ -224,7 +224,7 @@ class EventForwarder(object):
 
             if len(self._targets) == 0:
                 # Remove event listener if no forwarding targets present
-                self.hass.bus.remove_listener(ha.MATCH_ALL,
+                self.hass.bus.remove_listener(bm.MATCH_ALL,
                                               self._event_listener)
 
             return did_remove
@@ -233,7 +233,7 @@ class EventForwarder(object):
         """Listen and forward all events."""
         with self._lock:
             # We don't forward time events or, if enabled, non-local events
-            if event.event_type == ha.EVENT_TIME_CHANGED or \
+            if event.event_type == bm.EVENT_TIME_CHANGED or \
                (self.restrict_origin and event.origin != self.restrict_origin):
                 return
 
@@ -241,7 +241,7 @@ class EventForwarder(object):
                 fire_event(api, event.event_type, event.data)
 
 
-class StateMachine(ha.StateMachine):
+class StateMachine(bm.StateMachine):
     """Fire set events to an API. Uses state_change events to track states."""
 
     def __init__(self, bus, api):
@@ -250,7 +250,7 @@ class StateMachine(ha.StateMachine):
         self._api = api
         self.mirror()
 
-        bus.listen(ha.EVENT_STATE_CHANGED, self._state_changed_listener)
+        bus.listen(bm.EVENT_STATE_CHANGED, self._state_changed_listener)
 
     def remove(self, entity_id):
         """Remove the state of an entity.
@@ -404,7 +404,7 @@ def get_state(api, entity_id):
 
         # req.status_code == 422 if entity does not exist
 
-        return ha.State.from_dict(req.json()) \
+        return bm.State.from_dict(req.json()) \
             if req.status_code == 200 else None
 
     except (BluMateError, ValueError):
@@ -420,7 +420,7 @@ def get_states(api):
         req = api(METHOD_GET,
                   URL_API_STATES)
 
-        return [ha.State.from_dict(item) for
+        return [bm.State.from_dict(item) for
                 item in req.json()]
 
     except (BluMateError, ValueError, AttributeError):

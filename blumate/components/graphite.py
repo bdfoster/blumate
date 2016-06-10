@@ -22,7 +22,7 @@ def setup(hass, config):
     """Setup the Graphite feeder."""
     graphite_config = config.get('graphite', {})
     host = graphite_config.get('host', 'localhost')
-    prefix = graphite_config.get('prefix', 'ha')
+    prefix = graphite_config.get('prefix', 'bm')
     try:
         port = int(graphite_config.get('port', 2003))
     except ValueError:
