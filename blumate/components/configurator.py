@@ -8,7 +8,7 @@ the user has submitted configuration information.
 """
 import logging
 
-from blumate.const import EVENT_TIME_CHANGED
+from blumate.const import EVENT_TIME_CHANGED, ATTR_FRIENDLY_NAME
 from blumate.helpers.entity import generate_entity_id
 
 DOMAIN = "configurator"
@@ -118,6 +118,7 @@ class Configurator(object):
         data = {
             ATTR_CONFIGURE_ID: request_id,
             ATTR_FIELDS: fields,
+            ATTR_FRIENDLY_NAME: name,
         }
 
         data.update({

@@ -5,6 +5,7 @@ pytz>=2016.4
 pip>=7.0.0
 jinja2>=2.8
 voluptuous==0.8.9
+eventlet==0.19.0
 
 # blumate.components.isy994
 PyISY==1.0.6
@@ -93,9 +94,6 @@ hikvision==0.4
 # blumate.components.sensor.dht
 # http://github.com/mala-zaba/Adafruit_Python_DHT/archive/4101340de8d2457dd194bca1e8d11cbfc237e919.zip#Adafruit_DHT==1.1.0
 
-# blumate.components.sensor.netatmo
-https://github.com/HydrelioxGitHub/netatmo-api-python/archive/43ff238a0122b0939a0dc4e8836b6782913fb6e2.zip#lnetatmo==0.4.0
-
 # blumate.components.switch.dlink
 https://github.com/LinuxChristian/pyW215/archive/v0.1.1.zip#pyW215==0.1.1
 
@@ -122,14 +120,17 @@ https://github.com/danieljkemp/onkyo-eiscp/archive/python3.zip#onkyo-eiscp==0.9.
 # blumate.components.device_tracker.fritz
 # https://github.com/deisi/fritzconnection/archive/b5c14515e1c8e2652b06b6316a7f3913df942841.zip#fritzconnection==0.4.6
 
+# blumate.components.netatmo
+https://github.com/jabesq/netatmo-api-python/archive/v0.5.0.zip#lnetatmo==0.5.0
+
 # blumate.components.sensor.sabnzbd
 https://github.com/jamespcole/home-assistant-nzb-clients/archive/616cad59154092599278661af17e2a9f2cf5e2a9.zip#python-sabnzbd==0.1
 
 # blumate.components.qwikswitch
 https://github.com/kellerza/pyqwikswitch/archive/v0.4.zip#pyqwikswitch==0.4
 
-# blumate.components.ecobee
-https://github.com/nkgilley/python-ecobee-api/archive/4a884bc146a93991b4210f868f3d6aecf0a181e6.zip#python-ecobee==0.0.5
+# homeassistant.components.ecobee
+https://github.com/nkgilley/python-ecobee-api/archive/4856a704670c53afe1882178a89c209b5f98533d.zip#python-ecobee==0.0.6
 
 # blumate.components.switch.edimax
 https://github.com/rkabadi/pyedimax/archive/365301ce3ff26129a7910c501ead09ea625f3700.zip#pyedimax==0.1
@@ -252,6 +253,9 @@ pymongo==3.2.2
 
 # blumate.components.device_tracker.netgear
 pynetgear==0.3.3
+
+# blumate.components.switch.netio
+pynetio==0.1.6
 
 # blumate.components.alarm_control_panel.nx584
 # blumate.components.binary_sensor.nx584

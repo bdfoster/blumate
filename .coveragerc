@@ -78,6 +78,9 @@ omit =
     blumate/components/enocean.py
     blumate/components/*/enocean.py
 
+    blumate/components/netatmo.py
+    blumate/components/*/netatmo.py
+
     blumate/components/alarm_control_panel/alarmdotcom.py
     blumate/components/alarm_control_panel/nx584.py
     blumate/components/binary_sensor/arest.py
@@ -171,7 +174,6 @@ omit =
     blumate/components/sensor/gtfs.py
     blumate/components/sensor/lastfm.py
     blumate/components/sensor/loopenergy.py
-    blumate/components/sensor/netatmo.py
     blumate/components/sensor/neurio_energy.py
     blumate/components/sensor/nzbget.py
     blumate/components/sensor/onewire.py
@@ -210,6 +212,7 @@ omit =
     blumate/components/thermostat/radiotherm.py
     blumate/components/upnp.py
     blumate/components/zeroconf.py
+
 
 
 [report]

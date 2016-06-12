@@ -9,7 +9,7 @@ import logging
 
 from blumate.helpers.entity import Entity
 from blumate.helpers.entity_component import EntityComponent
-from blumate.components import bloomsky
+from blumate.components import bloomsky, netatmo
 from blumate.helpers.config_validation import PLATFORM_SCHEMA  # noqa
 from blumate.components.http import BluMateView
 
@@ -21,6 +21,7 @@ ENTITY_ID_FORMAT = DOMAIN + '.{}'
 # Maps discovered services to their platforms
 DISCOVERY_PLATFORMS = {
     bloomsky.DISCOVER_CAMERAS: 'bloomsky',
+    netatmo.DISCOVER_CAMERAS: 'netatmo',
 }
 
 STATE_RECORDING = 'recording'
