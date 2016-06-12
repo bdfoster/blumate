@@ -7,10 +7,10 @@ https://home-assistant.io/components/camera.netatmo/
 import logging
 from datetime import timedelta
 import requests
-from homeassistant.util import Throttle
+from blumate.util import Throttle
 
-from homeassistant.components.camera import Camera
-from homeassistant.loader import get_component
+from blumate.components.camera import Camera
+from blumate.loader import get_component
 
 DEPENDENCIES = ["netatmo"]
 
