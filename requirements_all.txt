@@ -129,7 +129,7 @@ https://github.com/jamespcole/home-assistant-nzb-clients/archive/616cad591540925
 # blumate.components.qwikswitch
 https://github.com/kellerza/pyqwikswitch/archive/v0.4.zip#pyqwikswitch==0.4
 
-# homeassistant.components.ecobee
+# blumate.components.ecobee
 https://github.com/nkgilley/python-ecobee-api/archive/4856a704670c53afe1882178a89c209b5f98533d.zip#python-ecobee==0.0.6
 
 # blumate.components.switch.edimax

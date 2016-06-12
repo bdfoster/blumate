@@ -61,12 +61,12 @@ https://home-assistant.io/components/switch.netio/
 import logging
 from collections import namedtuple
 from datetime import timedelta
-from homeassistant import util
-from homeassistant.components.http import HomeAssistantView
-from homeassistant.const import CONF_HOST, CONF_PORT, CONF_USERNAME, \
-    CONF_PASSWORD, EVENT_HOMEASSISTANT_STOP, STATE_ON
-from homeassistant.helpers import validate_config
-from homeassistant.components.switch import SwitchDevice
+from blumate import util
+from blumate.components.http import BluMateView
+from blumate.const import CONF_HOST, CONF_PORT, CONF_USERNAME, \
+    CONF_PASSWORD, EVENT_BLUMATE_STOP, STATE_ON
+from blumate.helpers import validate_config
+from blumate.components.switch import SwitchDevice
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -115,7 +115,7 @@ def setup_platform(hass, config, add_devices_callback, discovery_info=None):
 
         add_devices_callback(DEVICES[config[CONF_HOST]].entities)
 
-    hass.bus.listen_once(EVENT_HOMEASSISTANT_STOP, dispose)
+    hass.bus.listen_once(EVENT_BLUMATE_STOP, dispose)
     return True
 
 
@@ -125,7 +125,7 @@ def dispose(event):
         value.netio.stop()
 
 
-class NetioApiView(HomeAssistantView):
+class NetioApiView(BluMateView):
     """WSGI handler class."""
 
     url = URL_API_NETIO_EP
