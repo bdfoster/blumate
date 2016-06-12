@@ -6,10 +6,10 @@ https://home-assistant.io/components/netatmo/
 """
 import logging
 from urllib.error import HTTPError
-from homeassistant.components import discovery
-from homeassistant.const import (
+from blumate.components import discovery
+from blumate.const import (
     CONF_API_KEY, CONF_PASSWORD, CONF_USERNAME)
-from homeassistant.helpers import validate_config
+from blumate.helpers import validate_config
 
 REQUIREMENTS = [
     'https://github.com/jabesq/netatmo-api-python/archive/'
